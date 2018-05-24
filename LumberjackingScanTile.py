@@ -1,19 +1,19 @@
 # Parametri
 RaggioScansione = 15
 TreeStaticID = [3221, 3222, 3225, 3227, 3228, 3229, 3210, 3238, 3240, 3242, 3243, 3267, 3268, 3272, 3273, 3274, 3275, 3276, 3277, 3280, 3283, 3286, 3288, 3290, 3293, 3296, 3299, 3302, 3320, 3323, 3326, 3329, 3365, 3367, 3381, 3383, 3384, 3394, 3395, 3417, 3440, 3461, 3476, 3478, 3480, 3482, 3484, 3486, 3488, 3490, 3492, 3496]
-SerialAccetta = 0x4029A0A4 # Serial Axe
+SerialAccetta = 0x4254CE73 # Serial Axe
 EquipAccettaDelay = 1000
 TimeoutOnWaitAction = 4000
 ChopDelay = 1000
 RuneBookBanca = 0x41EA8DEE # Runebook for bank
-RuneBookAlberi = 0x40162DF1 # Runebook for tree spots
+RuneBookAlberi = 0x41EA8DEE # Runebook for tree spots
 RecallPause = 3000 
 DragDelay = 1200
 LogID = 0x1BDD
 OtherResourceID = [12687, 12697, 12127, 12688, 12689]
-LogBag = 0x40191C19 # Serial of log bag in bank
+LogBag = 0x401FA597 # Serial of log bag in bank
 OtherResourceBag = 0x40191C19 # Serial of other resource in bank
-WeightLimit = 500
+WeightLimit = 385
 BankX = 2051
 BankY = 1343
 
@@ -35,8 +35,8 @@ def RecallNextSpot( ):
     Gumps.ResetGump()
     Misc.SendMessage("--> Racall to Spot", 77) 
     Items.UseItem(RuneBookAlberi)
-    Gumps.WaitForGump(1431013363, TimeoutOnWaitAction)
-    Gumps.SendAction(1431013363, lastrune)
+    Gumps.WaitForGump(1431013363, 10000)
+    Gumps.SendAction(1431013363, 65)
     Misc.Pause(RecallPause)
     lastrune = lastrune + 6
     if lastrune > 95:
@@ -46,21 +46,11 @@ def RecallNextSpot( ):
         
 
 def RecallBack( ):
-    while Player.Position.X == BankX and Player.Position.Y == BankY:
-        global lastrune
-        Gumps.ResetGump()
-        Misc.SendMessage("--> Torno a tagliare ", 77) 
-        Misc.Pause(RecallPause)
-        Items.UseItem(RuneBookAlberi)
-        Gumps.WaitForGump(1431013363, TimeoutOnWaitAction)
-        Gumps.SendAction(1431013363, (lastrune - 6))
-        Misc.Pause(RecallPause)
-        if lastrune < 6:
-            Misc.SendMessage("--> Inizio Nuovo ciclo", 77) 
-            lastrune = 5
-        else:
-            Misc.NoOperation()
-        EquipAxe()
+    Items.UseItem(RuneBookAlberi)
+    Gumps.WaitForGump(1431013363, TimeoutOnWaitAction)
+    Gumps.SendAction(1431013363, 65)
+    Misc.Pause(RecallPause)
+    EquipAxe()
        
 
 def Scarico( ):
@@ -69,10 +59,9 @@ def Scarico( ):
     while Player.Weight >= WeightLimit:
         Gumps.ResetGump()
         Items.UseItem(RuneBookBanca)
-        Gumps.WaitForGump(1431013363, TimeoutOnWaitAction)
-        Gumps.SendAction(1431013363, 5)
+        Gumps.WaitForGump(1431013363, 10000)
+        Gumps.SendAction(1431013363, 71)
         Misc.Pause(RecallPause)
-        Player.ChatSay(33, "Bank")
         Misc.Pause(300)
         for item in Player.Backpack.Contains:
             if item.ItemID == LogID:

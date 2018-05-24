@@ -214,6 +214,8 @@ def trainTinkering():
         Misc.SendMessage('GM Tinkering!')
         sys.exit
         
+    dropCrafts()
+        
 def dropCrafts():
     # Get Counts
     countLockpick = countByItemID(lockpickType)

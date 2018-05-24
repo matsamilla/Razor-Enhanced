@@ -245,10 +245,6 @@ def printOreCounts():
 #Main Handler for mining    
 def autoMiner():
     while True:
-        
-        #Hide if not hidden
-        if Player.Visible == True:
-            Player.UseSkill('Hiding')
             
         #Get a mining tool!
         miningTool = getMinerTool()

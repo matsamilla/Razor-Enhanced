@@ -1,3 +1,12 @@
+#This will provoke 2 grey mobs onto eachother or a grey mob onto a PK
+#You have to setup 2 Enhanced Targetings though, next and pkenemy
+#nextenemy should have grey, grey (aggro) checked. Selector set to Next, and Human flag set to no
+#pkenemy should have Red checked, Selector set to closeset, and Human Flag to yes.
+
+#uncomment the block of code for it to play an insturment before you provo, guarenteeing you 
+#don't have the "which instrument" pop up instead of provoing. 
+
+
 def provoTwoNearest():
 #    
 #    instruments_list = [0xe9e, 0x2805, 0xe9d, 0xe9c, 0xeb3, 0xeb2, 0xeb1]
@@ -30,7 +39,7 @@ def provoTwoNearest():
     else:
         Target.SetLastTargetFromList("pkenemy")
         provo2 = Target.GetLast()
-        Player.HeadMessage (45, "!!PK!!")
+        Player.HeadMessage (55, "PKPKPK")
 
     Player.UseSkill('Provocation')
     Target.WaitForTarget(2000 , True)

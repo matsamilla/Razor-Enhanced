@@ -3,4 +3,4 @@ if Player.Poisoned:
     Target.SelfQueued()
 else:
     Spells.CastMagery('Heal')
-    Target.SelfQueued()
+    Target.SelfQueued() 

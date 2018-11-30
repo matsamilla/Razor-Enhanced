@@ -4,20 +4,23 @@
 #pkenemy should have Red checked, Selector set to closeset, and Human Flag to yes.
 
 #uncomment the block of code for it to play an insturment before you provo, guarenteeing you 
-#don't have the "which instrument" pop up instead of provoing. 
+#dont have the which instrument pop up instead of provoing. 
 
 
 def provoTwoNearest():
-#    
-#    instruments_list = [0xe9e, 0x2805, 0xe9d, 0xe9c, 0xeb3, 0xeb2, 0xeb1]
-#    instrument_total = 0
-#        
-#    for i in Player.Backpack.Contains:
-#        if i.ItemID in instruments_list:
-#            instrument_total += 1 
-#            Items.UseItem(i)
-#            Misc.Pause(600)
-#    if instrument_total == 0: Player.HeadMessage(55, "no instrument found")
+    
+    if Journal.Search("What instrument"):
+        instruments_list = [0xe9e, 0x2805, 0xe9d, 0xe9c, 0xeb3, 0xeb2, 0xeb1]
+        instrument_total = 0
+        for i in Player.Backpack.Contains:
+            if i.ItemID in instruments_list:
+                instrument_total += 1 
+                Items.UseItem(i)
+                Misc.Pause(1000)
+                Journal.Clear()
+        if instrument_total == 0: 
+            Player.HeadMessage(55, "no instrument found")
+            Journal.Clear()
     
     provo1 = 0
     provo2 = 0

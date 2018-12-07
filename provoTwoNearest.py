@@ -10,17 +10,15 @@
 def provoTwoNearest():
     
     if Journal.Search("What instrument"):
+        Player.HeadMessage(55, "Shouldnt see this")
         instruments_list = [0xe9e, 0x2805, 0xe9d, 0xe9c, 0xeb3, 0xeb2, 0xeb1]
         instrument_total = 0
         for i in Player.Backpack.Contains:
             if i.ItemID in instruments_list:
                 instrument_total += 1 
                 Items.UseItem(i)
-                Misc.Pause(1000)
-                Journal.Clear()
-        if instrument_total == 0: 
-            Player.HeadMessage(55, "no instrument found")
-            Journal.Clear()
+                Misc.Pause(800)
+        if instrument_total == 0: Player.HeadMessage(55, "no instrument found")
     
     provo1 = 0
     provo2 = 0
@@ -31,8 +29,7 @@ def provoTwoNearest():
 
     Target.SetLastTargetFromList("nextenemy")
     provo1 = provo2 = Target.GetLast()
-    Target.TargetExecute(provo1)
-    Target.WaitForTarget(500, True)
+    Misc.Pause(200)
     
     if Target.GetTargetFromList("pkenemy") is None:
         while provo1 == provo2 and counter <= max: #try to find a second target 
@@ -42,7 +39,7 @@ def provoTwoNearest():
     else:
         Target.SetLastTargetFromList("pkenemy")
         provo2 = Target.GetLast()
-        Player.HeadMessage (55, "PKPKPK")
+        Player.HeadMessage (55, "PK PK PK")
 
     Player.UseSkill('Provocation')
     Target.WaitForTarget(2000 , True)

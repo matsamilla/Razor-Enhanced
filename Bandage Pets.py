@@ -60,7 +60,7 @@ while Player.IsGhost == False:
         
         #checks the health of pet if below 50% will tell you.  
         #says the health level of the pet you are healing so others can assist with healing if needed.            
-        elif g.Hits < 13:
+        if g.Hits < 25 and Timer.Check("healyell") == False:
             if Journal.Search("finish applying") or Timer.Check("bandies") == False:
                 if Player.InRangeMobile(g, 1):
                     if Target.HasTarget( ) == False:
@@ -76,6 +76,7 @@ while Player.IsGhost == False:
             mhp = hp[g.Hits]
             #Say out loud who you are healing and the pecentage of the pet.
             Player.HeadMessage(1001, msg + ' is ' + mhp + '.')
+            Timer.Create("healyell", 5000)
             break
         
         #bandage        

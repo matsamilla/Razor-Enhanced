@@ -13,3 +13,5 @@ moongate = Items.ApplyFilter(gate)
 for m in moongate: # Look for items in filter
     if m.ItemID == 0x0F6C: # Return true if found a moongate = 0x0F6C
         Items.UseItem(m) # Double click on the moongate found 
+        Gumps.WaitForGump(3716879466, 10000)
+        Gumps.SendAction(3716879466, 1)

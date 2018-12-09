@@ -1,0 +1,7 @@
+if @findtype 0x99f 'any' 'backpack' 'any' '2'
+  @usetype 0x99f '0'
+  pause 800
+else
+  playsound 'cheer.wav'
+  stop
+endif

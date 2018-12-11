@@ -1,7 +1,8 @@
 #This will provoke 2 grey mobs onto eachother or a grey mob onto a PK
-#You have to setup 2 Enhanced Targetings though, next and pkenemy
-#nextenemy should have grey, grey (aggro) checked. Selector set to Next, and Human flag set to no
-#pkenemy should have Red checked, Selector set to closeset, and Human Flag to yes.
+#You have to setup 2 Enhanced Targetings though, nextenemy and pkenemy
+#nextenemy should have grey, grey (aggro) checked. Selector set to Next, and Human flag set to no, 
+#    friend flag to no, Range Min: -1, Range Max: 9
+#pkenemy should have Red checked, Selector set to closeset, and Human Flag to yes, Friends flag to no.
 
 #uncomment the block of code for it to play an insturment before you provo, guarenteeing you 
 #dont have the which instrument pop up instead of provoing. 

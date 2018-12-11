@@ -60,7 +60,7 @@ while Player.IsGhost == False:
         
         #checks the health of pet if below 50% will tell you.  
         #says the health level of the pet you are healing so others can assist with healing if needed.            
-        if g.Hits < 25 and Timer.Check("healyell") == False:
+        if g.Hits < 19 and Timer.Check("healyell") == False:
             if Journal.Search("finish applying") or Timer.Check("bandies") == False:
                 if Player.InRangeMobile(g, 1):
                     if Target.HasTarget( ) == False:

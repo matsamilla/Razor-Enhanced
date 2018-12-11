@@ -58,8 +58,7 @@ while Player.IsGhost == False:
     for g in petList:
         g = Mobiles.Select(petList, 'Weakest')
         
-        #checks the health of pet if below 50% will tell you.  
-        #says the health level of the pet you are healing so others can assist with healing if needed.            
+        #checks the health of pet if below 75% will tell you.  
         if g.Hits < 19 and Timer.Check("healyell") == False:
             if Journal.Search("finish applying") or Timer.Check("bandies") == False:
                 if Player.InRangeMobile(g, 1):

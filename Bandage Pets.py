@@ -58,26 +58,6 @@ while Player.IsGhost == False:
     for g in petList:
         g = Mobiles.Select(petList, 'Weakest')
         
-        #checks the health of pet if below 75% will tell you.  
-        if g.Hits < 19 and Timer.Check("healyell") == False:
-            if Journal.Search("finish applying") or Timer.Check("bandies") == False:
-                if Player.InRangeMobile(g, 1):
-                    if Target.HasTarget( ) == False:
-                        Items.UseItemByID(0x0E21, 0)
-                        Target.WaitForTarget(1500, True)
-                        Target.TargetExecute(g)
-                        Misc.Pause (500)
-                        Journal.Clear()
-                        Timer.Create("bandies", 10000)
-            #!Heal Me! pops above the head of pet being healed        
-            Mobiles.Message(g, 1001, '!Heal Me!')
-            msg = "%s" % (g.Name)
-            mhp = hp[g.Hits]
-            #Say out loud who you are healing and the pecentage of the pet.
-            Player.HeadMessage(1001, msg + ' is ' + mhp + '.')
-            Timer.Create("healyell", 5000)
-            break
-        
         #bandage        
         #check health level if in range one of guilded meta pet heals with bandages.          
         elif g.Hits < 23 and Player.InRangeMobile(g, 1):

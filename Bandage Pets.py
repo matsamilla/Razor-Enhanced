@@ -17,33 +17,6 @@ petList = [
  0x000190EB, # Thomas Spider
 ]
 
-hp = {
-1: 'going down',
-2: 'going down',
-3: 'at 12%',
-4: 'at 16%',
-5: 'at 20%',
-6: 'at 24%',    
-7: 'at 28%',
-8: 'at 32%',
-9: 'at 36%',
-10: 'at 40%',
-11: 'at 44%',
-12: 'at 48%',
-13: 'at 52%',
-14: 'at 56%',
-15: 'at 60%',
-16: 'at 64%',
-17: 'at 68%',
-18: 'at 72%',
-19: 'at 76%',
-20: 'at 80%',
-21: 'at 84%',
-22: 'at 88%',
-23: 'at 92%',
-24: 'at 96%',
-25: 'at 100%',
-}    
 
 petfilter = Mobiles.Filter()
 petfilter.Enabled = True
@@ -77,10 +50,6 @@ while Player.IsGhost == False:
             Player.HeadMessage(95, "You moved")
             Journal.Clear()
 
-                        
-                    
-
-        
 Target.ClearLastandQueue()
 Target.Cancel() 
 

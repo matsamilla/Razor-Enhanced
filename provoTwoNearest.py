@@ -1,50 +1,76 @@
-#This will provoke 2 grey mobs onto eachother or a grey mob onto a PK
-#You have to setup 2 Enhanced Targetings though, nextenemy and pkenemy
-#nextenemy should have grey, grey (aggro) checked. Selector set to Next, and Human flag set to no, 
-#    friend flag to no, Range Min: -1, Range Max: 9
-#pkenemy should have Red checked, Selector set to closeset, and Human Flag to yes, Friends flag to no.
+from System.Collections.Generic import List
+from System import Byte
+import sys
 
-def provoTwoNearest():
-    
-    if Journal.Search("What instrument"):
-        Player.HeadMessage(55, "Shouldnt see this")
-        instruments_list = [0xe9e, 0x2805, 0xe9d, 0xe9c, 0xeb3, 0xeb2, 0xeb1]
-        instrument_total = 0
-        for i in Player.Backpack.Contains:
-            if i.ItemID in instruments_list:
-                instrument_total += 1 
-                Items.UseItem(i)
-                Misc.Pause(800)
-        if instrument_total == 0: Player.HeadMessage(55, "no instrument found")
-    
-    provo1 = 0
-    provo2 = 0
-    counter = 0
-    max = 10 #  number of maximum try
-    Target.ClearLastandQueue()
-    Target.Cancel()
+tfilter = Mobiles.Filter()
+tfilter.Enabled = True
+tfilter.RangeMin = 0
+tfilter.RangeMax = 9
+tfilter.IsHuman = False
+tfilter.IsGhost = False
+#tfilter.Notorieties = List[Byte](bytes([3,4,5]))
+tfilter.Friend = False
+  
+def provoTwoNearest() :
+    provo1 = provo2 =  0
+    provoshit = []
+    instruments = [0xe9e, 0x2805, 0xe9c, 0xeb3, 0xeb1, 0x0eb2] #no tamborine(0x0E9D), my *newbied* one
+    msgColour = 55
 
-    Target.SetLastTargetFromList("nextenemy")
-    provo1 = provo2 = Target.GetLast()
-    Misc.Pause(200)
-    
-    if Target.GetTargetFromList("pkenemy") is None:
-        while provo1 == provo2 and counter <= max: #try to find a second target 
-            Target.SetLastTargetFromList("nextenemy")
-            provo2 = Target.GetLast()
-            counter += 1
+    enemies = Mobiles.ApplyFilter(tfilter)
+    Mobiles.Select(enemies,'Hostile')
+    if len(enemies) <= 1:
+        Player.HeadMessage(msgColour, 'Not enough monsters detected')
+        return False
+    if len(enemies) >= 2:
+        
+        Target.ClearLastandQueue()
+        Target.Cancel()
+        
+        #makes list with [Serial, DistanceTo]
+        for enemy in enemies:
+            provoshit.append([enemy.Serial, Player.DistanceTo(enemy)])
+        
+        #sorts list according to distance
+        provoshit.sort(key=lambda x: x[1])
+            
+        #sets provo targets from list, pause is necessary    
+        provo1 = provoshit[0][0]
+        Misc.Pause(50)
+        provoshit.pop(0)
+        provo2 = provoshit[0][0]
+        
+        Player.UseSkill("Provocation")
+        Misc.Pause(100)
+        
+        #skill timer not up
+        if Journal.Search("You must wait"):
+            Player.HeadMessage(msgColour, "Try Again, skill timer")
+            Journal.Clear()
+            return False
+        
+        #instrument check
+        if Journal.Search("What instrument shall you play?"):
+            for i in Player.Backpack.Contains:
+                if i.ItemID in instruments:
+                    Target.TargetExecute(i)
+                    Player.HeadMessage(msgColour, "Instrument Found")
+                    Journal.Clear()
+                    Misc.Pause(200)
+                    break
+        
+        #setlast target to show what you are provoing
+        Target.SetLast(provo1)
+        Target.WaitForTarget(2000 , True)
+        Target.TargetExecute(provo1)
+        Target.SetLast(provo2)
+        Target.WaitForTarget(2000, True)
+        Target.TargetExecute(provo2)
+            
+        return True
+        
     else:
-        Target.SetLastTargetFromList("pkenemy")
-        provo2 = Target.GetLast()
-        Player.HeadMessage (55, "PK PK PK")
+        Player.HeadMessage(msgColour, 'Something Happend')
+        return False
 
-    Player.UseSkill('Provocation')
-    Target.WaitForTarget(2000 , True)
-    Target.TargetExecute(provo1)
-    Target.WaitForTarget(2000 , True)
-    Target.TargetExecute(provo2)
-
-    Target.ClearLastandQueue()
-    Target.Cancel() 
-    
-provoTwoNearest()
+provoTwoNearest()  

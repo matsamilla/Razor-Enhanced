@@ -8,7 +8,7 @@ tfilter.RangeMin = 0
 tfilter.RangeMax = 9
 tfilter.IsHuman = False
 tfilter.IsGhost = False
-#tfilter.Notorieties = List[Byte](bytes([3,4,5]))
+tfilter.Notorieties = List[Byte](bytes([3,4,5]))
 tfilter.Friend = False
   
 def provoTwoNearest() :

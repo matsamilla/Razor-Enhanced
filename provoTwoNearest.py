@@ -12,6 +12,7 @@ tfilter.Notorieties = List[Byte](bytes([3,4,5]))
 tfilter.Friend = False
   
 def provoTwoNearest() :
+    Journal.Clear()
     provo1 = provo2 =  0
     provoshit = []
     instruments = [0xe9e, 0x2805, 0xe9c, 0xeb3, 0xeb1, 0x0eb2] #no tamborine(0x0E9D), my *newbied* one

@@ -7,8 +7,10 @@ from System.Collections.Generic import List
 # see examples below
 
 ####### RESTOCK BUTLER ##################
+# I haven't tested the restock much, ####
+# so it is commented out ################
 #backpack = Player.Backpack.Serial
-#Mobiles.UseMobile(0x0029C3D1)
+#Mobiles.UseMobile(0x0029C3D1) #replace with your butler ID
 #Gumps.WaitForGump(989312372, 10000)
 #Gumps.SendAction(989312372, 5)
 #Target.WaitForTarget(10000, False)

@@ -1,0 +1,1 @@
+Player.ChatSay(05, "Fire Left")

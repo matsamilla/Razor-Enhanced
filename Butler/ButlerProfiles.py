@@ -22,8 +22,8 @@ from System.Collections.Generic import List
 name = Player.Name.lower().replace(' ', '')
 
 #name must be all lowercase with no spaces
-if name == 'NameOfToon1':
-    Misc.SetSharedValue('moss', 75)
+if name == 'NameOfToon1': #Replace NameOfToon1 with toon name, no caps or spaces
+    Misc.SetSharedValue('moss', 75) # last number is how much of that item you will pull from butler.
     Misc.SetSharedValue('ash', 75)
     Misc.SetSharedValue('root', 75)
     Misc.SetSharedValue('pearl', 75)

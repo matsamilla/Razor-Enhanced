@@ -1,8 +1,6 @@
 # Bandage Heals by MatsaMilla
 # Hopefully improved bandage timer
-
 import sys
-
 banTime = 0
 msgcolor = 76
 
@@ -48,10 +46,8 @@ def bandageSelf():
 while True:
     while Player.IsGhost:
         Misc.Pause(50)
-        Misc.NoOperation()
     while Player.Hits == Player.HitsMax and not Player.Poisoned:
         Misc.Pause(50)
-        Misc.NoOperation()
         
     if Journal.Search("You begin applying the bandages"):
         Journal.Clear()

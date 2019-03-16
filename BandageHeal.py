@@ -1,5 +1,5 @@
 # Bandage Heals by MatsaMilla
-# Hopefully improved bandage timer
+# Have auto run - will stop if player doesn't have over 80 healing
 import sys
 banTime = 0
 msgcolor = 76

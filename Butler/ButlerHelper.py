@@ -1,6 +1,7 @@
 from System.Collections.Generic import List
 # 4 = equip armor, 5 = bag regs, 6 = bag pots
 switch = List[int]([0,4])
+player_bag = Items.FindBySerial(Player.Backpack.Serial)
 
 butlerID = 0x0029C3D1 #add your butler serial here
 
@@ -116,6 +117,12 @@ if Misc.CheckSharedValue('bolts'):
 else: 
     bolts25 = bolts
 
+def dumpBottles():
+    for i in player_bag.Contains:
+        if i.ItemID == 0x0F0E:
+            Items.Move(i, butlerID, 0)
+            Misc.Pause(600)
+    
 def butler():
     #################### Armor #######################################
     textid = List[int]([0])
@@ -230,4 +237,5 @@ def butler():
     Gumps.WaitForGump(989312372, 2000)
     Gumps.SendAdvancedAction(989312372, 6, switch, textid, text)
 
+dumpBottles()
 butler()

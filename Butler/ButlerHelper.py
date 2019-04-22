@@ -1,5 +1,5 @@
 from System.Collections.Generic import List
-switch = List[int]([4])
+switch = List[int]([0,4])
 
 butlerID = 0x0029C3D1 #add your butler serial here
 

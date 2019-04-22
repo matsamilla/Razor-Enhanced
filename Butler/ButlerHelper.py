@@ -1,4 +1,5 @@
 from System.Collections.Generic import List
+# 4 = equip armor, 5 = bag regs, 6 = bag pots
 switch = List[int]([0,4])
 
 butlerID = 0x0029C3D1 #add your butler serial here

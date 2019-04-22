@@ -25,9 +25,9 @@ if name == 'playername1': #Replace playername1 with toon name, no caps or spaces
     Misc.SetSharedValue('agil', 10)
     Misc.SetSharedValue('heal', 10)
     Misc.SetSharedValue('cure', 10)
-    Misc.SetSharedValue('armor', 0)
     Misc.SetSharedValue('arrows', 0)
-    Misc.SetSharedValue('bolts', 0)     
+    Misc.SetSharedValue('bolts', 0)
+    Misc.SetSharedValue('armor', 0)
 elif name == 'playername2': #Replace playername2 with toon name, no caps or spaces
     Misc.SetSharedValue('moss', 75)
     Misc.SetSharedValue('ash', 75)

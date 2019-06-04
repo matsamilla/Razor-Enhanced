@@ -1,10 +1,15 @@
 # Slayer Spellbook Crafter by MatsaMilla
 # Last edit: Matsamilla 6/4/19
+#
+# Restocks blank scrolls from beetle (1k at a time)
+# Moves slayers to beetle
 
+#***************SETUP SECTION**********************************
 #ItemSerials
 trashcan = 0x4007b816
 beetle = 0x1aa252
 ignoreBook = 0x458CD42E # don't throw away your full spellbook
+#**************************************************************
 
 dragTime = 600
 pen = 0xfbf
@@ -62,7 +67,7 @@ def restockScrolls():
         Misc.ContextReply(0x001AA252, 'Open Backpack')
         Misc.Pause(dragTime)
         beetleScrolls = Items.FindByID(scrolls, noColor, -1)
-        Items.Move(beetleScrolls, self_pack, 2000)
+        Items.Move(beetleScrolls, self_pack, 1000)
         Misc.Pause(dragTime)
         Mobiles.UseMobile(beetle)
         Misc.Pause(dragTime)

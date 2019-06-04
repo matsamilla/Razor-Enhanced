@@ -63,6 +63,9 @@ def restockScrolls():
     if Player.Mount:
         Mobiles.UseMobile(self)
         Misc.Pause(dragTime)
+        backpackscrolls = Items.FindByID(scrolls, noColor, self_pack)
+        Items.Move(backpackscrolls, beetle, -1)
+        Misc.Pause(dragTime)
         Misc.WaitForContext(0x001AA252, 10000)
         Misc.ContextReply(0x001AA252, 'Open Backpack')
         Misc.Pause(dragTime)

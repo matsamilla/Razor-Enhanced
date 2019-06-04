@@ -73,7 +73,6 @@ for i in idContainer.Contains:
         #Misc.Pause(skillTimer)
     elif i.ItemID in boneArmor:
         checkWeight()
-        checkDistance()
         Journal.Clear()
         Player.UseSkill('Item ID')
         Target.WaitForTarget(1500)

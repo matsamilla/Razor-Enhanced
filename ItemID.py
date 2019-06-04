@@ -13,7 +13,7 @@ idStuff = Target.PromptTarget('Select container to ID stuff in')
 
 slashProps = ['Invulnerability','Exceptional','Power']
 subSlashProps = ['Indestructable','Supremely Accurate','Exceedingly Accurate','Eminently Accurate']
-keepProps = ['Vanquishing','Silver','Undead','Snake','Lizardman','Dragon','Reptile','Terathan','Scorpion',
+keepProps = ['Vanquishing','Silver','Undead','Snake','Lizardman','Dragon','Reptilian','Terathan','Scorpion',
 'Spider','Orc Slaying','Ogre','Water','Earth','Elemental','Flame','Vacuum','Repond','Fey','Gargoyle',
 'Daemon','Exorcism','Poison','Arachnid']
 

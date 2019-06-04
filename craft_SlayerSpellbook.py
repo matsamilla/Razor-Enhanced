@@ -9,6 +9,7 @@
 trashcan = 0x4007b816
 beetle = 0x1aa252
 ignoreBook = 0x458CD42E # don't throw away your full spellbook
+keepAll = True # true to keep all slayers
 #**************************************************************
 
 dragTime = 600
@@ -87,15 +88,19 @@ def craftBook():
 def slayerCheck():
     global craftedBook
     craftedBook = Items.FindByID(spellbook, -1, self_pack)
-    if Journal.Search('You have successfully crafted a slayer'):
-        moveSlayerBookToBeetle()
-        Journal.Clear()
+    
+    if keepAll:
+        if Journal.Search('You have successfully crafted a slayer'):
+            winsound.PlaySound(sound, winsound.SND_FILENAME)
+            moveSlayerBookToBeetle()
+            Journal.Clear()
+        else:
+            trashSpellbook()
     else:
-        #double check
         Items.SingleClick(craftedBook.Serial)
         Misc.Pause(dragTime)
-        if any(Journal.Search(keep) for keep in keepProps):
-            Misc.SendMessage('SLAYER SAVED')
+        if any(Journal.Search(keep) for keep in keepSlayerProps):
+            winsound.PlaySound(sound, winsound.SND_FILENAME)
             moveSlayerBookToBeetle()
             Journal.Clear()
         else:

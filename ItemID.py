@@ -15,7 +15,7 @@ slashProps = ['Invulnerability','Exceptional','Power']
 subSlashProps = ['Indestructable','Supremely Accurate','Exceedingly Accurate','Eminently Accurate']
 keepProps = ['Vanquishing','Silver','Undead','Snake','Lizardman','Dragon','Reptile','Terathan','Scorpion',
 'Spider','Orc Slaying','Ogre','Water','Earth','Elemental','Flame','Vacuum','Repond','Fey','Gargoyle',
-'Daemon','Exorcism','Poison']
+'Daemon','Exorcism','Poison','Arachnid']
 
 idItems = [0x1b72,0x1b73,0x1b7b,0x1b74,0x1b79,0x1b7a,0x1b76,0x1408,0x1410,0x1411,0x1412,0x1413,0x1414,0x1415,
 0x140a,0x140c,0x140e,0x13bb,0x13be,0x13bf,0x13ee,0x13eb,0x13ec,0x13f0,0x13da,0x13db,0x13d5,0x13d6,0x13dc,

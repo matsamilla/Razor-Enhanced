@@ -9,12 +9,8 @@ petList = [
 # PetList
  0x00120786, # Meta Dragon
  0x0005D79D, # night llama
- 0x000743AD, # Water Dragon
  0x00049A23, # Water Wyrm
- 0x000743AD, # Water Dragon
  0x0016D74B, # Death Beetle
- 0x0008461B, # Lara Fox Meta
- 0x000190EB, # Thomas Spider
 ]
 
 
@@ -33,7 +29,7 @@ while Player.IsGhost == False:
         
         #bandage        
         #check health level if in range one of guilded meta pet heals with bandages.          
-        elif g.Hits < 23 and Player.InRangeMobile(g, 1):
+        if g.Hits < 23 and Player.InRangeMobile(g, 1):
             if Journal.Search("finish applying") or Timer.Check("bandies") == False: 
                 if Target.HasTarget( ) == False:
                     Items.UseItemByID(0x0E21, -1)

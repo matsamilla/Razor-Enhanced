@@ -45,7 +45,7 @@ while Player.IsGhost == False:
         elif Journal.Search("stay close enough"):
             Player.HeadMessage(95, "You moved")
             Journal.Clear()
-
+    Misc.Pause(50)
 Target.ClearLastandQueue()
 Target.Cancel() 
 

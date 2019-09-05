@@ -14,6 +14,7 @@ bandies = 120 # default bandage count
 arrows = 0
 bolts = 0
 ############################################################
+randomPause = 150
 
 #moss
 if Misc.CheckSharedValue('moss'):
@@ -122,120 +123,131 @@ def dumpBottles():
         if i.ItemID == 0x0F0E:
             Items.Move(i, butlerID, 0)
             Misc.Pause(600)
+def saveProfile(textid, text):
+    Gumps.WaitForGump(989312372, 2000)
+    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    Misc.Pause(randomPause)
     
 def butler():
+    Mobiles.UseMobile(butlerID)
     #################### Armor #######################################
     textid = List[int]([0])
     text = List[str]([str(cap0)])
-    Mobiles.UseMobile(butlerID)
-    Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    saveProfile(textid, text)
+
     textid = List[int]([1])
     text = List[str]([str(gorget1)])
-    Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    saveProfile(textid, text)
+    
     textid = List[int]([2])
     text = List[str]([str(sleeves2)])
-    Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    saveProfile(textid, text)
+    
     textid = List[int]([3])
     text = List[str]([str(gloves3)])
-    Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    saveProfile(textid, text)
+    
     textid = List[int]([4])
     text = List[str]([str(tunic4)])
-    Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    saveProfile(textid, text)
+    
     textid = List[int]([5])
     text = List[str]([str(legs5)])
-    Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    saveProfile(textid, text)
+    
     #################### REGS #######################################
     # Moss
     textid = List[int]([6])
     text = List[str]([str(moss6)])
-    Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    saveProfile(textid, text)
+    
     #Ash
     textid = List[int]([7])
     text = List[str]([str(ash7)])
-    Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    saveProfile(textid, text)
+    
     #Root
     textid = List[int]([8])
     text = List[str]([str(root8)])
-    Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    saveProfile(textid, text)
+    
     #Pearl
     textid = List[int]([9])
     text = List[str]([str(pearl9)])
-    Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    saveProfile(textid, text)
+    
     #Nightshade
     textid = List[int]([10])
     text = List[str]([str(shade10)])
-    Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    saveProfile(textid, text)
+    
     #Ginseng
     textid = List[int]([11])
     text = List[str]([str(ginseng11)])
-    Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    saveProfile(textid, text)
+    
     #garlic
     textid = List[int]([12])
     text = List[str]([str(garlic12)])
-    Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    saveProfile(textid, text)
+    
     #SpidersSilk
     textid = List[int]([13])
     text = List[str]([str(silk13)])
-    Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    saveProfile(textid, text)
+    
     #################### Potions ###################################
     #explode
     textid = List[int]([14])
     text = List[str]([str(exp14)])
-    Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    saveProfile(textid, text)
+    
     #Strength
     textid = List[int]([15])
     text = List[str]([str(str15)])
-    Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    saveProfile(textid, text)
+    
     #Refresh
     textid = List[int]([16])
     text = List[str]([str(refresh16)])
-    Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    saveProfile(textid, text)
+    
     #Agility
     textid = List[int]([17])
     text = List[str]([str(agi17)])
-    Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    saveProfile(textid, text)
+    
     #Heal
     textid = List[int]([18])
     text = List[str]([str(heal18)])
-    Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    saveProfile(textid, text)
+    
     #Cure
     textid = List[int]([19])
     text = List[str]([str(cure19)])
-    Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    saveProfile(textid, text)
+    
     #################### Bandages ###################################
     textid = List[int]([20])
     text = List[str]([str(bandages20)])
-    Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    saveProfile(textid, text)
+    
+    #################### Petals #####################################
+    textid = List[int]([23])
+    text = List[str]([str(0)])
+    saveProfile(textid, text)
+    
     textid = List[int]([24])
     text = List[str]([str(arrows24)])
-    Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    saveProfile(textid, text)
+    
     #################### Arrows/Bolts ###############################
     textid = List[int]([25])
     text = List[str]([str(bolts25)])
+    saveProfile(textid, text)
+
     Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 6, switch, textid, text)
+    Gumps.SendAction(989312372, 6)
 
 dumpBottles()
 butler()

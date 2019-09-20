@@ -10,6 +10,7 @@ from System.Collections.Generic import List
 name = Player.Name.lower().replace(' ', '')
 
 if name == 'playername1': #Replace playername1 with toon name, no caps or spaces
+    Misc.SendMessage('Loading: ' + name)
     Misc.SetSharedValue('moss', 75)
     Misc.SetSharedValue('ash', 75)
     Misc.SetSharedValue('root', 75)
@@ -29,6 +30,7 @@ if name == 'playername1': #Replace playername1 with toon name, no caps or spaces
     Misc.SetSharedValue('arrows', 0)
     Misc.SetSharedValue('bolts', 0)  
 elif name == 'playername2': #Replace playername2 with toon name, no caps or spaces
+    Misc.SendMessage('Loading: ' + name)
     Misc.SetSharedValue('moss', 0)
     Misc.SetSharedValue('ash', 0)
     Misc.SetSharedValue('root', 0)

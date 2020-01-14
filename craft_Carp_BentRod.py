@@ -1,8 +1,7 @@
 # Bent Rod Crafter by MatsaMilla
 # Last edit: Matsamilla 6/4/19
-#
-# Restocks blank scrolls from beetle (1k at a time)
-# Moves slayers to beetle
+
+# Moves bent rods to beetle
 
 from System.Collections.Generic import List
 import winsound

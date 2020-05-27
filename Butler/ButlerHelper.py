@@ -1,3 +1,6 @@
+# By Spatchel & Matsamilla
+# Last updated by Matsamilla to work with leather dye tubs 5/27/20
+
 from System.Collections.Generic import List
 # 4 = equip armor, 5 = bag regs, 6 = bag pots
 switch = List[int]([0,4])
@@ -8,14 +11,16 @@ butlerID = 0x0029C3D1 #add your butler serial here
 ###########################################################
 # Edit this section if you dont run other per-player macro#
 ###########################################################
-regs = 100 # default reg count if not profile
+regs = 50 # default reg count if not profile
 armor = 0 # default armor, 0=no 1=yes
+cap = False # false for never cap, ever ever
 bandies = 120 # default bandage count
 arrows = 0
 bolts = 0
 ############################################################
 randomPause = 150
-
+saveSwitch = 3
+withdrawSwitch = 6
 #moss
 if Misc.CheckSharedValue('moss'):
     moss6 = Misc.ReadSharedValue('moss')
@@ -43,7 +48,7 @@ else:
     shade10 = regs
 # Ginseng count
 if Misc.CheckSharedValue('ginseng'):
-    ginseng11 = Misc.ReadSharedValue('moss')
+    ginseng11 = Misc.ReadSharedValue('ginseng')
 else: 
     ginseng11 = regs 
 # Garlic Count   
@@ -59,14 +64,20 @@ else:
 # Armor
 if Misc.CheckSharedValue('armor'):
     armorS = Misc.ReadSharedValue('armor')
-    cap0 = armorS
+    if cap:
+        cap0 = armorS
+    else:
+        cap0 = 0
     gorget1 = armorS
     sleeves2 = armorS
     gloves3 = armorS
     tunic4 = armorS
     legs5 = armorS
 else:
-    cap0 = armor
+    if cap:
+        cap0 = armor
+    else:
+        cap0 = 0
     gorget1 = armor
     sleeves2 = armor
     gloves3 = armor
@@ -98,8 +109,8 @@ if Misc.CheckSharedValue('heal'):
 else: 
     heal18 = 0
 # Cure Pots Count    
-if Misc.CheckSharedValue('heal'):
-    cure19 = Misc.ReadSharedValue('heal')
+if Misc.CheckSharedValue('cure'):
+    cure19 = Misc.ReadSharedValue('cure')
 else: 
     cure19 = 0
 # Bandages Pots Count    
@@ -125,11 +136,17 @@ def dumpBottles():
             Misc.Pause(600)
 def saveProfile(textid, text):
     Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, 3, switch, textid, text)
+    Gumps.SendAdvancedAction(989312372, saveSwitch, switch, textid, text) #change 3 to 5 w/ tub
     Misc.Pause(randomPause)
     
 def butler():
     Mobiles.UseMobile(butlerID)
+    Gumps.WaitForGump(989312372, 2000)
+    if Gumps.LastGumpTextExist( 'Remove Leather Tub?' ):
+        Misc.SendMessage('Leather Tub Detected')
+        saveSwitch = 5
+        withdrawSwitch = 8
+    
     #################### Armor #######################################
     textid = List[int]([0])
     text = List[str]([str(cap0)])
@@ -247,7 +264,8 @@ def butler():
     saveProfile(textid, text)
 
     Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAction(989312372, 6)
+    #Gumps.SendAction(989312372, 6)
+    Gumps.SendAdvancedAction(989312372, withdrawSwitch, switch) #change to 8 w/ tub
 
 dumpBottles()
 butler()

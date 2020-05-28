@@ -1,6 +1,10 @@
 # Bandage Timer by Wardoc
 # Contributions by Matsamilla
 # I have this always running, start at login.
+
+# True for overhead Bandage Available message, false for in system messages
+overheadMessage = False
+
 msgcolor = 88
 Misc.SetSharedValue('bandageDone', True)
 def BandagesApplying():
@@ -40,10 +44,12 @@ def WaitForBandagesToApply():
         Misc.SendMessage ( 'Bandage: %is' % ( secondsCounter ) , msgcolor)
         if secondsCounter > 18:
             break
-    if not (Misc.ScriptStatus('Bandage_Self.py') or Misc.ScriptStatus('pvm_Vet Pets.py')):
+            
+    if overheadMessage:
         Player.HeadMessage(msgcolor, 'Bandage Available')
     else:
         Misc.SendMessage( 'Bandage Available', msgcolor )
+        
     Misc.SetSharedValue('bandageDone', True)
     return
 

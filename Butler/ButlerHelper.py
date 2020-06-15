@@ -1,5 +1,5 @@
 # By Spatchel & Matsamilla
-# Last updated by Matsamilla to work with leather dye tubs 5/27/20
+# Last updated by Matsamilla to work with leather dye tubs 6/15/20
 
 from System.Collections.Generic import List
 # 4 = equip armor, 5 = bag regs, 6 = bag pots
@@ -19,6 +19,7 @@ arrows = 0
 bolts = 0
 ############################################################
 randomPause = 150
+
 saveSwitch = 3
 withdrawSwitch = 6
 #moss
@@ -146,6 +147,9 @@ def butler():
         Misc.SendMessage('Leather Tub Detected')
         saveSwitch = 5
         withdrawSwitch = 8
+    else:
+        saveSwitch = 3
+        withdrawSwitch = 6
     
     #################### Armor #######################################
     textid = List[int]([0])

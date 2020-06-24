@@ -1,6 +1,7 @@
 # Automatic Potion Butler Filler by MatsaMilla
 # Target items requested
 # Makes Make sure restock chest & motar bags are open
+# For best results have refill keg in backpack
 
 
 butler = Target.PromptTarget('Target Butler')

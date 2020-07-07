@@ -1,5 +1,5 @@
-matsa = Mobiles.FindBySerial(0x1E60BC)
-nalf = Mobiles.FindBySerial(0x000B519E)
+# Dexxer trainer by MatsaMilla
+# Will train Healing , Anatomy, Hiding & Alchemy
 dummy = None
 dragTime = 600
         

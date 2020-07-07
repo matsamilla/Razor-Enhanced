@@ -105,7 +105,7 @@ def checkRegs():
 Journal.Clear()
 while Player.GetRealSkillValue('Magery')  < 100:
     if resistTrain:
-        trainResist()
+        trainMage()
     else:       
         trainMageryNoResist()
     checkRegs()

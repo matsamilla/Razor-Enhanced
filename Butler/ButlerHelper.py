@@ -1,5 +1,8 @@
-# By Spatchel & Matsamilla
-# Last updated by Matsamilla to work with leather dye tubs 6/15/20
+# ButlerHelper by Spatchel & Matsamilla
+# use with ButlerProfiles.py for best results, and don't edit this
+
+# Last updated 7/14/20
+
 
 from System.Collections.Generic import List
 # 4 = equip armor, 5 = bag regs, 6 = bag pots
@@ -7,9 +10,10 @@ switch = List[int]([0,4])
 player_bag = Items.FindBySerial(Player.Backpack.Serial)
 
 butlerID = 0x0029C3D1 #add your butler serial here
+randomPause = 150
 
 ###########################################################
-# Edit this section if you dont run other per-player macro#
+# Edit this section if you dont run ButlerProfiles.py     #
 ###########################################################
 regs = 50 # default reg count if not profile
 armor = 0 # default armor, 0=no 1=yes
@@ -18,10 +22,7 @@ bandies = 120 # default bandage count
 arrows = 0
 bolts = 0
 ############################################################
-randomPause = 150
 
-saveSwitch = 3
-withdrawSwitch = 6
 #moss
 if Misc.CheckSharedValue('moss'):
     moss6 = Misc.ReadSharedValue('moss')
@@ -135,12 +136,8 @@ def dumpBottles():
         if i.ItemID == 0x0F0E:
             Items.Move(i, butlerID, 0)
             Misc.Pause(600)
-def saveProfile(textid, text):
-    Gumps.WaitForGump(989312372, 2000)
-    Gumps.SendAdvancedAction(989312372, saveSwitch, switch, textid, text) #change 3 to 5 w/ tub
-    Misc.Pause(randomPause)
-    
 def butler():
+    global saveSwitch
     Mobiles.UseMobile(butlerID)
     Gumps.WaitForGump(989312372, 2000)
     if Gumps.LastGumpTextExist( 'Remove Leather Tub?' ):
@@ -268,8 +265,18 @@ def butler():
     saveProfile(textid, text)
 
     Gumps.WaitForGump(989312372, 2000)
-    #Gumps.SendAction(989312372, 6)
-    Gumps.SendAdvancedAction(989312372, withdrawSwitch, switch) #change to 8 w/ tub
+    #Gumps.SendAction(989312372, withdrawSwitch)
+    Gumps.SendAdvancedAction(989312372, withdrawSwitch, switch)
+    
+def saveProfile(textid, text):
+    if Gumps.CurrentGump() != 989312372:
+        tempGump = Gumps.CurrentGump()
+        Gumps.CloseGump(tempGump)
+        Gumps.ResetGump()
+        Mobiles.UseMobile(butlerID)
+    Gumps.WaitForGump(989312372, 2000)
+    Gumps.SendAdvancedAction(989312372, saveSwitch, switch, textid, text)
+    Misc.Pause(randomPause)
 
 dumpBottles()
 butler()

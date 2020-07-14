@@ -272,7 +272,6 @@ def saveProfile(textid, text):
     if Gumps.CurrentGump() != 989312372:
         tempGump = Gumps.CurrentGump()
         Gumps.CloseGump(tempGump)
-        Gumps.ResetGump()
         Mobiles.UseMobile(butlerID)
     Gumps.WaitForGump(989312372, 2000)
     Gumps.SendAdvancedAction(989312372, saveSwitch, switch, textid, text)

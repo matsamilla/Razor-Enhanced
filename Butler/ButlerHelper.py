@@ -1,5 +1,5 @@
 # ButlerHelper by Spatchel & Matsamilla
-# use with ButlerProfiles.py for best results, and don't edit this
+# use with ButlerProfiles.py for best results, and do not edit this
 
 # Last updated 7/14/20
 

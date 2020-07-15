@@ -1,4 +1,5 @@
 # XP tracker by SilentNox, imporoved by MatsaMilla
+#   Version 1.1: Fixed crash on max talisman
 #
 # Tracks XP of talisman, or meta pet, just start it up 
 # and leave talisman / meta stone gump open
@@ -9,7 +10,6 @@
 # True = will track XP only since running the script
 # False = will track XP since Enhanced, if you stop/restart script it will still track starting xp
 trackOnScript = False
-
     
 minxp = 0
 currentxp = 0
@@ -21,6 +21,9 @@ def setup():
     global currentxp
     
     temp = Gumps.LastGumpGetLine(gumpLine)
+    if temp == 'MAX':
+        Misc.SendMessage('Talisman Maxxed, stopping', 33)
+        Stop
     temp = temp.split("/", 1)[0]
     
     if hasInt(temp):
@@ -50,7 +53,6 @@ def setup():
             startingxp = currentxp
             Misc.SetSharedValue( pname + 'xp', startingxp )
             Misc.SendMessage('Starting XP: ' + str(startingxp) , 33)
-
 
 def hasInt(s):
     try: 
@@ -130,6 +132,7 @@ else:
 
 Items.UseItem(Tallyserial)
 Misc.Pause(200)
+
 setup()
 while True:
     talismanXp()

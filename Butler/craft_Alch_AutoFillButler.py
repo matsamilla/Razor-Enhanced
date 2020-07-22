@@ -1,4 +1,5 @@
 # Automatic Potion Butler Filler by MatsaMilla
+# Must have TOOLTIPSON ([toggletooltips in game to turn off/on)
 # Target items requested
 # Makes Make sure restock chest & motar bags are open
 # For best results have refill keg in backpack

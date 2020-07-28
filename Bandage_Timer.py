@@ -3,7 +3,7 @@
 # I have this always running, start at login.
 
 # True for overhead Bandage Available message, false for in system messages
-overheadMessage = False
+overheadMessage = True
 
 msgcolor = 88
 Misc.SetSharedValue('bandageDone', True)
@@ -41,7 +41,11 @@ def WaitForBandagesToApply():
         worldSave()
         Misc.Pause( 1000 )
         secondsCounter += 1
-        Misc.SendMessage ( 'Bandage: %is' % ( secondsCounter ) , msgcolor)
+        if overheadMessage:
+            Player.HeadMessage( msgcolor, 'Bandage: %is' % ( secondsCounter ) )
+        else:
+            Player.HeadMessage ( msgcolor, 'Bandage: %is' % ( secondsCounter ) )
+        
         if secondsCounter > 18:
             break
             

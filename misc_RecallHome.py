@@ -9,7 +9,4 @@ if Player.Name == "ToonName":
     Target.TargetExecute(0x43286FAE)
 # Non Mage Toon
 elif Player.Name == "ToonName":
-    Items.UseItem(0x423A667B)
-    Misc.Pause(openRunebookPause)
-    Gumps.WaitForGump(1431013363, 10000)
-    Gumps.SendAction(1431013363, 2)
+    # Record opening book and recalling home then place here:

@@ -1,12 +1,17 @@
+# Recall Home by MatsaMilla
+# Insert name without spaces and all lowercase.
+# Example: "Player Name" needs to be "playername"
+
 msgcolor = 62
 openRunebookPause = 150
+pname = Player.Name.lower().replace(' ', '')
 
 Target.ClearLastandQueue()
-# mage toon
-if Player.Name == "ToonName":
+# mage toon (name no spaces all lowercase)
+if pname == "toonname":
     Spells.CastMagery('Recall')
     Target.WaitForTarget(1500,False)
     Target.TargetExecute(0x43286FAE) # Change to serialID of your recall book
-# Non Mage Toon
-elif Player.Name == "ToonName":
-    # Record opening book and recalling home then place here:
+# Non Mage Toon (name no spaces all lowercase)
+elif pname == "toonname2":
+    # Record opening book and recalling home in new script, then copy/paste here:

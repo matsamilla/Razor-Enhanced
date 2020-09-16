@@ -4,21 +4,17 @@
 # Makes Make sure restock chest & motar bags are open
 # For best results have refill keg in backpack
 
-
 butler = Target.PromptTarget('Target Butler')
 restockChest = Target.PromptTarget('Target Restock Chest')
-kegTarget =  Target.PromptTarget('Target keg to fill (optional)')
 mortarBag = Target.PromptTarget('Mortar Restock Bag (optional)')
-
-if kegTarget != -1:
+        
+keg = Items.FindByID( 0x1940 , -1 ,  Player.Backpack.Serial )
+if keg:
+    Misc.SendMessage('Using keg in pack', 66)
+else:
+    kegTarget =  Target.PromptTarget('Target keg to fill (optional)')
     Misc.SendMessage('Using targeted Keg', 66)
     keg = Items.FindBySerial(kegTarget)
-else:
-    keg = Items.FindByID( 0x1940 , -1 ,  Player.Backpack.Serial )
-    if keg:
-        Misc.SendMessage('Using keg in pack', 66)
-    else:
-        Misc.SendMessage('Need a keg', 33)
 
 fillStopNumber = 4900
 dragTime = 800
@@ -113,10 +109,6 @@ def craftPot (potType):
             else:
                 Misc.SendMessage('Out of regs for this pot type, moving to next pot', 33)
                 break
-#            if Items.BackpackCount(regID) < 10:
-#                Misc.SendMessage('Out of regs for this pot type, moving to next pot', 33)
-#                break
-            
             
         # move pot to keg  
         pot = FindItem( potID , Player.Backpack)
@@ -131,19 +123,11 @@ def craftPot (potType):
             Items.Move(emptyPot, Player.Backpack.Serial, 1)
             Misc.Pause(dragTime)
         
-#        #make sure you have empty bottle
-#        if Gumps.LastGumpTextExist('You need an empty bottle to make a potion.'):
-#            pot = FindItem( potID , Player.Backpack)
-#            Misc.SendMessage('Moving Pot')
-#            Items.Move(pot, keg, 0)
-#            Misc.Pause(dragTime)
-            
         if Journal.Search('You decide that it would be a bad idea to mix different types of potions.'):
             Misc.SendMessage('Oops')
             Items.Move( keg , butler , 0 )
             Misc.Pause(dragTime)
             Journal.Clear()
-
             
         #craft pot
         Items.UseItem(mortar)
@@ -164,6 +148,7 @@ def craftPot (potType):
 
 
 Journal.Clear()
+Misc.Pause(1000)
 Mobiles.UseMobile(butler)
 Misc.Pause(1000)
 if Gumps.LastGumpTextExist( 'Remove Leather Tub?' ):

@@ -5,6 +5,7 @@ import sys
 # range at which target will aquire
 targetRange = 12
 
+# filter
 def find(notoriety):
     fil = Mobiles.Filter()
     fil.Enabled = True
@@ -21,6 +22,7 @@ def find(notoriety):
 # 1 blue, 2 green, 3 grey, 4 grey(agro), 5 orange, 6 red, 7 invul
 # Random, Nearest,Farthest, Weakest, Strongest, Next
 
+# if your toon is blue, green, or gray
 if (Player.Notoriety == 1 or Player.Notoriety == 2 or Player.Notoriety == 3):
     orangeMobile = Mobiles.Select(find(5),'Nearest')
     redMobile = Mobiles.Select(find(6),'Nearest')
@@ -37,7 +39,8 @@ if (Player.Notoriety == 1 or Player.Notoriety == 2 or Player.Notoriety == 3):
         Misc.SendMessage('Changing last target to ' + greyMobile.Name)
         Target.SetLast(greyMobile)
         Target.TargetExecute(greyMobile)
-    
+
+# if your toon is red
 elif Player.Notoriety == 6:
     blueMobile = Mobiles.Select(find(1),'Nearest')
     if blueMobile:

@@ -1,6 +1,4 @@
 # ItemID script by MatsaMilla v2
-
-#MIB SORT / ID STUFF
 # Item ID
 from System.Collections.Generic import List
 import winsound
@@ -69,7 +67,6 @@ else:
     global trashCan
     trashCan = trashcanhere[ 0 ]
 
-Misc.SendMessage('MIB ID Sort', 33)
 msgColor = 45
 stopWeight = 380
 rightHand = Player.CheckLayer('RightHand')

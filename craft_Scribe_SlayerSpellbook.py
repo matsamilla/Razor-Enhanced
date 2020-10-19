@@ -88,24 +88,16 @@ def hide():
         Timer.Create('hideskill',11000)
 
 def checkMats():
-    if Items.BackpackCount(pen, -1) < 1:
-        Misc.SendMessage('Out of Pens',33)
-        winsound.PlaySound(error, winsound.SND_FILENAME)
-        if not Player.Mount:
-                Mobiles.UseMobile(beetle)
-                Misc.Pause(dragTime)
-        Misc.ScriptStop('craft_Scribe_SlayerSpellbook.py')
-        
     if Items.BackpackCount(scrolls, -1) < 16:
         restockScrolls()
         Misc.Pause(dragTime)
         if Items.BackpackCount(scrolls, -1) < 16:
             Misc.SendMessage('Out of Scrolls',33)
-            winsound.PlaySound(error, winsound.SND_FILENAME)
+            Misc.Beep()
             if not Player.Mount:
                 Mobiles.UseMobile(beetle)
                 Misc.Pause(dragTime)
-            Misc.ScriptStop('craft_Scribe_SlayerSpellbook.py')
+            Stop
             
 def restockScrolls():
     if Player.Mount:
@@ -156,14 +148,21 @@ def FindItem( itemID, container, color = -1, ignoreContainer = [] ):
         
 def craftBook():
     currentPen = FindItem(pen, Player.Backpack)#Items.FindByID(pen, -1, -1)
-    if Gumps.CurrentGump() != 0x38920abd:
-        Items.UseItem(currentPen.Serial)
-    Gumps.WaitForGump(0x38920abd,1500)
-    Gumps.SendAction(0x38920abd, 57)
-    Gumps.WaitForGump(0x38920abd,1500)
-    Gumps.SendAction(0x38920abd, 16)
-    Misc.Pause(2000)
-    
+    if currentPen:
+        if Gumps.CurrentGump() != 0x38920abd:
+            Items.UseItem(currentPen.Serial)
+        Gumps.WaitForGump(0x38920abd,1500)
+        Gumps.SendAction(0x38920abd, 57)
+        Gumps.WaitForGump(0x38920abd,1500)
+        Gumps.SendAction(0x38920abd, 16)
+        Misc.Pause(2000)
+    else:
+        Misc.SendMessage('Out of Pens',33)
+        Misc.Beep()
+        if not Player.Mount:
+                Mobiles.UseMobile(beetle)
+                Misc.Pause(dragTime)
+        Stop
 def slayerCheck():
     global craftedBook
     craftedBook = Items.FindByID(spellbook, -1, self_pack)

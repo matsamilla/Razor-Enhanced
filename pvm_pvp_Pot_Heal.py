@@ -19,7 +19,10 @@ else:
     if leftHand and noBow:
         Player.UnEquipItemByLayer('LeftHand')
         Misc.Pause(650)
-        Items.UseItemByID(0x0F0C, -1)
+        Player.ChatSay( 1 , '[drink greaterhealpotion')
+        Misc.Pause(100)
+        if Journal.Search( 'You do not have any of those potions.'):
+            Player.HeadMessage(msgColor, "No Heal pots!")
         Misc.Pause(chugtime)
         Player.EquipItem(leftHand)
         Misc.Pause(50)

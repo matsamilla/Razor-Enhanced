@@ -1,6 +1,6 @@
 # Automatic Potion Butler Filler by MatsaMilla
 # Must have TOOLTIPSON ([toggletooltips in game to turn off/on)
-# NEED: Restock Chest, Mortars either in backpack or in a bag to restock from, empty keg on toon, at least 1 empty bottle on toon.
+# NEED: Restock Chest, Mortars either in backpack or in a bag to restock from, empty keg on toon, at least 2 empty bottles on toon.
 # Makes Make sure restock chest & motar bags are open
 # For best results have refill keg in backpack
 # Target items requested
@@ -13,7 +13,7 @@ keg = Items.FindByID( 0x1940 , -1 ,  Player.Backpack.Serial )
 if keg:
     Misc.SendMessage('Using keg in pack', 66)
 else:
-    kegTarget =  Target.PromptTarget('Target keg to fill (optional)')
+    kegTarget =  Target.PromptTarget('Target keg to fill')
     Misc.SendMessage('Using targeted Keg', 66)
     keg = Items.FindBySerial(kegTarget)
 
@@ -144,8 +144,6 @@ def craftPot (potType):
     Items.Move( keg , butler , 0 )
     Misc.Pause(dragTime)
     Journal.Clear()
-    
-
 
 
 Journal.Clear()

@@ -1,8 +1,9 @@
 # Automatic Potion Butler Filler by MatsaMilla
 # Must have TOOLTIPSON ([toggletooltips in game to turn off/on)
-# Target items requested
+# NEED: Restock Chest, Mortars either in backpack or in a bag to restock from, empty keg on toon, at least 1 empty bottle on toon.
 # Makes Make sure restock chest & motar bags are open
 # For best results have refill keg in backpack
+# Target items requested
 
 butler = Target.PromptTarget('Target Butler')
 restockChest = Target.PromptTarget('Target Restock Chest')

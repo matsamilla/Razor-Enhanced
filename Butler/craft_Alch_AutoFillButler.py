@@ -100,8 +100,8 @@ def craftPot (potType):
         # count / restock reg type   
         if Items.BackpackCount(regID) < 10:
             regFound = Items.FindByID( regID, -1, restockChest)
-            Items.WaitForProps( regFound.Serial , dragTime)
             if regFound:
+                Items.WaitForProps( regFound.Serial , dragTime)
                 Items.Move( regFound, Player.Backpack , 250 )
                 Misc.Pause(dragTime)
                 if Items.BackpackCount(regID) < 10:

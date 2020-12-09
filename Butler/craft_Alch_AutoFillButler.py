@@ -1,23 +1,33 @@
-# Automatic Potion Butler Filler by MatsaMilla
-# Must have TOOLTIPSON ([toggletooltips in game to turn off/on)
-# NEED: Restock Chest, Mortars either in backpack or in a bag to restock from, empty keg on toon, at least 2 empty bottles on toon.
-# Makes Make sure restock chest & motar bags are open
-# For best results have refill keg in backpack
-# Target items requested
+# Automatic Potion Butler Filler by MatsaMilla 
+#   - Version 2, updated 12/9/20
 
+# Must have TOOLTIPSON ([toggletooltips in game to turn off/on)
+
+# NEED: Restock Chest (containing regs / empty pots), 
+#       Mortars in backpack or in restock chest (can be in a bag in restock chest, has to be open).
+#       Empty keg in toons backpack.
+
+# Makes Make sure restock chest & motar restock bags are open
+
+#*******************************************************************#
+
+Player.HeadMessage(66,'Target Butler')
 butler = Target.PromptTarget('Target Butler')
-restockChest = Target.PromptTarget('Target Restock Chest')
-mortarBag = Target.PromptTarget('Mortar Restock Bag (optional)')
+Player.HeadMessage(66,'Target Restock Chest')
+restockChest = Items.FindBySerial( Target.PromptTarget('Target Restock Chest') )
+#Player.HeadMessage(66,'Mortar Restock Bag (optional)')
+#mortarBag = Items.FindBySerial( Target.PromptTarget('Mortar Restock Bag (optional)') )
         
 keg = Items.FindByID( 0x1940 , -1 ,  Player.Backpack.Serial )
 if keg:
     Misc.SendMessage('Using keg in pack', 66)
 else:
+    Player.HeadMessage(66,'Target keg to fill')
     kegTarget =  Target.PromptTarget('Target keg to fill')
     Misc.SendMessage('Using targeted Keg', 66)
     keg = Items.FindBySerial(kegTarget)
 
-fillStopNumber = 4900
+fillStopNumber = 5000
 dragTime = 800
 butlerGump = 989312372
 
@@ -37,7 +47,6 @@ def FindItem( itemID, container, color = -1, ignoreContainer = [] ):
     Searches through the container for the item IDs specified and returns the first one found
     Also searches through any subcontainers, which Misc.FindByID() does not
     '''
-
     ignoreColor = False
     if color == -1:
         ignoreColor = True
@@ -79,12 +88,16 @@ def craftPot (potType):
         Misc.SendMessage('potType not defined, stopping', 33)
         Misc.ScriptStop('craft_Alch_FillButler.py')
     
-    while not Items.GetPropValue(keg,'The Keg Is Completely Full.'): #not Journal.SearchByType('The keg will not hold any more!', 'Regular'):
+    while not Items.GetPropValue(keg,'The Keg Is Completely Full.'): 
+    #while not Journal.SearchByType('The keg will not hold any more!', 'Regular'): # non-tool tips change
+        
+        worldSave()
+        
         # find mortar, even if nested in backpack
         mortar = FindItem( 0x0E9B , Player.Backpack )
         if not mortar:
             if mortarBag != -1:
-                mortarFound = Items.FindByID(0x0E9B , -1 , mortarBag)
+                mortarFound = FindItem( 0x0E9B , restockChest )#Items.FindByID(0x0E9B , -1 , mortarBag)
                 if mortarFound:
                     Items.Move(mortarFound, Player.Backpack.Serial, 0)
                     Misc.Pause(dragTime)
@@ -97,15 +110,21 @@ def craftPot (potType):
                 Misc.Pause(5000)
                 Stop
          
-        # count / restock reg type   
-        if Items.BackpackCount(regID) < 10:
-            regFound = Items.FindByID( regID, -1, restockChest)
+        # count / restock reg type
+        packRegs = FindItem(regID, Player.Backpack)
+        if not packRegs or packRegs.Amount < 10:
+        #if Items.BackpackCount(regID) < 10:
+            Misc.Pause(100)
+            regFound = FindItem(regID, restockChest) #Items.FindByID( regID, -1, restockChest)
             if regFound:
                 Items.WaitForProps( regFound.Serial , dragTime)
                 Items.Move( regFound, Player.Backpack , 250 )
-                Misc.Pause(dragTime)
-                if Items.BackpackCount(regID) < 10:
-                    Misc.SendMessage('Out of regs for this pot type, moving to next pot', 33)
+                Misc.Pause(800)
+                packRegs = FindItem(regID, Player.Backpack)
+                if not packRegs or packRegs.Amount < 10:
+                #if Items.BackpackCount(regID) < 10:
+                    Misc.NoOperation()
+                    #Misc.SendMessage('Out of regs for this pot type, moving to next pot - 1', 33)
                     break
             else:
                 Misc.SendMessage('Out of regs for this pot type, moving to next pot', 33)
@@ -120,10 +139,10 @@ def craftPot (potType):
         
         # make sure you have empty bottle
         if Items.BackpackCount(0x0F0E) < 1:
-            emptyPot = Items.FindByID( 0x0F0E, -1, restockChest)
-            Items.Move(emptyPot, Player.Backpack.Serial, 1)
+            emptyPot = FindItem(0x0F0E,restockChest) #Items.FindByID( 0x0F0E, -1, restockChest)
+            Items.Move(emptyPot, Player.Backpack.Serial, 2)
             Misc.Pause(dragTime)
-        
+        # empty keg of other potion
         if Journal.Search('You decide that it would be a bad idea to mix different types of potions.'):
             Misc.SendMessage('Oops')
             Items.Move( keg , butler , 0 )
@@ -138,18 +157,29 @@ def craftPot (potType):
         Gumps.SendAction(949095101, gumpAction2)
         Gumps.WaitForGump(949095101, dragTime)
         Misc.Pause(120)
+        #check keg level
         Items.WaitForProps(keg, dragTime)
     
     # move keg to butler
     Items.Move( keg , butler , 0 )
     Misc.Pause(dragTime)
     Journal.Clear()
-
-
+    
+def worldSave():
+    if Journal.SearchByType('The world is saving, please wait.', 'Regular' ):
+#    if Journal.SearchByType('The world will save in 1 minute.', 'Regular' ):
+        Misc.SendMessage('Pausing for world save', 33)
+        while not Journal.SearchByType('World save complete.', 'Regular'):
+            Misc.Pause(1000)
+        Misc.SendMessage('Continuing', 33)
+        Journal.Clear()
+    
 Journal.Clear()
 Misc.Pause(1000)
 Mobiles.UseMobile(butler)
 Misc.Pause(1000)
+
+# check for dye tub, adjust buttons if yes
 if Gumps.LastGumpTextExist( 'Remove Leather Tub?' ):
     Misc.SendMessage('Leather Tub Detected')
     fillList = [('explode',37),('strength',38),('refresh',39),('agility',40),('heal',41),('cure',42)]
@@ -157,17 +187,22 @@ else:
     fillList = [('explode',35),('strength',36),('refresh',37),('agility',38),('heal',39),('cure',40)]
 
 while True:
-    
+    # verify its butler gump
     if Gumps.CurrentGump() == butlerGump:
+        # iterate through fillList
         for i in fillList:
-            while int(Gumps.LastGumpGetLine(i[1])) < fillStopNumber:
+            # read gump line
+            fillNumber = fillStopNumber - int(float(Gumps.LastGumpGetLine(i[1])))
+            while fillNumber > 100: #int(float(Gumps.LastGumpGetLine(i[1]))) < fillStopNumber:
                 Gumps.CloseGump(butlerGump)
-                Misc.SendMessage('Filling ' + i[0], 66)
+                Misc.SendMessage('Filling ' + str(i[0])+ ', ' + str(fillNumber) + ' left', 66)
                 Misc.Pause(dragTime)
                 craftPot (i[0])
                 Mobiles.UseMobile(butler)
                 Misc.Pause(dragTime)
+                fillNumber = fillStopNumber - int(float(Gumps.LastGumpGetLine(i[1])))
         Misc.SendMessage('Butler is as full as we can get it!', 66)
+        Gumps.CloseGump(butlerGump)
         Stop
     else:
         Mobiles.UseMobile(butler)

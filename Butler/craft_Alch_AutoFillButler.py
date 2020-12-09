@@ -140,8 +140,11 @@ def craftPot (potType):
         # make sure you have empty bottle
         if Items.BackpackCount(0x0F0E) < 1:
             emptyPot = FindItem(0x0F0E,restockChest) #Items.FindByID( 0x0F0E, -1, restockChest)
-            Items.Move(emptyPot, Player.Backpack.Serial, 2)
-            Misc.Pause(dragTime)
+            if emptyPot:
+                Items.Move(emptyPot, Player.Backpack.Serial, 2)
+                Misc.Pause(dragTime)
+            else:
+                Player.HeadMessage(33,'Need empty pot(s) in restock container or in backpack.')
         # empty keg of other potion
         if Journal.Search('You decide that it would be a bad idea to mix different types of potions.'):
             Misc.SendMessage('Oops')

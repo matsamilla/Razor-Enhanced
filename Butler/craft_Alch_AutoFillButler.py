@@ -145,6 +145,7 @@ def craftPot (potType):
                 Misc.Pause(dragTime)
             else:
                 Player.HeadMessage(33,'Need empty pot(s) in restock container or in backpack.')
+                Stop
         # empty keg of other potion
         if Journal.Search('You decide that it would be a bad idea to mix different types of potions.'):
             Misc.SendMessage('Oops')

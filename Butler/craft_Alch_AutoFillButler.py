@@ -96,15 +96,10 @@ def craftPot (potType):
         # find mortar, even if nested in backpack
         mortar = FindItem( 0x0E9B , Player.Backpack )
         if not mortar:
-            if mortarBag != -1:
-                mortarFound = FindItem( 0x0E9B , restockChest )#Items.FindByID(0x0E9B , -1 , mortarBag)
-                if mortarFound:
-                    Items.Move(mortarFound, Player.Backpack.Serial, 0)
-                    Misc.Pause(dragTime)
-                else:
-                    Misc.SendMessage('Out of Mortars!', 33)
-                    Misc.Pause(5000)
-                    Stop
+            mortarFound = FindItem( 0x0E9B , restockChest )#Items.FindByID(0x0E9B , -1 , mortarBag)
+            if mortarFound:
+                Items.Move(mortarFound, Player.Backpack.Serial, 0)
+                Misc.Pause(dragTime)
             else:
                 Misc.SendMessage('Out of Mortars!', 33)
                 Misc.Pause(5000)

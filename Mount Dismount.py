@@ -6,13 +6,13 @@ dragTime = 600
 
 # I use this for tamers, will All Kill & target last target when you dismount
 # then call pet to you until close enough to mount again.
-dismountAttackList = [ "Toon Name 1", "Toon Name 4" ] # good for tamers
+dismountAttackList = [ "MatsaMilla", "Toon Name 4" ] # good for tamers
 
 # I use this for toons with beetles & toons with stealth
 dismountOnly = [ "Toon Name 2" , "Toon Name 3"  ]
 
-if Player.Name == "Toon Name 1":
-    mountID = MountSerial
+if Player.Name == "MatsaMilla":
+    mountID = 0x00127E94
     
 elif Player.Name == "Toon Name 2":
     mountID = MountSerial
@@ -22,7 +22,8 @@ elif Player.Name == "Toon Name 3":
     
 elif Player.Name == "Toon Name 4":
     mountID = MountSerial
-
+    
+################## no touchy below ########################
 
 def dismount():
     if Player.Mount:

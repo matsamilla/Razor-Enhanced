@@ -1,5 +1,5 @@
 # XP tracker by SilentNox, imporoved by MatsaMilla
-#   Version 2.5: Uses tooltips
+#   Version 2.6: Fixed error with rogue while using tooltips
     
 # Tracks XP of talisman, or meta pet, just start it up 
 # and leave talisman / meta stone gump open
@@ -231,7 +231,11 @@ pname = Player.Name.lower().replace(' ', '')
 Talli = Player.GetItemOnLayer('Talisman')
 if Talli:
     Tallyserial = Items.FindBySerial(Talli.Serial)
-    propLine = 5
+        Tallyserial = Items.FindBySerial(Talli.Serial)
+    if Talli.Hue == 0x078c:
+        propLine = 6
+    else:
+        propLine = 5
     gumpLine = 4
     gumpid = 463091633
 else:

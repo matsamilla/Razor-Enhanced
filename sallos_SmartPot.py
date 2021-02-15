@@ -8,5 +8,5 @@ if Player.Poisoned:
 else:
     Player.ChatSay( 1 , '[drink greaterhealpotion')
     Misc.Pause(100)
-    if (Journal.Search( 'You do not have any of those potions.'):
+    if Journal.Search( 'You do not have any of those potions.'):
         Player.HeadMessage(msgColor, "No Heal pots!")

@@ -1,5 +1,7 @@
 # Weapon Swapper by Matsamilla
-# Swaps between weps you target, last wep targeted will be first equiped
+# Swaps between weps you target, last targeted is first equipted
+
+# Version 1.3: fixed error not reading shared value, and fixed if weps not found
 
 leftHand = Player.GetItemOnLayer('LeftHand')
 rightHand = Player.GetItemOnLayer('RightHand')
@@ -29,10 +31,24 @@ def setWeps(text, multiple=True):
                return chosenid
 
 # check to see if weps are saved
-if Misc.CheckSharedValue(Player.Name + 'mainWeplist') == False:
-    mainWeplist = setWeps("Target Weps, then cancel target.")
-    Misc.SetSharedValue(Player.Name + 'mainWeplist', mainWeplist)
-    Misc.Pause(600)
+def checkList():
+    global mainWeplist
+    if Misc.CheckSharedValue(Player.Name + 'mainWeplist') == False:
+        mainWeplist = setWeps("Target Weps, then cancel target.")
+        Misc.SetSharedValue(Player.Name + 'mainWeplist', mainWeplist)
+        Misc.Pause(600)
+    else:
+        mainWeplist = Misc.ReadSharedValue(Player.Name + 'mainWeplist')
+
+checkList()
+for i in mainWeplist:
+    if Items.FindBySerial(i) == None:
+        Player.HeadMessage(33, 'Set New Weps')
+        Misc.RemoveSharedValue(Player.Name + 'weplist')
+        Misc.RemoveSharedValue(Player.Name + 'mainWeplist')
+        checkList()
+        break
+    
 
 # set weps to temp list
 if Misc.CheckSharedValue(Player.Name + 'weplist'):
@@ -53,10 +69,11 @@ if leftHand:
     Misc.Pause(600)
 
 # get last list position
-currentWep = len(weplist) -1
+lastPos = len(weplist) -1
 
 # equip next wep in list
-Player.EquipItem(weplist[currentWep])
+#currentWep = Items.FindBySerial(currentWep)
+Player.EquipItem(weplist[lastPos])
 
 # delete last equipt wep from temp list
 weplist.pop()

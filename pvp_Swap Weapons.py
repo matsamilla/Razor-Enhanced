@@ -1,48 +1,49 @@
 # Weapon Swapper by Matsamilla
-# Swaps between 2 weps
+# Swaps between weps you target, target 
 
 leftHand = Player.GetItemOnLayer('LeftHand')
 rightHand = Player.GetItemOnLayer('RightHand')
 
-if Misc.CheckSharedValue(Player.Name + 'swep'):
-    tempwep = Items.FindBySerial(Misc.ReadSharedValue(Player.Name + 'swep'))
-    if tempwep:
-        wep = tempwep.Serial
-    else:
-        Player.HeadMessage(66,'Target New Wep')
-        wep = Target.PromptTarget()
-        Misc.SetSharedValue(Player.Name + 'swep', wep)
-        Player.HeadMessage(66, 'Wep Set')
-else:
-    Player.HeadMessage(66,'Target Wep')
-    wep = Target.PromptTarget()
-    Misc.SetSharedValue(Player.Name + 'swep', wep)
-    Player.HeadMessage(66, 'Wep Set')
-    
-if Misc.CheckSharedValue(Player.Name + 'swep2'):
-    tempwep2 = Items.FindBySerial(Misc.ReadSharedValue(Player.Name + 'swep2'))
-    if tempwep2:
-        wep2 = tempwep2.Serial
-    else:
-        Player.HeadMessage(66,'Target Wep 2')
-        wep2 = Target.PromptTarget()
-        Misc.SetSharedValue(Player.Name + 'swep2', wep2)
-        Player.HeadMessage(66, 'Wep 2 Set')
-else:
-    Player.HeadMessage(66,'Target Wep')
-    wep2 = Target.PromptTarget()
-    Misc.SetSharedValue(Player.Name + 'swep2', wep2)
-    Player.HeadMessage(66, 'Wep 2 Set')
-    
+def setWeps(text, multiple=True):
+        Player.HeadMessage(76,text)
+        list = []
+        if multiple: 
+            while multiple:
+                chosenid = Target.PromptTarget()
+                if chosenid > -1:
+                   chosen = Items.FindBySerial(chosenid)
+                   Misc.Pause(500)
+                   list.append(chosen.Serial)
+                else:
+                   multiple = False
+                   if len(list) == 1:
+                       return list
+                   else:
+                       return list
+        else:
+            chosenid = Target.PromptTarget()
+            if chosenid > -1:
+               chosen = Items.FindBySerial(chosenid)
+               Misc.Pause(500)
+               Misc.SendMessage("Chose {}".format(chosen.Name))
+               return chosenid
+
+# check to see if weps are saved
+if Misc.CheckSharedValue(Player.Name + 'mainWeplist') == False:
+    mainWeplist = setWeps("Target Weps, then cancel target.")
+    Misc.SetSharedValue(Player.Name + 'mainWeplist', mainWeplist)
+    Misc.Pause(600)
+
+# set weps to temp list
 if Misc.CheckSharedValue(Player.Name + 'weplist'):
     weplist = Misc.ReadSharedValue(Player.Name + 'weplist')
 else:
-    weplist = [wep,wep2]
+    weplist =[]
+    for i in mainWeplist:
+        weplist.append(i)
     Misc.SetSharedValue(Player.Name + 'weplist', weplist)
-for i in weplist:    
-    Misc.SendMessage(i)
     
-
+# clear hands
 if rightHand:
     Items.Move(rightHand,Player.Backpack.Serial,0)
     Misc.Pause(600)
@@ -51,8 +52,13 @@ if leftHand:
     Items.Move(leftHand,Player.Backpack.Serial,0)
     Misc.Pause(600)
 
-Player.EquipItem(weplist[0])
-weplist.reverse()
+# get last list position
+currentWep = len(weplist) -1
+
+# equip next wep in list
+Player.EquipItem(weplist[currentWep])
+
+# delete last equipt wep from temp list
 weplist.pop()
 if not weplist:
     Misc.RemoveSharedValue(Player.Name + 'weplist')

@@ -1,5 +1,5 @@
 # Weapon Swapper by Matsamilla
-# Swaps between weps you target, target 
+# Swaps between weps you target
 
 leftHand = Player.GetItemOnLayer('LeftHand')
 rightHand = Player.GetItemOnLayer('RightHand')

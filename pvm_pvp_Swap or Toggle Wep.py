@@ -1,6 +1,7 @@
 # Weapon Swapper by Matsamilla
 # Swaps between weps you target, last targeted is first equipted
 # if only one weapon targeted, acts as a wep toggle.
+# To clear weps, put weps away, run offscreen & run script, cancel target
 
 # Version 2.1: Fixed null error
 

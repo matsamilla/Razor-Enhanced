@@ -2,7 +2,7 @@
 # Swaps between weps you target, last targeted is first equipted
 # if only one weapon targeted, acts as a wep toggle.
 
-# Version 2.0: Now will toggle wep if only one targeted.
+# Version 2.1: Fixed null error
 
 leftHand = Player.GetItemOnLayer('LeftHand')
 rightHand = Player.GetItemOnLayer('RightHand')
@@ -109,12 +109,17 @@ def checkList():
     else:
         mainWeplist = Misc.ReadSharedValue(Player.Name + 'mainWeplist')
 
+try:
+    checkList()
 
-checkList()
-
-if isinstance(mainWeplist, list):
-    Misc.SendMessage('Swap Wep', 33)
-    swampWeps()
-else:
-    Misc.SendMessage('Toggle Wep', 33)
-    toggleWep()
+    if isinstance(mainWeplist, list):
+        Misc.SendMessage('Swap Wep', 33)
+        swampWeps()
+    else:
+        Misc.SendMessage('Toggle Wep', 33)
+        toggleWep()
+except:
+    Misc.RemoveSharedValue(Player.Name + 'mainWeplist')
+    Misc.RemoveSharedValue(Player.Name + 'singlewep')
+    Misc.RemoveSharedValue(Player.Name + 'weplist')
+    Player.HeadMessage(33, 'Something went wrong, reset weps')

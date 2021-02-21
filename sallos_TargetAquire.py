@@ -43,6 +43,9 @@ if (Player.Notoriety == 1 or Player.Notoriety == 2 or Player.Notoriety == 3):
 # if your toon is red
 elif Player.Notoriety == 6:
     blueMobile = Mobiles.Select(find(1),'Nearest')
+    orangeMobile = Mobiles.Select(find(5),'Nearest')
+    redMobile = Mobiles.Select(find(6),'Nearest')
+    greyMobile = Mobiles.Select(find(3),'Nearest')
     if blueMobile:
         Misc.SendMessage('Changing last target to ' + blueMobile.Name)
         Target.SetLast(blueMobile)

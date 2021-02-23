@@ -6,22 +6,22 @@ dragTime = 600
 
 # I use this for tamers, will All Kill & target last target when you dismount
 # then call pet to you until close enough to mount again.
-dismountAttackList = [ "MatsaMilla", "Toon Name 4" ] # good for tamers
+dismountAttackList = [ "MatsaMilla", "MGD" ] # good for tamers
 
 # I use this for toons with beetles & toons with stealth
-dismountOnly = [ "Toon Name 2" , "Toon Name 3"  ]
+dismountOnly = [ "Matsa" , "EmGD"  ]
 
 if Player.Name == "MatsaMilla":
-    mountID = 0x00127E94
+    mountID = 0x01237E94
     
-elif Player.Name == "Toon Name 2":
-    mountID = MountSerial
+elif Player.Name == "Matsa":
+    mountID = 0x00121234
     
-elif Player.Name == "Toon Name 3":
-    mountID = MountSerial
+elif Player.Name == "MGD":
+    mountID = 0x00121234
     
-elif Player.Name == "Toon Name 4":
-    mountID = MountSerial
+elif Player.Name == "EmGD":
+    mountID = 0x00121234
     
 ################## no touchy below ########################
 

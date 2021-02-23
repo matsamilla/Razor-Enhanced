@@ -1,15 +1,17 @@
-# Target Closest, Attack and Drop Target On nearest humanoid
+# Target Closest, Attack and DROP Target on nearest target
 #   aka sallos target aquire
 # by MatsaMilla & contributions by Trick Tickler
 from System.Collections.Generic import List
 from System import Byte
 import sys
 
+# true to attack, false will only set as last target
+attack = True
 
-# true to send message in party
-sendMessage = False
+# true to send target message to party
+sendMessage = True
 
-# true to display target overhead & overmobile
+# true to display target overhead & over mobile
 displayTarget = False
 
 # range at which target will aquire
@@ -20,7 +22,6 @@ def find(notoriety):
     fil = Mobiles.Filter()
     fil.Enabled = True
     fil.RangeMax = targetRange
-    fil.IsHuman = True
     fil.IsGhost = False
     fil.Friend = False
     fil.Notorieties = List[Byte](bytes(notoriety))
@@ -41,8 +42,8 @@ if (Player.Notoriety == 1 or Player.Notoriety == 2 or Player.Notoriety == 3):
         if sendMessage:
             Player.ChatParty('Changing last target to ' + orangeMobile.Name)
         Target.SetLast(orangeMobile)
-        Player.Attack(orangeMobile)
-        Target.TargetExecute(orangeMobile)
+        if attack:
+            Player.Attack(orangeMobile)
         if displayTarget:
             Player.HeadMessage(47, "Target: " + orangeMobile.Name)
             Mobiles.Message(orangeMobile, 15, "*Target*")
@@ -50,8 +51,8 @@ if (Player.Notoriety == 1 or Player.Notoriety == 2 or Player.Notoriety == 3):
         if sendMessage:
             Player.ChatParty('Changing last target to ' + redMobile.Name)
         Target.SetLast(redMobile)
-        Player.Attack(redMobile)
-        Target.TargetExecute(redMobile)
+        if attack:
+            Player.Attack(redMobile)
         if displayTarget:
             Player.HeadMessage(33, "Target: " + redMobile.Name)
             Mobiles.Message(redMobile, 15, "*Target*")
@@ -59,8 +60,8 @@ if (Player.Notoriety == 1 or Player.Notoriety == 2 or Player.Notoriety == 3):
         if sendMessage:
             Player.ChatParty('Changing last target to ' + greyMobile.Name)
         Target.SetLast(greyMobile)
-        Player.Attack(greyMobile)
-        Target.TargetExecute(greyMobile)
+        if attack:
+            Player.Attack(greyMobile)
         if greyMobile:
             Player.HeadMessage(902, "Target: " + greyMobile.Name)
             Mobiles.Message(greyMobile, 15, "*Target*")
@@ -77,8 +78,8 @@ elif Player.Notoriety == 6:
         if sendMessage:
             Player.ChatParty('Changing last target to ' + blueMobile.Name)
         Target.SetLast(blueMobile)
-        Player.Attack(blueMobile)
-        Target.TargetExecute(blueMobile)
+        if attack:
+            Player.Attack(blueMobile)
         if displayTarget:
             Player.HeadMessage(1266, "Target: " + blueMobile.Name)
             Mobiles.Message(blueMobile, 15, "*Target*")
@@ -86,8 +87,8 @@ elif Player.Notoriety == 6:
         if sendMessage:
             Player.ChatParty('Changing last target to ' + greyMobile.Name)
         Target.SetLast(greyMobile)
-        Player.Attack(greyMobile)
-        Target.TargetExecute(greyMobile)
+        if attack:
+            Player.Attack(greyMobile)
         if displayTarget:
             Player.HeadMessage(902, "Target: " + greyMobile.Name)
             Mobiles.Message(greyMobile, 15, "*Target*")
@@ -95,8 +96,8 @@ elif Player.Notoriety == 6:
         if sendMessage:
             Player.ChatParty('Changing last target to ' + orangeMobile.Name)
         Target.SetLast(orangeMobile)
-        Player.Attack(orangeMobile)
-        Target.TargetExecute(orangeMobile)
+        if attack:
+            Player.Attack(orangeMobile)
         if displayTarget:
             Player.HeadMessage(47, "Target: " + orangeMobile.Name)
             Mobiles.Message(orangeMobile, 15, "*Target*")
@@ -104,8 +105,8 @@ elif Player.Notoriety == 6:
         if sendMessage:
             Player.ChatParty('Changing last target to ' + redMobile.Name)
         Target.SetLast(redMobile)
-        Player.Attack(redMobile)
-        Target.TargetExecute(redMobile)
+        if attack:
+            Player.Attack(redMobile)
         if displayTarget:
             Player.HeadMessage(33, "Target: " + redMobile.Name)
             Mobiles.Message(redMobile, 15, "*Target*")

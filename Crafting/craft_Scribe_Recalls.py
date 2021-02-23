@@ -1,7 +1,7 @@
 restockBeetle = False
 
-amountToMake = 5000
-restockChest = 0x43510513
+amountToMake = 10000
+restockChestSerial = 0x43510513
 dragTime = 600
 bp = 0x0F7A
 bm = 0x0F7B
@@ -16,8 +16,11 @@ beetle = 0x0023F0A0
 beetleContainer = 0x439F1BD4 # Inspect item in beetle to get container
 
 
+restockChest = Items.FindBySerial(restockChestSerial)
+
 def craftRecall():
-    pens = Items.FindByID(0x0FBF,-1,pack)
+    #pens = Items.FindByID(0x0FBF,-1,pack)
+    pens = FindItem(0x0FBF, Player.Backpack)
     Items.UseItem(pens)
     Gumps.WaitForGump(949095101, 2000)
     Gumps.SendAction(949095101, 22)
@@ -42,22 +45,45 @@ def med():
 
 def unload():
     recalls = Items.FindByID(recall, -1, pack)
-    
-    if restockBeetle:
-        if Player.Mount:
-            Mobiles.UseMobile(self)
+    if recalls:
+        if restockBeetle:
+            if Player.Mount:
+                Mobiles.UseMobile(self)
+                Misc.Pause(dragTime)
+                Items.Move(recalls, beetle, 0)
+                Misc.Pause(dragTime)
+            if not Player.Mount:
+                Mobiles.UseMobile(beetle)
+                Misc.Pause(dragTime)
+                
+        else:
+            Items.Move(recalls, restockChest.Serial, 0)
             Misc.Pause(dragTime)
-            Items.Move(recalls, beetle, 0)
-            Misc.Pause(dragTime)
-        if not Player.Mount:
-            Mobiles.UseMobile(beetle)
-            Misc.Pause(dragTime)
-            
-    else:
-        Items.Move(recalls, restockChest, 0)
-        Misc.Pause(dragTime)
         
-    
+def FindItem( itemID, container, color = -1, ignoreContainer = [] ):
+    '''
+    Searches through the container for the item IDs specified and returns the first one found
+    Also searches through any subcontainers, which Misc.FindByID() does not
+    '''
+    ignoreColor = False
+    if color == -1:
+        ignoreColor = True
+
+    if isinstance( itemID, int ):
+        foundItem = next( ( item for item in container.Contains if ( item.ItemID == itemID and ( ignoreColor or item.Hue == color ) ) ), None )
+    elif isinstance( itemID, list ):
+        foundItem = next( ( item for item in container.Contains if ( item.ItemID in itemID and ( ignoreColor or item.Hue == color ) ) ), None )
+    else:
+        raise ValueError( 'Unknown argument type for itemID passed to FindItem().', itemID, container )
+
+    if foundItem != None:
+        return foundItem
+
+    subcontainers = [ item for item in container.Contains if ( item.IsContainer and not item.Serial in ignoreContainer ) ]
+    for subcontainer in subcontainers:
+        foundItem = FindItem( itemID, subcontainer, color, ignoreContainer )
+        if foundItem != None:
+            return foundItem    
         
 
 def restock():
@@ -120,7 +146,7 @@ def restock():
         if Items.BackpackCount(scroll, -1) < 1:
             Items.UseItem(restockChest)
             Misc.Pause(dragTime)
-            scrolls = Items.FindByID (scroll ,-1,restockChest)
+            scrolls = Items.FindByID (scroll ,-1,restockChest.Serial)
             Items.Move(scrolls, pack, 100)
             Misc.Pause(dragTime)
             unload()
@@ -128,7 +154,7 @@ def restock():
         if Items.BackpackCount(bp, -1) < 1:
             Items.UseItem(restockChest)
             Misc.Pause(dragTime)
-            bps = Items.FindByID (bp ,-1,restockChest)
+            bps = Items.FindByID (bp ,-1,restockChest.Serial)
             Items.Move(bps, pack, 100)
             Misc.Pause(dragTime)
             unload()
@@ -136,7 +162,7 @@ def restock():
         if Items.BackpackCount(bm, -1) < 1:
             Items.UseItem(restockChest)
             Misc.Pause(dragTime)
-            bms = Items.FindByID (bm ,-1,restockChest)
+            bms = Items.FindByID (bm ,-1,restockChest.Serial)
             Items.Move(bms, pack, 100)
             Misc.Pause(dragTime)
             unload()
@@ -144,22 +170,23 @@ def restock():
         if Items.BackpackCount(mr, -1) < 1:
             Items.UseItem(restockChest)
             Misc.Pause(dragTime)
-            mrs = Items.FindByID (mr ,-1,restockChest)
+            mrs = Items.FindByID (mr ,-1,restockChest.Serial)
             Items.Move(mrs, pack, 100)
             Misc.Pause(dragTime)
             unload()
+    if Items.BackpackCount(pen, -1) < 1:
+        restockPen = FindItem(pen, restockChest)
+        Items.Move(restockPen, pack, 0)
+        Misc.Pause(dragTime)
     
     if Items.BackpackCount(scroll, -1) < 1 or Items.BackpackCount(bp, -1) < 1 or Items.BackpackCount(bm, -1) < 1 or Items.BackpackCount(mr, -1) < 1:
         Stop
-
+    if Items.BackpackCount(pen, -1) < 1:
+        Misc.SendMessage('Out of pens', 33)
+        Stop
 for i in range(0,amountToMake):
     restock()    
     craftRecall()
-    if Items.BackpackCount(pen, -1) < 1:
-        Misc.SendMessage('Out of pens', 33)
-        Misc.ScriptStop('craft_Scribe_Recalls.py')
-#    if Items.BackpackCount(recall, -1) > 100:
-#        unload()
     if i % 10 == 0:
         Misc.SendMessage ( 'Recalls made: %i' % ( i ) , 33)
         #Misc.SendMessage(i)

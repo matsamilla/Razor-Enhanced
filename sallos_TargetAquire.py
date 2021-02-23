@@ -1,7 +1,17 @@
-# Target Aquire by MatsaMilla
+# Target Closest, Attack and Drop Target On nearest humanoid
+#   aka sallos target aquire
+# by MatsaMilla & contributions by Trick Tickler
 from System.Collections.Generic import List
 from System import Byte
 import sys
+
+
+# true to send message in party
+sendMessage = False
+
+# true to display target overhead & overmobile
+displayTarget = False
+
 # range at which target will aquire
 targetRange = 12
 
@@ -13,7 +23,7 @@ def find(notoriety):
     fil.IsHuman = True
     fil.IsGhost = False
     fil.Friend = False
-    fil.Notorieties = List[Byte](bytes([notoriety]))
+    fil.Notorieties = List[Byte](bytes(notoriety))
     list = Mobiles.ApplyFilter(fil)
 
     return list
@@ -22,43 +32,82 @@ def find(notoriety):
 # 1 blue, 2 green, 3 grey, 4 grey(agro), 5 orange, 6 red, 7 invul
 # Random, Nearest,Farthest, Weakest, Strongest, Next
 
-# if your toon is blue, green, or gray
+# if your toon is blue, green, or gray or militia
 if (Player.Notoriety == 1 or Player.Notoriety == 2 or Player.Notoriety == 3):
-    orangeMobile = Mobiles.Select(find(5),'Nearest')
-    redMobile = Mobiles.Select(find(6),'Nearest')
-    greyMobile = Mobiles.Select(find(3),'Nearest')
+    greyMobile = Mobiles.Select(find([3,4]),'Nearest',)
+    orangeMobile = Mobiles.Select(find([5]),'Nearest')
+    redMobile = Mobiles.Select(find([6]),'Nearest')
     if orangeMobile:
-        Misc.SendMessage('Changing last target to ' + orangeMobile.Name)
+        if sendMessage:
+            Player.ChatParty('Changing last target to ' + orangeMobile.Name)
         Target.SetLast(orangeMobile)
+        Player.Attack(orangeMobile)
         Target.TargetExecute(orangeMobile)
+        if displayTarget:
+            Player.HeadMessage(47, "Target: " + orangeMobile.Name)
+            Mobiles.Message(orangeMobile, 15, "*Target*")
     elif redMobile:
-        Misc.SendMessage('Changing last target to ' + redMobile.Name)
+        if sendMessage:
+            Player.ChatParty('Changing last target to ' + redMobile.Name)
         Target.SetLast(redMobile)
+        Player.Attack(redMobile)
         Target.TargetExecute(redMobile)
+        if displayTarget:
+            Player.HeadMessage(33, "Target: " + redMobile.Name)
+            Mobiles.Message(redMobile, 15, "*Target*")
     elif greyMobile:
-        Misc.SendMessage('Changing last target to ' + greyMobile.Name)
+        if sendMessage:
+            Player.ChatParty('Changing last target to ' + greyMobile.Name)
         Target.SetLast(greyMobile)
+        Player.Attack(greyMobile)
         Target.TargetExecute(greyMobile)
+        if greyMobile:
+            Player.HeadMessage(902, "Target: " + greyMobile.Name)
+            Mobiles.Message(greyMobile, 15, "*Target*")
+    else:
+        Misc.SendMessage('No Targets', 33)
 
 # if your toon is red
 elif Player.Notoriety == 6:
-    blueMobile = Mobiles.Select(find(1),'Nearest')
-    orangeMobile = Mobiles.Select(find(5),'Nearest')
-    redMobile = Mobiles.Select(find(6),'Nearest')
-    greyMobile = Mobiles.Select(find(3),'Nearest')
+    blueMobile = Mobiles.Select(find([1]),'Nearest')
+    greyMobile = Mobiles.Select(find([3,4]),'Nearest')
+    orangeMobile = Mobiles.Select(find([5]),'Nearest')
+    redMobile = Mobiles.Select(find([6]),'Nearest')
     if blueMobile:
-        Misc.SendMessage('Changing last target to ' + blueMobile.Name)
+        if sendMessage:
+            Player.ChatParty('Changing last target to ' + blueMobile.Name)
         Target.SetLast(blueMobile)
+        Player.Attack(blueMobile)
         Target.TargetExecute(blueMobile)
-    elif orangeMobile:
-        Misc.SendMessage('Changing last target to ' + orangeMobile.Name)
-        Target.SetLast(orangeMobile)
-        Target.TargetExecute(orangeMobile)
-    elif redMobile:
-        Misc.SendMessage('Changing last target to ' + redMobile.Name)
-        Target.SetLast(redMobile)
-        Target.TargetExecute(redMobile)
+        if displayTarget:
+            Player.HeadMessage(1266, "Target: " + blueMobile.Name)
+            Mobiles.Message(blueMobile, 15, "*Target*")
     elif greyMobile:
-        Misc.SendMessage('Changing last target to ' + greyMobile.Name)
+        if sendMessage:
+            Player.ChatParty('Changing last target to ' + greyMobile.Name)
         Target.SetLast(greyMobile)
+        Player.Attack(greyMobile)
         Target.TargetExecute(greyMobile)
+        if displayTarget:
+            Player.HeadMessage(902, "Target: " + greyMobile.Name)
+            Mobiles.Message(greyMobile, 15, "*Target*")
+    elif orangeMobile:
+        if sendMessage:
+            Player.ChatParty('Changing last target to ' + orangeMobile.Name)
+        Target.SetLast(orangeMobile)
+        Player.Attack(orangeMobile)
+        Target.TargetExecute(orangeMobile)
+        if displayTarget:
+            Player.HeadMessage(47, "Target: " + orangeMobile.Name)
+            Mobiles.Message(orangeMobile, 15, "*Target*")
+    elif redMobile:
+        if sendMessage:
+            Player.ChatParty('Changing last target to ' + redMobile.Name)
+        Target.SetLast(redMobile)
+        Player.Attack(redMobile)
+        Target.TargetExecute(redMobile)
+        if displayTarget:
+            Player.HeadMessage(33, "Target: " + redMobile.Name)
+            Mobiles.Message(redMobile, 15, "*Target*")
+    else:
+        Misc.SendMessage('No Targets', 33)

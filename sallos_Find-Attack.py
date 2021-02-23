@@ -8,7 +8,7 @@ import sys
 # true to attack, false will only set as last target
 attack = True
 
-# true for humanoid only
+# true for humanoid only, false excludes humaniods
 humanoid = False
 
 # true to also target red targets. (I keep false to not auto target bosses)

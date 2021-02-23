@@ -42,6 +42,7 @@ if (Player.Notoriety == 1 or Player.Notoriety == 2 or Player.Notoriety == 3):
         if sendMessage:
             Player.ChatParty('Changing last target to ' + orangeMobile.Name)
         Target.SetLast(orangeMobile)
+        Target.TargetExecute(orangeMobile)
         if attack:
             Player.Attack(orangeMobile)
         if displayTarget:
@@ -51,6 +52,7 @@ if (Player.Notoriety == 1 or Player.Notoriety == 2 or Player.Notoriety == 3):
         if sendMessage:
             Player.ChatParty('Changing last target to ' + redMobile.Name)
         Target.SetLast(redMobile)
+        Target.TargetExecute(redMobile)
         if attack:
             Player.Attack(redMobile)
         if displayTarget:
@@ -60,6 +62,7 @@ if (Player.Notoriety == 1 or Player.Notoriety == 2 or Player.Notoriety == 3):
         if sendMessage:
             Player.ChatParty('Changing last target to ' + greyMobile.Name)
         Target.SetLast(greyMobile)
+        Target.TargetExecute(greyMobile)
         if attack:
             Player.Attack(greyMobile)
         if greyMobile:
@@ -78,6 +81,7 @@ elif Player.Notoriety == 6:
         if sendMessage:
             Player.ChatParty('Changing last target to ' + blueMobile.Name)
         Target.SetLast(blueMobile)
+        Target.TargetExecute(blueMobile)
         if attack:
             Player.Attack(blueMobile)
         if displayTarget:
@@ -87,6 +91,7 @@ elif Player.Notoriety == 6:
         if sendMessage:
             Player.ChatParty('Changing last target to ' + greyMobile.Name)
         Target.SetLast(greyMobile)
+        Target.TargetExecute(greyMobile)
         if attack:
             Player.Attack(greyMobile)
         if displayTarget:
@@ -96,6 +101,7 @@ elif Player.Notoriety == 6:
         if sendMessage:
             Player.ChatParty('Changing last target to ' + orangeMobile.Name)
         Target.SetLast(orangeMobile)
+        Target.TargetExecute(orangeMobile)
         if attack:
             Player.Attack(orangeMobile)
         if displayTarget:
@@ -105,6 +111,7 @@ elif Player.Notoriety == 6:
         if sendMessage:
             Player.ChatParty('Changing last target to ' + redMobile.Name)
         Target.SetLast(redMobile)
+        Target.TargetExecute(redMobile)
         if attack:
             Player.Attack(redMobile)
         if displayTarget:

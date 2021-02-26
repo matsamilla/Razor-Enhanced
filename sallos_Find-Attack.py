@@ -72,7 +72,7 @@ if (Player.Notoriety == 1 or Player.Notoriety == 2 or Player.Notoriety == 3):
         Target.SetLast(greyMobile)
         if attack:
             Player.Attack(greyMobile)
-        if greyMobile:
+        if displayTarget:
             Player.HeadMessage(902, "Target: " + greyMobile.Name)
             Mobiles.Message(greyMobile, 15, "*Target*")
     else:

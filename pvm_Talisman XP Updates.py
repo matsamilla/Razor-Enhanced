@@ -231,7 +231,7 @@ pname = Player.Name.lower().replace(' ', '')
 Talli = Player.GetItemOnLayer('Talisman')
 if Talli:
     Tallyserial = Items.FindBySerial(Talli.Serial)
-        Tallyserial = Items.FindBySerial(Talli.Serial)
+    Tallyserial = Items.FindBySerial(Talli.Serial)
     if Talli.Hue == 0x078c:
         propLine = 6
     else:

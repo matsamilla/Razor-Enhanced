@@ -1,8 +1,9 @@
 # XP tracker by SilentNox, imporoved by MatsaMilla
 #   Version 2.6: Fixed error with rogue while using tooltips
     
-# Tracks XP of talisman, or meta pet, just start it up 
-# and leave talisman / meta stone gump open
+# Tracks XP of talisman, or meta pet, just start it up and enjoy
+# *leave talisman gump open if NOT using tooltips
+# *leave meta stone gump open regardless
 
 # Displays XP gained every 10 seconds, total every 60s & grand total
 

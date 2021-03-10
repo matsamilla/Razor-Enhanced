@@ -14,7 +14,11 @@ if pname == "toonname":
     Target.TargetExecute(0x43286FAE) # Change to serialID of your recall book
 # Non Mage Toon (name no spaces all lowercase)
 elif pname == "toonname2":
-    # Record opening book and recalling home in new script, then copy/paste here:
+    # Record opening book and recalling home in new script, then copy/paste over the lines below:
+    Items.UseItem(0x423A667B)
+    Misc.Pause(openRunebookPause)
+    Gumps.WaitForGump(1431013363, 10000)
+    Gumps.SendAction(1431013363, 2)
 # mage toon (name no spaces all lowercase)
 elif pname == "toonname3":
     Spells.CastMagery('Recall')

@@ -102,8 +102,8 @@ def GetEnemies( Mobiles, minRange = 0, maxRange = 12, notorieties = GetEnemyNoto
     enemyFilter.RangeMin = minRange
     enemyFilter.RangeMax = maxRange
     enemyFilter.Notorieties = notorieties
-    enemyFilter.Friend = False
     enemyFilter.CheckIgnoreObject = True
+    enemyFilter.Friend = False
     enemies = Mobiles.ApplyFilter( enemyFilter )
 
     if IgnorePartyMembers:
@@ -390,4 +390,6 @@ def ProvoEnemies():
             provoAttemptCompleted = True
 
 # Run ProvoEnemies
+while Target.HasTarget():
+    Misc.Pause(10)
 ProvoEnemies()

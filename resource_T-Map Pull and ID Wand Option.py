@@ -247,6 +247,14 @@ def pullGems():
     for i in mapChest.Contains :
         checkDistance()
         checkWeight()
+        if i.ItemID == 0x0F21 and i.Hue == 0x0489:
+            Player.ChatEmote(1,'[e woohoo')
+            Misc.Pause(200)
+            Player.ChatParty('FRAG, GET OUT OF HERE!')
+            Misc.Pause(200)
+            Player.ChatSay(66, 'FRAG, GET OUT OF HERE!')
+            Items.Move(i, gemBag, 0)
+            Misc.Pause(dragTime)
         if i.ItemID in gems:
             Items.Move(i, gemBag, 0)
             Misc.Pause(dragTime)

@@ -1,9 +1,8 @@
 # Weapon Swapper by Matsamilla
 # Swaps between weps you target, last targeted is first equipted
 # if only one weapon targeted, acts as a wep toggle.
-# To clear weps, put weps away, run offscreen & run script, cancel target
 
-# Version 2.1: Fixed null error
+# Version 2.2: non-listed weps will unequip
 
 leftHand = Player.GetItemOnLayer('LeftHand')
 rightHand = Player.GetItemOnLayer('RightHand')
@@ -78,12 +77,21 @@ def toggleWep():
         if rightHand.Serial == wep:
             Items.Move(wep,Player.Backpack.Serial,0)
             return
-            
+        else:
+            Items.Move(rightHand.Serial,Player.Backpack.Serial,0)
+            Misc.Pause(600)
+            Player.EquipItem(wep)
+            return
+                
     if leftHand:
         if leftHand.Serial == wep:
             Items.Move(wep,Player.Backpack.Serial,0)
+            return
         else:
+            Items.Move(leftHand.Serial,Player.Backpack.Serial,0)
+            Misc.Pause(600)
             Player.EquipItem(wep)
+            return
     else:
         Player.EquipItem(wep)
         

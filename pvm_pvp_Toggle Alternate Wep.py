@@ -23,11 +23,17 @@ else:
 if rightHand:
     if rightHand.Serial == wep:
         Items.Move(wep,Player.Backpack.Serial,0)
+    else:
+        Items.Move(rightHand.Serial,Player.Backpack.Serial,0)
+        Misc.Pause(600)
+        Player.EquipItem(wep)
         
 if leftHand:
     if leftHand.Serial == wep:
         Items.Move(wep,Player.Backpack.Serial,0)
     else:
-       Player.EquipItem(wep)
+        Items.Move(leftHand.Serial,Player.Backpack.Serial,0)
+        Misc.Pause(600)
+        Player.EquipItem(wep)
 else:
     Player.EquipItem(wep)

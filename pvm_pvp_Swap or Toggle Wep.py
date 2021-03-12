@@ -2,7 +2,7 @@
 # Swaps between weps you target, last targeted is first equipted
 # if only one weapon targeted, acts as a wep toggle.
 
-# Version 2.2: non-listed weps will unequip
+# Version 2.0: Now will toggle wep if only one targeted.
 
 leftHand = Player.GetItemOnLayer('LeftHand')
 rightHand = Player.GetItemOnLayer('RightHand')
@@ -77,11 +77,11 @@ def toggleWep():
         if rightHand.Serial == wep:
             Items.Move(wep,Player.Backpack.Serial,0)
             return
-        else:
-            Items.Move(rightHand.Serial,Player.Backpack.Serial,0)
-            Misc.Pause(600)
-            Player.EquipItem(wep)
-            return
+#        else:
+#            Items.Move(rightHand.Serial,Player.Backpack.Serial,0)
+#            Misc.Pause(600)
+#            Player.EquipItem(wep)
+#            return
                 
     if leftHand:
         if leftHand.Serial == wep:

@@ -1,6 +1,7 @@
 # Target Closest, Attack and DROP Target on nearest target
 #   aka sallos target aquire
 # by MatsaMilla & contributions by Trick Tickler
+# Last Update: 3/15/21 - added agro gray for player check
 from System.Collections.Generic import List
 from System import Byte
 import sys
@@ -34,7 +35,7 @@ def find(notoriety):
 # Random, Nearest,Farthest, Weakest, Strongest, Next
 
 # if your toon is blue, green, or gray or militia
-if (Player.Notoriety == 1 or Player.Notoriety == 2 or Player.Notoriety == 3):
+if (Player.Notoriety == 1 or Player.Notoriety == 2 or Player.Notoriety == 3 or Player.Notoriety == 4):
     greyMobile = Mobiles.Select(find([3,4]),'Nearest',)
     orangeMobile = Mobiles.Select(find([5]),'Nearest')
     redMobile = Mobiles.Select(find([6]),'Nearest')

@@ -1,28 +1,50 @@
 # ButlerHelper by Spatchel & Matsamilla
-# use with ButlerProfiles.py for best results, and do not edit this
+# use with ButlerProfiles.py for best results, update butlerID with butler serial below
 
-# Last updated 7/14/20
-
-
-from System.Collections.Generic import List
-# 4 = equip armor, 5 = bag regs, 6 = bag pots
-switch = List[int]([0,4])
-player_bag = Items.FindBySerial(Player.Backpack.Serial)
-
-butlerID = 0x0029C3D1 #add your butler serial here
-randomPause = 150
+# Last updated 3/16/21 - 
+#    •Cap option
+#    •Wont grab armor if layer is occupied
+#    •Stops if butler not found
+#    •Waits until in range of butler
 
 ###########################################################
-# Edit this section if you dont run ButlerProfiles.py     #
+# Add your butlers serial below                           #
+###########################################################
+
+butlerID = 0x0029C3D1 #add your butler serial here
+
+###########################################################
+# Option to equip armor, bag regs & bag pots below        #
+###########################################################
+
+from System.Collections.Generic import List
+# 4 = equip armor, 5 = bag regs, 6 = bag pots (switch = List[int]([0,4,5,6]) would do all
+switch = List[int]([0,4])
+
+###########################################################
+# If you dont run ButlerProfiles.py, this will load       #
 ###########################################################
 regs = 50 # default reg count if not profile
 armor = 0 # default armor, 0=no 1=yes
-cap = False # false for never cap, ever ever
-bandies = 120 # default bandage count
+cap = 0 # cap in default profile,  0=no 1=yes
+bandies = 100 # default bandage count
 arrows = 0
 bolts = 0
-############################################################
 
+######## NO TOUCHY BELOW THIS #############################
+
+butler = Mobiles.FindBySerial(butlerID)
+randomPause = 150
+player_bag = Items.FindBySerial(Player.Backpack.Serial)
+
+if butler == None:
+    Player.HeadMessage(33, 'Butler not found, stoppling')
+    Stop
+while Player.DistanceTo(butler) > 2.5:
+    if Timer.Check('butler') == False:
+        Mobiles.Message(butler,33, 'Come closer to restock.')
+        Timer.Create('butler',2500)
+    
 #moss
 if Misc.CheckSharedValue('moss'):
     moss6 = Misc.ReadSharedValue('moss')
@@ -63,28 +85,44 @@ if Misc.CheckSharedValue('silk'):
     silk13 = Misc.ReadSharedValue('silk')
 else: 
     silk13 = regs
+# armor cap
+if Misc.CheckSharedValue('cap'):
+    cap0 = Misc.ReadSharedValue('cap')
+else: 
+    cap0 = cap
 # Armor
 if Misc.CheckSharedValue('armor'):
     armorS = Misc.ReadSharedValue('armor')
-    if cap:
-        cap0 = armorS
-    else:
-        cap0 = 0
     gorget1 = armorS
     sleeves2 = armorS
     gloves3 = armorS
     tunic4 = armorS
     legs5 = armorS
 else:
-    if cap:
-        cap0 = armor
-    else:
-        cap0 = 0
+    cap0 = cap
     gorget1 = armor
     sleeves2 = armor
     gloves3 = armor
     tunic4 = armor
     legs5 = armor
+    
+# Check if layer is taken, dont grab armor if is
+layers = [ ('Head',0),('Neck',1), ('Arms',2), ('Gloves',3),('InnerTorso',4),('Pants',5) ]
+for i in layers:
+    if Player.CheckLayer(i[0]):
+        if i[1] == 0:
+            cap0 = 0
+        elif i[1] == 1:
+            gorget1 = 0
+        elif i[1] == 2:
+            sleeves2 = 0
+        elif i[1] == 3:
+            gloves3 = 0
+        elif i[1] == 4:
+            tunic4 = 0
+        elif i[1] == 5:
+            legs5 = 0
+        
 # Explode Pots Count
 if Misc.CheckSharedValue('exp'):
     exp14 = Misc.ReadSharedValue('exp')

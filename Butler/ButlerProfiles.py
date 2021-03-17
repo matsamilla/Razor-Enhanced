@@ -1,7 +1,8 @@
 from System.Collections.Generic import List
-# you need to set the shared values of the following categories:
+# you need to set the values of the following categories:
 # moss, ash, root, pearl, shade, ginseng, garlic, silk
 # armor (0 = no, 1 = yes)
+# cap (0 = no, 1 = yes)
 # POTS: exp, str, refresh, agil, heal, cure
 # bandages, arrows, bolts
 # see examples below
@@ -9,7 +10,7 @@ from System.Collections.Generic import List
 #makes player name lowercase with no spaces.... if name of toon is Matsa Milla, makes it matsamilla
 name = Player.Name.lower().replace(' ', '')
 
-if name == 'playername1': #Replace playername1 with toon name, no caps or spaces
+if name == 'matsamilla': #Replace matsamilla with toon name, no caps or spaces
     Misc.SendMessage('Loading: ' + name)
     Misc.SetSharedValue('moss', 75)
     Misc.SetSharedValue('ash', 75)
@@ -19,17 +20,20 @@ if name == 'playername1': #Replace playername1 with toon name, no caps or spaces
     Misc.SetSharedValue('ginseng', 75)
     Misc.SetSharedValue('garlic', 75)
     Misc.SetSharedValue('silk', 75)
-    Misc.SetSharedValue('bandies', 0)
+    Misc.SetSharedValue('bandies', 50)
     Misc.SetSharedValue('exp', 10)
     Misc.SetSharedValue('str', 10)
-    Misc.SetSharedValue('refresh', 10)
+    Misc.SetSharedValue('refresh', 20)
     Misc.SetSharedValue('agil', 10)
-    Misc.SetSharedValue('heal', 10)
+    Misc.SetSharedValue('heal', 15)
     Misc.SetSharedValue('cure', 10)
     Misc.SetSharedValue('armor', 1)
+    Misc.SetSharedValue('cap', 1)
     Misc.SetSharedValue('arrows', 0)
     Misc.SetSharedValue('bolts', 0)  
-elif name == 'playername2': #Replace playername2 with toon name, no caps or spaces
+#******************
+# copy, paste and edit as many as this next section as you need for toons
+elif name == 'playername': #Replace playername with toon name, no caps or spaces
     Misc.SendMessage('Loading: ' + name)
     Misc.SetSharedValue('moss', 0)
     Misc.SetSharedValue('ash', 0)
@@ -40,14 +44,17 @@ elif name == 'playername2': #Replace playername2 with toon name, no caps or spac
     Misc.SetSharedValue('garlic', 0)
     Misc.SetSharedValue('silk', 0)
     Misc.SetSharedValue('bandies', 100)
-    Misc.SetSharedValue('exp', 25)
+    Misc.SetSharedValue('exp', 0)
     Misc.SetSharedValue('str', 10)
-    Misc.SetSharedValue('refresh', 30)
+    Misc.SetSharedValue('refresh', 20)
     Misc.SetSharedValue('agil', 10)
-    Misc.SetSharedValue('heal', 20)
-    Misc.SetSharedValue('cure', 15)
+    Misc.SetSharedValue('heal', 10)
+    Misc.SetSharedValue('cure', 10)
     Misc.SetSharedValue('arrows', 0)
     Misc.SetSharedValue('bolts', 0)  
     Misc.SetSharedValue('armor', 0)   
-        
+    Misc.SetSharedValue('cap', 0)
+    
+#******************
+
 Misc.ScriptRun('ButlerHelper.py')

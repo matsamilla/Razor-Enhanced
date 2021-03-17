@@ -1,11 +1,9 @@
-from System.Collections.Generic import List
-# you need to set the values of the following categories:
-# moss, ash, root, pearl, shade, ginseng, garlic, silk
-# armor (0 = no, 1 = yes)
-# cap (0 = no, 1 = yes)
-# POTS: exp, str, refresh, agil, heal, cure
-# bandages, arrows, bolts
+# ButlerProfiles.py by MatsaMilla - 2 part script, part 1 is ButlerHelper.py
+
+# You need to set up a "profile" for each toon based on name
 # see examples below
+# Note - armor (0 = no, 1 = yes) (all but cap)
+#        cap (0 = no, 1 = yes)   (cap only)
 
 #makes player name lowercase with no spaces.... if name of toon is Matsa Milla, makes it matsamilla
 name = Player.Name.lower().replace(' ', '')
@@ -27,10 +25,10 @@ if name == 'matsamilla': #Replace matsamilla with toon name, no caps or spaces
     Misc.SetSharedValue('agil', 10)
     Misc.SetSharedValue('heal', 15)
     Misc.SetSharedValue('cure', 10)
-    Misc.SetSharedValue('armor', 1)
-    Misc.SetSharedValue('cap', 1)
     Misc.SetSharedValue('arrows', 0)
     Misc.SetSharedValue('bolts', 0)  
+    Misc.SetSharedValue('armor', 1)
+    Misc.SetSharedValue('cap', 1)
 #******************
 # copy, paste and edit as many as this next section as you need for toons
 elif name == 'playername': #Replace playername with toon name, no caps or spaces

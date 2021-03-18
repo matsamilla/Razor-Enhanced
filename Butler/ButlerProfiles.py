@@ -4,6 +4,7 @@
 # see examples below
 # Note - armor (0 = no, 1 = yes) (all but cap)
 #        cap (0 = no, 1 = yes)   (cap only)
+# If upgrading, add this line to your profiles to take a cap: Misc.SetSharedValue('cap', 1)
 
 #makes player name lowercase with no spaces.... if name of toon is Matsa Milla, makes it matsamilla
 name = Player.Name.lower().replace(' ', '')

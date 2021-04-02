@@ -1,5 +1,5 @@
 wands = [0xdf5,0xdf3,0xdf4,0xdf2]
-wandType = "greater heal"
+wandType = "Greater Heal"
 msgColor = 33
 dragTime = 600
 

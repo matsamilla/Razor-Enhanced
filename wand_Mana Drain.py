@@ -1,6 +1,6 @@
 
 wands = [0xdf5,0xdf3,0xdf4,0xdf2]
-wandType = "mana drain"
+wandType = "Mana Drain"
 msgColor = 33
 dragTime = 600
 

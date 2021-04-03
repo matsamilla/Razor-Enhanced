@@ -1,5 +1,5 @@
-wands = [0xdf5,0xdf3,0xdf4,0xdf2]
 wandType = "Greater Heal"
+wands = [0xdf5,0xdf3,0xdf4,0xdf2]
 msgColor = 33
 dragTime = 600
 
@@ -43,19 +43,53 @@ def findAndEquipWand (wandType):
         wand = Items.FindBySerial(i)
         Items.WaitForProps( wand, 500 )
         propList = Items.GetPropStringList( wand )
+        charges = Items.GetPropValue(wand,"Charges")
         
         if any( wandType in s for s in propList ):
+            Player.HeadMessage(78,"{} charges".format(int(charges)))
             #Misc.SendMessage(wandType + " found")
-            if Player.CheckLayer('LeftHand'):
-                Player.UnEquipItemByLayer('LeftHand')
-                Misc.Pause( dragTime )
-            elif Player.CheckLayer('RightHand'):
-                Player.UnEquipItemByLayer('RightHand')
-                Misc.Pause( dragTime )
+            
             Player.EquipItem( wand )
             Misc.Pause( dragTime )
             Items.UseItem( wand )
+            Target.WaitForTarget( 2500 )
+            while Target.HasTarget():
+                Misc.Pause( 50 )
+            Misc.Pause( dragTime )
+            Player.UnEquipItemByLayer('RightHand')
+            Stop
                 
     Player.HeadMessage( msgColor, "No wands found!" )
     
-findAndEquipWand (wandType)
+def checkHands(wandType):
+    leftHand = Player.GetItemOnLayer('LeftHand')
+    rightHand = Player.GetItemOnLayer('RightHand')
+    if leftHand:
+        Misc.SendMessage('lefthand')
+        Player.UnEquipItemByLayer('LeftHand')
+        Misc.Pause( dragTime )
+        return False
+    if rightHand:
+        if rightHand.ItemID in wands:
+            Items.WaitForProps(rightHand,500)
+            propList = Items.GetPropStringList( rightHand )
+            charges = Items.GetPropValue(rightHand,"Charges")
+            if any( wandType in s for s in propList ):
+                Player.HeadMessage(78,"{} charges".format(int(charges)))
+                Items.UseItem( rightHand )
+                Target.WaitForTarget( 2500 )
+                while Target.HasTarget():
+                    Misc.Pause( 50 )
+                Misc.Pause( dragTime )
+                Player.UnEquipItemByLayer('RightHand')
+                return True
+        else:
+            Player.UnEquipItemByLayer('RightHand')
+            Misc.Pause( dragTime )
+            return False
+        
+
+if checkHands(wandType):
+    Misc.NoOperation()
+else:
+    findAndEquipWand (wandType)

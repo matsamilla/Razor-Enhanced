@@ -64,6 +64,11 @@ def findAndEquipWand (wandType):
 def checkHands(wandType):
     leftHand = Player.GetItemOnLayer('LeftHand')
     rightHand = Player.GetItemOnLayer('RightHand')
+    if leftHand:
+        Misc.SendMessage('lefthand')
+        Player.UnEquipItemByLayer('LeftHand')
+        Misc.Pause( dragTime )
+        return False
     if rightHand:
         if rightHand.ItemID in wands:
             Items.WaitForProps(rightHand,500)
@@ -78,15 +83,10 @@ def checkHands(wandType):
                 Misc.Pause( dragTime )
                 Player.UnEquipItemByLayer('RightHand')
                 return True
-            else:
-                Player.UnEquipItemByLayer('RightHand')
-                Misc.Pause( dragTime )
-                return False
-            
-    if leftHand:
-        Player.UnEquipItemByLayer('LeftHand')
-        Misc.Pause( dragTime )
-        return False
+        else:
+            Player.UnEquipItemByLayer('RightHand')
+            Misc.Pause( dragTime )
+            return False
         
 
 if checkHands(wandType):

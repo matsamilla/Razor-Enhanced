@@ -1,6 +1,7 @@
 # Sallos . recall and . gate commands
-# By MatsaMilla, Version 1.2 9/21/20
+# By MatsaMilla, Version 1.3 4/8/21 - fixed crash error if no text passed
 
+Misc.Pause(5000)
 runebookDelay = 600
 
 if Player.GetRealSkillValue('Magery') > 35:
@@ -16,10 +17,11 @@ def makeRunebookList( ):
             # opens runebook
             Items.UseItem( i )
             Misc.Pause(120)
+            Gumps.WaitForGump( 1431013363, 10000 )
             if Journal.Search('You must wait'):
                 Misc.SendMessage('trying runebook again')
                 Items.UseItem( i )
-            Gumps.WaitForGump( 1431013363, 5000 )
+                Gumps.WaitForGump( 1431013363, 10000 )
             
             bookSerial = i.Serial
             runeNames = []
@@ -59,7 +61,8 @@ def recall( str ):
             Items.UseItem(f[0])
             Gumps.WaitForGump(1431013363, 1000)
             Gumps.SendAction(1431013363, f[2])
-            Misc.SendMessage('Recalling to ' + str,11)    
+            Player.HeadMessage(66, '- ' + str + ' -')
+            #Misc.SendMessage('Recalling to ' + str,11)    
         
 def chargeRecall( str ):
     for f in runeNames:
@@ -67,7 +70,8 @@ def chargeRecall( str ):
             Items.UseItem(f[0])
             Gumps.WaitForGump(1431013363, 1000)
             Gumps.SendAction(1431013363, f[3])
-            Misc.SendMessage('Recalling to ' + str,11)
+            Player.HeadMessage(66, '- ' + str + ' -')
+            # Misc.SendMessage('Recalling to ' + str,11)
 
             
 def gate( str ):
@@ -76,7 +80,8 @@ def gate( str ):
             Items.UseItem(f[0])
             Gumps.WaitForGump(1431013363, 1000)
             Gumps.SendAction(1431013363, f[4])
-            Misc.SendMessage('Gating ' + str,11)
+            Player.HeadMessage(66, '- ' + str + ' -')
+            #Misc.SendMessage('Gating ' + str,11)
             
 def FindItem( itemID, container, color = -1, ignoreContainer = [] ):
     '''
@@ -118,12 +123,15 @@ def parseJournal (str):
     regularText.Reverse()
 
     # Read back until the item ID was started to see if it succeeded
-    for line in regularText[ 0 : len( regularText ) ]:
-        #if line == str:
-        if str in line:
-            line = line.split(str + ' ', 1)[1]
-            Journal.Clear()
-            return line
+    try:
+        for line in regularText[ 0 : len( regularText ) ]:
+            #if line == str:
+            if str in line:
+                line = line.split(str + ' ', 1)[1]
+                Journal.Clear()
+                return line
+    except:
+        Player.HeadMessage(33,'Not Found')
 
 playerSerialCheck = Misc.ReadSharedValue('playerSerial')
 
@@ -142,15 +150,18 @@ while True:
     if Journal.SearchByName(". recall", Player.Name):
         if mageRecall and checkRegs():
             recallLocation = parseJournal('. recall')
-            recall(recallLocation.lower())
+            if recallLocation != None:
+                recall(recallLocation.lower())
             Misc.NoOperation()
         else:
             recallLocation = parseJournal('. recall')
-            chargeRecall(recallLocation.lower())
+            if recallLocation != None:
+                chargeRecall(recallLocation.lower())
             Misc.NoOperation()
         Journal.Clear()
     elif Journal.SearchByName(". gate", Player.Name):
         gateLocation = parseJournal('. gate')
-        gate(gateLocation.lower())
+        if gateLocation != None:
+            gate(gateLocation.lower())
         Journal.Clear()
     Misc.Pause(50)

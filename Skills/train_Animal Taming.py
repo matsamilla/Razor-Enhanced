@@ -642,6 +642,7 @@ def TrainAnimalTaming():
             if killTame:
                 Mobiles.Message( animalBeingTamed, 1100, 'Tried more than %i times to tame. Killing animal' % maximumTameAttempts )
                 Player.Attack( animalBeingTamed )
+                Mobiles.IgnoreObject( animalBeingTamed )
             else:
                 Mobiles.Message( animalBeingTamed, 1100, 'Tried more than %i times to tame. Ignoring animal' % maximumTameAttempts )
                 Mobiles.IgnoreObject( animalBeingTamed )

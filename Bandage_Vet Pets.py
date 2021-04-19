@@ -36,7 +36,6 @@ while True:
         healPet = Mobiles.FindBySerial(j)
         if healPet:
             if healPet.Hits <= healing.Hits or healPet.Poisoned:
-                Misc.SendMessage(healPet.Name)
                 healing = Mobiles.FindBySerial(healPet.Serial)
     if healing:
         pet2Heal = Mobiles.FindBySerial(healing.Serial)

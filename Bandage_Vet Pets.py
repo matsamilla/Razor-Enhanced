@@ -17,33 +17,38 @@ petList = [
 
 # quits if you have less than 80 HP
 if Player.GetRealSkillValue('Veterinary') < 80:
-    Stop
-
-petfilter = Mobiles.Filter()
-petfilter.Enabled = True
-petfilter.RangeMax = 1
-petfilter.IsHuman = False
-petfilter.IsGhost = False
-petfilter.Serials = List[int] (petList)
-
-while Player.IsGhost == False: 
+    Misc.SendMessage('Not enough vet skill, stopping',33)
+    sys.exit()
     
-    if not Misc.ScriptStatus('Bandage_Timer.py'):
-        Misc.ScriptRun('Bandage_Timer.py')
+healing = None
+while True:
+    init = 0
+    plist = []
+    for i in petList:
+        healPet = Mobiles.FindBySerial(i)
+        if healPet:
+            if healPet.Hits != 0 and Player.InRangeMobile(healPet, 1.5) and healPet.Body not in broodlings:
+                plist.append(healPet.Serial)
+    for j in plist:
+        if init == 0:
+            healing = Mobiles.FindBySerial(j)
+            init = 1
+        healPet = Mobiles.FindBySerial(j)
+        if healPet:
+            if healPet.Hits <= healing.Hits or healPet.Poisoned:
+                Misc.SendMessage(healPet.Name)
+                healing = Mobiles.FindBySerial(healPet.Serial)
+    if healing:
+        pet2Heal = Mobiles.FindBySerial(healing.Serial)
+        if pet2Heal:
+            if (pet2Heal.Hits < 23 or pet2Heal.Poisoned) and Player.InRangeMobile(pet2Heal, 1.5):
+                if Misc.ReadSharedValue('bandageDone') == True and Player.Visible:
+                    prevTarget = Target.Last()
+                    if Target.HasTarget( ) == False:
+                        Misc.SendMessage("Healing " + pet2Heal.Name, 33)  
+                        Items.UseItemByID(0x0E21, -1)
+                        Target.WaitForTarget(1500)
+                        Target.TargetExecute(pet2Heal)
+                        Misc.Pause(600)
     
-    petList = Mobiles.ApplyFilter(petfilter) 
-            
-    for g in petList:
-        g = Mobiles.Select(petList, 'Weakest')
-        
-        #bandage        
-        #check health level if in range one of guilded meta pet heals with bandages.          
-        if g.Hits < 23 and Player.InRangeMobile(g, 1):
-            if Misc.ReadSharedValue('bandageDone') == True:
-                if Target.HasTarget( ) == False:
-                    Items.UseItemByID(0x0E21, -1)
-                    Target.WaitForTarget(1500, True)
-                    Target.TargetExecute(g)
-                    Misc.Pause (500)
-                    break
-    Misc.Pause(50)
+    Misc.Pause(10)

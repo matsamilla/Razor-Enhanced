@@ -12,7 +12,7 @@ petList = [
  0x003FAA39,# Kuzco
  0x00049A23,# Water Wyrm
  0x0016D74B,# Pacha
- 0x001BF91B # Matsa- Mare
+ 0x001BF91B, # Matsa- Mare
 ]
 
 # quits if you have less than 80 HP

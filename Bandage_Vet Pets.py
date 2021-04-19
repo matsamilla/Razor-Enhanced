@@ -27,7 +27,7 @@ while True:
     for i in petList:
         healPet = Mobiles.FindBySerial(i)
         if healPet:
-            if healPet.Hits != 0 and Player.InRangeMobile(healPet, 1.5) and healPet.Body not in broodlings:
+            if healPet.Hits != 0 and Player.InRangeMobile(healPet, 1.5):
                 plist.append(healPet.Serial)
     for j in plist:
         if init == 0:

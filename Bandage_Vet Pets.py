@@ -1,4 +1,4 @@
-# Pet Vet by Matsamilla, updated 6/21/20
+# Pet Vet by Matsamilla, updated 4/19/21
 # This script relys on Bandage_Timer.py, if you do not have it, it will not work
 # Add the serials of pets you want to heal to the petList
 from System.Collections.Generic import List

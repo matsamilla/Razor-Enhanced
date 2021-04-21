@@ -9,3 +9,5 @@ How to add scripts & some basic use of Enhanced:
   https://www.youtube.com/watch?v=W7s7ylopA0Q
   
 Razor Enhanced Wiki: http://razorenhanced.net/dokuwiki/doku.php
+www.classicuo.eu
+www.uoforever.com

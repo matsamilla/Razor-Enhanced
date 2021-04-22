@@ -59,8 +59,8 @@ peacemakingTimerMilliseconds = 5000
 bandageTimerMilliseconds = 10000
 
 if Player.GetRealSkillValue('Animal Taming') < 35:
-    Misc.SendMessage('Buy Taming Skill Up', 33)
-    Stop
+    Misc.SendMessage('Buy Taming Skill Up, stopping', 33)
+    sys.exit()
     
 from System.Collections.Generic import List
 

@@ -1,3 +1,8 @@
+# Lightning Wand by MatsaMilla
+# equips and uses Lightning wand, then unequips after
+
+#[equip spellwand lightning
+
 wandType = "Lightning"
 wands = [0xdf5,0xdf3,0xdf4,0xdf2]
 msgColor = 33

@@ -6,6 +6,7 @@ dragTime = 600
 bows = [0x13B2,0x26C2,0x0F50,0x13FD]
 leftHand = Player.GetItemOnLayer('LeftHand')
 
+import sys
 def trainingDummy():
     global dummy
     training = Target.PromptTarget("Target training dummy")
@@ -14,7 +15,7 @@ def trainingDummy():
 def kegPots():
     if Journal.Search('hold any more'):
         Misc.SendMessage('Empty Keg!!')
-        Stop
+        sys.exit()
     
     keg = Items.FindByID(0x1940,-1,Player.Backpack.Serial)
     tr = Items.FindByID(0xf0b,-1,Player.Backpack.Serial)

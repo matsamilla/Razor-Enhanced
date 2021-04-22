@@ -5,7 +5,7 @@
 
 from System.Collections.Generic import List
 import winsound
-
+import sys
 #***************SETUP SECTION**********************************
 #ItemSerials
 beetle = 0x00215F22
@@ -43,7 +43,7 @@ if trashcanhere:
         trashcan = t
 else:
     Misc.SendMessage('No trashcan nearby, stopping',33)
-    Misc.ScriptStop('craft_BentRod.py')
+    sys.exit()
 
 if keepGM:
     Mobiles.UseMobile(self)
@@ -70,7 +70,7 @@ def moveToBeetle():
             if gmCount == keepCount:
                 Misc.SendMessage('GM Rod Count Reached, stopping.',33)
                 winsound.PlaySound(error, winsound.SND_FILENAME)
-                Misc.ScriptStop('craft_Carp_BentRod.py')
+                sys.exit()
         else:
             if Player.Mount:
                 Mobiles.UseMobile(self)
@@ -95,7 +95,7 @@ def trashPole():
         Misc.Pause(dragTime)
     else:
         Misc.SendMessage('No trashcan nearby, stopping',33)
-        Misc.ScriptStop('craft_BentRod.py')
+        sys.exit()
     
 def hide():
     if not Player.BuffsExist('Hiding'):
@@ -105,12 +105,12 @@ def checkMats():
     if Items.BackpackCount(cloth, -1) < 5:
         Misc.SendMessage('Out of Cloth',33)
         winsound.PlaySound(error, winsound.SND_FILENAME)
-        Misc.ScriptStop('craft_Carp_BentRod.py')
+        sys.exit()
         
     if Items.BackpackCount(wood, -1) < 5 and Items.BackpackCount(logs, -1) < 5:
         Misc.SendMessage('Out of Wood',33)
         winsound.PlaySound(error, winsound.SND_FILENAME)
-        Misc.ScriptStop('craft_Carp_BentRod.py')
+        sys.exit()
         
     if Items.BackpackCount(saw, noColor) < 1:
         craftTools()
@@ -121,7 +121,7 @@ def craftTools():
     if Items.BackpackCount(ignot, noColor) < 10:
         Misc.SendMessage('Out of Ignots',33)
         winsound.PlaySound(error, winsound.SND_FILENAME)
-        Misc.ScriptStop('craft_BentRod.py')
+        sys.exit()
     
     if Items.BackpackCount(tink, noColor) < 2:
         Items.UseItem(currentTink.Serial)

@@ -1,5 +1,5 @@
 # T-Map ID & Pull by MatsaMilla
-# Last Edit 6/4/18
+# Last Edit 4/22/21
 # Disable auto-open corpses to run smoother
 # Uses wands if ID skill below 80.
 

@@ -8,6 +8,7 @@ dummy = Mobiles.FindBySerial(training)
 
 bows = [0x13B2,0x26C2,0x0F50,0x13FD]
 leftHand = Player.GetItemOnLayer('LeftHand')
+import sys
 def equipBow():
     #Misc.Pause( config.dragDelayMilliseconds )
     if Player.GetRealSkillValue('Archery') > 80:
@@ -42,7 +43,7 @@ while True:
             Misc.Pause(100)
                 
     if Items.BackpackCount( 0x0F8D, -1) < 1:
-        Stop
+        sys.exit()
     if Journal.Search('Did it, got it') == 50:
-        Stop
+        sys.exit()
             

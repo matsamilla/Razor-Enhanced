@@ -7,7 +7,7 @@ backpack = Player.Backpack.Serial
 dragTime = 600
 msgColor = 33
 pKeg = None
-
+import sys
 def GetBag ( sharedValue, promptString ):
     if Misc.CheckSharedValue( sharedValue ):
         bag = Misc.ReadSharedValue( sharedValue )
@@ -43,7 +43,7 @@ def restockKeg():
     elif pkeg == None:
         Misc.SendMessage('Out of kegs', msgColor)
         Misc.Beep()
-        Stop
+        sys.exit()
             
 def trainPoison():
     pkeg = Items.FindByID( 0x1940 , -1 , backpack )

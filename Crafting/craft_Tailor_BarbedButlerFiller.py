@@ -14,6 +14,7 @@ fillStopNumber = 50
 dragTime = 800
 butlerGump = 989312372
 
+import sys
 def setValues( armorValue , gump ):
     global armorID
     global gumpAction
@@ -65,7 +66,7 @@ def craftArmor(armor, amount):
         setValues( 0x13CB , 30 )
     else:
         Misc.SendMessage('potType not defined, stopping', 33)
-        Stop
+        sys.exit()
     while amount > 0:
         worldSave()
         restock()
@@ -108,7 +109,7 @@ def restock():
             Misc.Pause(dragTime)
         else:
             Misc.SendMessage( 'No more leather' , 33 )
-            Stop
+            sys.exit()
         
     sewKit = FindItem( 0x0F9D , Player.Backpack )
     if sewKit == None:
@@ -130,7 +131,7 @@ def restock():
                 Misc.Pause(dragTime)
             else:
                 Misc.SendMessage( 'No more sewing kits' , 33 )
-                Stop
+                sys.exit()
     
 def worldSave():
     if Journal.SearchByType('The world is saving, please wait.', 'Regular' ):
@@ -165,7 +166,7 @@ while True:
                 fillNumber = fillStopNumber - int(float(Gumps.LastGumpGetLine(i[1])))
         Misc.SendMessage('Butler is as full as we can get it!', 66)
         Gumps.CloseGump(butlerGump)
-        Stop
+        sys.exit()
     else:
         Mobiles.UseMobile(butler)
         Misc.Pause(dragTime)

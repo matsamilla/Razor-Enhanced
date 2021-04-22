@@ -1,3 +1,8 @@
+# Mana Drain Wand by MatsaMilla
+# equips and uses Mana Drain wand, then unequips after
+
+#[equip spellwand Mana Drain
+
 wandType = "Mana Drain"
 wands = [0xdf5,0xdf3,0xdf4,0xdf2]
 msgColor = 33

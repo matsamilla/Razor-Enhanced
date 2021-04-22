@@ -18,6 +18,7 @@ butlerID = 0x0029C3D1 #add your butler serial here
 ###########################################################
 
 from System.Collections.Generic import List
+import sys
 # 4 = equip armor, 5 = bag regs, 6 = bag pots (switch = List[int]([0,4,5,6]) would do all
 switch = List[int]([0,4])
 
@@ -39,7 +40,7 @@ player_bag = Items.FindBySerial(Player.Backpack.Serial)
 
 if butler == None:
     Player.HeadMessage(33, 'Butler not found, stoppling')
-    Stop
+    sys.exit()
 while Player.DistanceTo(butler) > 2.5:
     if Timer.Check('butler') == False:
         Mobiles.Message(butler,33, 'Come closer to restock.')

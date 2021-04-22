@@ -1,3 +1,9 @@
+# ID Wand by MatsaMilla
+# equips and uses Greater Heal wand, then unequips after
+
+#[equip idwand
+
+
 wandType = "identification"
 wands = [0xdf5,0xdf3,0xdf4,0xdf2]
 msgColor = 33

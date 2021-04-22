@@ -19,6 +19,7 @@ restockChest = Items.FindBySerial( Target.PromptTarget('Target Restock Chest') )
 #mortarBag = Items.FindBySerial( Target.PromptTarget('Mortar Restock Bag (optional)') )
         
 keg = Items.FindByID( 0x1940 , -1 ,  Player.Backpack.Serial )
+import sys
 if keg:
     Misc.SendMessage('Using keg in pack', 66)
 else:
@@ -86,7 +87,7 @@ def craftPot (potType):
         setValues ( 0x0F88 , 0x0F0A , 36 , 23 )
     else:
         Misc.SendMessage('potType not defined, stopping', 33)
-        Misc.ScriptStop('craft_Alch_FillButler.py')
+        sys.exit()
     
     while not Items.GetPropValue(keg,'The Keg Is Completely Full.'): 
     #while not Journal.SearchByType('The keg will not hold any more!', 'Regular'): # non-tool tips change
@@ -103,7 +104,7 @@ def craftPot (potType):
             else:
                 Misc.SendMessage('Out of Mortars!', 33)
                 Misc.Pause(5000)
-                Stop
+                sys.exit()
          
         # count / restock reg type
         packRegs = FindItem(regID, Player.Backpack)
@@ -140,7 +141,7 @@ def craftPot (potType):
                 Misc.Pause(dragTime)
             else:
                 Player.HeadMessage(33,'Need empty pot(s) in restock container or in backpack.')
-                Stop
+                sys.exit()
         # empty keg of other potion
         if Journal.Search('You decide that it would be a bad idea to mix different types of potions.'):
             Misc.SendMessage('Oops')
@@ -202,7 +203,7 @@ while True:
                 fillNumber = fillStopNumber - int(float(Gumps.LastGumpGetLine(i[1])))
         Misc.SendMessage('Butler is as full as we can get it!', 66)
         Gumps.CloseGump(butlerGump)
-        Stop
+        sys.exit()
     else:
         Mobiles.UseMobile(butler)
         Misc.Pause(dragTime)

@@ -11,6 +11,7 @@ Description: Uses the instruments from the player backpack and the selected targ
 '''
 from System.Collections.Generic import List
 from System import Byte
+import sys
 
 # provo skill cooldown
 provocationTimerMilliseconds = 10200
@@ -61,7 +62,7 @@ def TrainProvocation():
                         Misc.Pause(200)
                         break
                 Misc.SendMessage('No Instruments found',33)
-                Stop
+                sys.exit()
 
             Target.WaitForTarget( 2000, True )
             

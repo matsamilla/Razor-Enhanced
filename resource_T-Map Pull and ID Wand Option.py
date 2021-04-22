@@ -95,7 +95,7 @@ Misc.Pause(dragTime)
 def checkWeight():
     if Player.Weight >= heavy:
         Player.ChatSay(msgColor, 'Overweight, stopping!')
-        Stop
+        sys.exit()
 
 def checkDistance():
     Timer.Create('Distance', 5000)
@@ -310,7 +310,7 @@ def equipWand():
         wandSerial = Player.GetItemOnLayer('RightHand').Serial
     else:
         Player.ChatSay(33, "No Wands Found, Stopping Script")
-        Misc.ScriptStop('TMap Pull and ID.py')
+        sys.exit()
         
 def idTarget():
     if idWand:

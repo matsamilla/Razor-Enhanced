@@ -5,6 +5,7 @@
 # Moves slayers to beetle
 from System.Collections.Generic import List
 import winsound
+import sys
 
 #***************SETUP SECTION**********************************
 #ItemSerials
@@ -61,9 +62,7 @@ trashcanhere = Items.ApplyFilter( trashBarrelFilter )
 
 if not trashcanhere:
     Player.HeadMessage( 1100, 'No trashcan nearby!' )
-    Misc.ScriptStop( 'craft_SlayerSpellbook.py' )
-    Misc.Pause(5000)
-    Stop
+    sys.exit()
 else:
     global trashcan
     trashcan = trashcanhere[ 0 ]
@@ -97,7 +96,7 @@ def checkMats():
             if not Player.Mount:
                 Mobiles.UseMobile(beetle)
                 Misc.Pause(dragTime)
-            Stop
+            sys.exit()
             
 def restockScrolls():
     if Player.Mount:
@@ -162,7 +161,7 @@ def craftBook():
         if not Player.Mount:
                 Mobiles.UseMobile(beetle)
                 Misc.Pause(dragTime)
-        Stop
+        sys.exit()
 def slayerCheck():
     global craftedBook
     craftedBook = Items.FindByID(spellbook, -1, self_pack)

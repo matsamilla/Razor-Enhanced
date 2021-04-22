@@ -1,6 +1,7 @@
 # ItemID script by MatsaMilla v2
 # Item ID
 from System.Collections.Generic import List
+import sys
 import winsound
 #**********************************************************
 
@@ -62,7 +63,7 @@ trashcanhere = Items.ApplyFilter( trashBarrelFilter )
 
 if not trashcanhere:
     Player.HeadMessage( 1100, 'No trashcan nearby!' )
-    Stop
+    sys.exit()
 else:
     global trashCan
     trashCan = trashcanhere[ 0 ]
@@ -209,7 +210,7 @@ def equipWand():
         wandSerial = Player.GetItemOnLayer('RightHand').Serial
     else:
         Player.ChatSay(33, "No Wands Found, Stopping Script")
-        Stop
+        sys.exit()
     Misc.Pause(dragTime)
         
 def idTarget():
@@ -229,7 +230,7 @@ def checkWeight():
     if Player.Weight >= stopWeight:
         Player.HeadMessage(msgColor, 'Go Sell this shit')
         winsound.PlaySound(sound, winsound.SND_ALIAS)
-        Stop
+        sys.exit()
         
 def idStuff(container, type):
     idContainer = Items.FindBySerial(container)

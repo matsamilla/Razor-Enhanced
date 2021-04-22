@@ -1,29 +1,78 @@
 # Recall Home by MatsaMilla
-# version 2.0 4/10/21 - revamped, easier setup and checks for regs - recalls by charge if no regs
-# Setup:
-#   • Insert name without spaces and all lowercase.
-#     • Example: "Player Name" needs to be "playername"
-#   • runebook serial
-#   • runeNumber (posotion of rune in book, 1-16)
-#   • to add more, copy-paste one of the "elif" below last.
+# version 2.1 - overhead message for using charges, and remaining charges
+#
+# Enter in player name (case sensitive!), runebook and runeNumber (posotion of rune in book, 1-16)
 
 # True = Mage will not open book, home rune set to default
 targetBook = True
 
-#ignore this line
-pname = Player.Name.lower().replace(' ', '')
-
-if pname == "matsamilla":
+if Player.Name == "MetaMilla":
     runebook = 0x43286FAE
     runeNumber = 1
     
-elif pname == "toonname":
+elif Player.Name == "MGD":
     runebook = 0x402F6431
-    runeNumber = 5
+    runeNumber = 1
     
-elif pname == "othertoonname":
+elif Player.Name == "UhOh":
     runebook = 0x40c0aa9a
-    runeNumber = 7
+    runeNumber = 2
+    
+elif Player.Name == "EmGD":
+    runebook = 0x42FAD098
+    runeNumber = 11
+    
+elif Player.Name == "Mirunn":
+    runebook = 0x4701FFAE
+    runeNumber = 1
+    
+elif Player.Name == "Nalfein":
+    runebook = 0x423A667B
+    runeNumber = 1
+    
+elif Player.Name == "MGDexxer":
+    runebook = 0x423AE870
+    runeNumber = 1
+    
+elif Player.Name == "Vierna DoUrden":
+    runebook = 0x423AE2DE
+    runeNumber = 1
+    
+elif Player.Name == "Thicc":
+    runebook = 0x411AC13E
+    runeNumber = 1
+    
+elif Player.Name == "UselessGuy":
+    runebook = 0x40E104BB
+    runeNumber = 2
+    
+elif Player.Name == "MatsaMilla":
+    runebook = 0x41DB0F60
+    runeNumber = 1
+    
+elif Player.Name == "Matsa":
+    runebook = 0x423949E3
+    runeNumber = 1
+    
+elif Player.Name == "Matsa-":
+    runebook = 0x40788ED9
+    runeNumber = 1
+    
+elif Player.Name == "MatsaAxa":
+    runebook = 0x411C1DCD
+    runeNumber = 1
+    
+elif Player.Name == "Poinsettia":
+    runebook = 0x4114C90D
+    runeNumber = 1
+    
+elif Player.Name == "MatsaMaga":
+    runebook = 0x42106027
+    runeNumber = 6
+    
+elif Player.Name == "Hydragea":
+    runebook = 0x4239C87F
+    runeNumber = 1
     
 #***************************************************************#
     
@@ -46,8 +95,12 @@ def recallCharge(book, rune):
     rune = 2 + (6 * rune)
     if Gumps.CurrentGump() != 1431013363:
         Items.UseItem(book)
+        Misc.Pause(100)
     Gumps.WaitForGump(1431013363, 1000)
     Gumps.SendAction(1431013363, rune)
+    Items.WaitForProps(book,500)
+    charges = Items.GetPropValue(book,'Charges')
+    Player.HeadMessage(66, str(int(charges)) + ' charges left' )
     
 def FindItem( itemID, container, color = -1, ignoreContainer = [] ):
     '''
@@ -82,10 +135,11 @@ def checkRegs():
         return False
 
     
-try:
+if runebook != None:
     if Player.GetRealSkillValue('Magery') > 50 and checkRegs():
         recallMagery(runebook, runeNumber)
     else:
+        Player.HeadMessage(66,"-Using Charge-")
         recallCharge(runebook, runeNumber)
-except:
-    Player.HeadMessage(33,'Toon Not Set Up')
+else:
+    Player.HeadMessage(33,'No Runebook Set')

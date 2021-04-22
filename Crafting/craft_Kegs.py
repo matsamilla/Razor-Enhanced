@@ -1,4 +1,5 @@
 from System.Collections.Generic import List
+import sys
 # Empty Potion Keg Maker by MatsaMilla Version 1.1
 # Target restock container, then container for empty potion kegs
 # will make as many as maxToMake, or until mats run out
@@ -105,7 +106,7 @@ def moveKegs(container):
         potionKeg = FindItem(0x1940, Player.Backpack)
         if Journal.Search('That container cannot hold more weight.'):
             Player.HeadMessage(33, 'Potion container full, stopping')
-            Stop
+            sys.exit()
     
 def checkMats ():
     # Stop if low on iron
@@ -114,14 +115,14 @@ def checkMats ():
         Misc.Pause(journalPause)
         if Items.BackpackCount(ignot, -1) < 10:
             Misc.SendMessage('Out of Ignots',33)
-            Stop
+            sys.exit()
     # Stop if low on wood
     if Items.BackpackCount(wood, -1) < 19:
         restock(restockContainer)
         Misc.Pause(journalPause)
         if Items.BackpackCount(wood, -1) < 19:
             Misc.SendMessage('Out of Wood',33)
-            Stop
+            sys.exit()
             
     # Stop if low on bottles
     if Items.BackpackCount(bottle, -1) < 10:
@@ -129,7 +130,7 @@ def checkMats ():
         Misc.Pause(journalPause)
         if Items.BackpackCount(bottle, -1) < 10:
             Misc.SendMessage('Out of Bottles',33)
-            Stop
+            sys.exit()
     # always have 2 tinker kits
     if Items.BackpackCount(tink, -1) < 2:
         tinkCraft (tinkKitGump1, tinkKigGump2)

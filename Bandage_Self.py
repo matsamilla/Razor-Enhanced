@@ -3,13 +3,13 @@
 
 # Pause at start for skill check,
 # Script stops if no healing on toon.
+import sys
 Misc.Pause( 5000 )
 if Player.GetRealSkillValue( 'Healing' ) < 50:
-    Misc.SendMessage( 'No Healing, stopping script' )
+    Misc.SendMessage( 'No Healing, stopping script',33)
     Misc.Pause( 200 )
-    Stop
+    sys.exit()
 
-import sys
 
 def BandageSelf():
     if Misc.ReadSharedValue('bandageDone') == True:

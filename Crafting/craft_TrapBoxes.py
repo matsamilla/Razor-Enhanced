@@ -20,7 +20,7 @@ def craftTools():
     if Items.BackpackCount(ignot, -1) < 10:
         Misc.SendMessage('Out of Ignots',33)
         winsound.PlaySound(error, winsound.SND_FILENAME)
-        Misc.ScriptStop('craft_BentRod.py')
+        sys.exit()
     
     if Items.BackpackCount(tink, -1) < 2:
         Items.UseItem(currentTink.Serial)

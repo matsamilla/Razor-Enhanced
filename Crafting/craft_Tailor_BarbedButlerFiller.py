@@ -1,7 +1,10 @@
 # Automatic Potion Butler Filler by MatsaMilla 
-#   - Version 2, updated 1/5/21
+#   - Version 3, updated 4/10/21 - Can fill if not Owner or CoOwner of house
 
 # NEED: Restock Chest (containing BARBED leather / tailor kits (or ignots if you have tinkering))
+
+# False if not owner or co-owned to house
+houseOwner = True
 
 #*******************************************************************#
 
@@ -13,8 +16,8 @@ restockChest = Items.FindBySerial( Target.PromptTarget('Target Restock Chest') )
 fillStopNumber = 50
 dragTime = 800
 butlerGump = 989312372
-
 import sys
+
 def setValues( armorValue , gump ):
     global armorID
     global gumpAction
@@ -146,12 +149,16 @@ Misc.Pause(1000)
 Mobiles.UseMobile(butler)
 Misc.Pause(1000)
 
-fillList = [('cap',4),('gorget',5),('arms',6),('gloves',7),('chest',8),('legs',9)]
+if houseOwner:
+    fillList = [('cap',4),('gorget',5),('arms',6),('gloves',7),('chest',8),('legs',9)]
+else:
+    fillList = [('cap',5),('gorget',7),('arms',9),('gloves',11),('chest',13),('legs',15)]
 
 while True:
     # verify its butler gump
     if Gumps.CurrentGump() == butlerGump:
         # iterate through fillList
+        
         for i in fillList:
             # read gump line
             fillNumber = fillStopNumber - int(float(Gumps.LastGumpGetLine(i[1])))

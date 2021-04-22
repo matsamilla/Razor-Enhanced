@@ -17,7 +17,8 @@ def find(notoriety):
     
 # quits if you have less than 80 HP
 if Player.GetRealSkillValue('Veterinary') < 80:
-    Stop
+    Misc.SendMessage('Not enough vet skill, stopping',33)
+    sys.exit()
     
 healing = None
 while True:

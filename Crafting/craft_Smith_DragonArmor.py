@@ -1,4 +1,5 @@
 from System.Collections.Generic import List
+import sys
 # Dragon Armor Crafter by MatsaMilla
 # ToolTips must be enabled and must have a beetle
 ####################################################
@@ -68,7 +69,7 @@ trashcanhere = Items.ApplyFilter( trashBarrelFilter )
 
 if not trashcanhere:
     Player.HeadMessage( 1100, 'No trashcan nearby!' )
-    Misc.ScriptStop( 'craft_SlayerSpellbook.py' )
+    sys.exit()
 else:
     global trashcan
     trashcan = trashcanhere[ 0 ]
@@ -95,7 +96,7 @@ def craftTools():
     if Items.BackpackCount(0x1BF2, noColor) < 10:
         Misc.SendMessage('Out of Ignots',33)
         winsound.PlaySound(error, winsound.SND_FILENAME)
-        Misc.ScriptStop('craft_Smith_DragonArmor.py')
+        sys.exit()
     
     if Items.BackpackCount(0x1EB8, noColor) < 2:
         Items.UseItem(currentTink.Serial)

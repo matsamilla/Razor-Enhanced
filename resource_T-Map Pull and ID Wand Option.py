@@ -31,8 +31,6 @@ dragTime = 800
 msgColor = 68
 self = Mobiles.FindBySerial(Player.Serial)
 heavy = Player.MaxWeight - 10
-rightHand = Player.CheckLayer('RightHand')
-leftHand = Player.CheckLayer('LeftHand')
 
 #loot includes gate, recall & lvl 8 summoning scrolls
 loot = [0x2260,0x1f4c,0x1f60,0x1f66,0x1f68,0x1f69,0x1f6a,0x1f6b,0x1f6c]
@@ -297,16 +295,15 @@ def trashStuff():
 def equipWand():
     global wandSerial
     player_bag = Items.FindBySerial(Player.Backpack.Serial)
+    rightHand = Player.CheckLayer('RightHand')
+    leftHand = Player.CheckLayer('LeftHand')
     if leftHand:
         Player.UnEquipItemByLayer('LeftHand')
         
     if not rightHand:
-        for i in player_bag.Contains:
-            if i.ItemID in wands:
-                Player.EquipItem(i.Serial)
-                Misc.Pause(dragTime)
-                wandSerial = Player.GetItemOnLayer('RightHand').Serial
-    elif Player.GetItemOnLayer('RightHand').ItemID in wands:
+        Player.ChatSay(66,'[equip idwand')
+        Misc.Pause(dragTime)
+    if Player.GetItemOnLayer('RightHand').ItemID in wands:
         wandSerial = Player.GetItemOnLayer('RightHand').Serial
     else:
         Player.ChatSay(33, "No Wands Found, Stopping Script")

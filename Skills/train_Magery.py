@@ -17,13 +17,14 @@ ginseng = 0x0F85
 garlic = 0x0F84
 ash = 0x0F8C
 
+import sys
 def trainMageryNoResist():
     while Player.Hits < 45:
         Misc.Pause(100)
     
     if Player.GetRealSkillValue('Magery') < 35:
         Misc.SendMessage('Go buy Magery skill!!')
-        Stop
+        sys.exit()
     elif Player.GetRealSkillValue('Magery') < 65:
         Spells.CastMagery('Mind Blast')
         Target.WaitForTarget(2500)
@@ -52,7 +53,7 @@ def trainMageryNoResist():
 def trainMage():
     if Player.GetRealSkillValue('Magery') < 35:
         Misc.SendMessage('Go buy Magery skill!!')
-        Stop
+        sys.exit()
     elif Player.GetRealSkillValue('Magery') < 55:
         Spells.CastMagery('Mana Drain')
         Target.WaitForTarget(2500)
@@ -79,28 +80,28 @@ def trainMage():
 def checkRegs():
     if Items.BackpackCount(pearl, -1) < 2:
         Misc.SendMessage('Low on Pearl!')
-        Stop
+        sys.exit()
     elif Items.BackpackCount(root, -1) < 2:
         Misc.SendMessage('Low on Root!')
-        Stop
+        sys.exit()
     elif Items.BackpackCount(shade, -1) < 2:
         Misc.SendMessage('Low on Shade!')
-        Stop
+        sys.exit()
     elif Items.BackpackCount(silk, -1) < 2:
         Misc.SendMessage('Low on Silk!')
-        Stop
+        sys.exit()
     elif Items.BackpackCount(garlic, -1) < 2:
         Misc.SendMessage('Low on Garlic!')
-        Stop
+        sys.exit()
     elif Items.BackpackCount(ash, -1) < 2:
         Misc.SendMessage('Low on Ash!')
-        Stop
+        sys.exit()
     elif Items.BackpackCount(silk, -1) < 2:
         Misc.SendMessage('Low on Silk!')
-        Stop
+        sys.exit()
     elif Items.BackpackCount(ginseng, -1) < 2:
         Misc.SendMessage('Low on Ginseng!')
-        Stop
+        sys.exit()
 
 Journal.Clear()
 while Player.GetRealSkillValue('Magery')  < 100:

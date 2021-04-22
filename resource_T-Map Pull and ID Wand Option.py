@@ -24,7 +24,7 @@ else:
     idWand = False
 
 #**********************************************************
-
+import sys
 Misc.SendMessage('Starting TMap Pull and ID', 33)
 skillTimer = 0
 dragTime = 800

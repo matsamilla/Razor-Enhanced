@@ -22,6 +22,7 @@ minxp = 0
 currentxp = 0
 counter = 0
 name = Player.Name.lower().replace(' ', '')
+import sys
 
 def setupToolTips():
     global startingxp

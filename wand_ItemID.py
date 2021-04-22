@@ -2,6 +2,7 @@ wandType = "identification"
 wands = [0xdf5,0xdf3,0xdf4,0xdf2]
 msgColor = 33
 dragTime = 600
+import sys
 
 def getWands( itemID , container = Player.Backpack  ):
     '''
@@ -57,7 +58,7 @@ def findAndEquipWand (wandType):
                 Misc.Pause( 50 )
             Misc.Pause( dragTime )
             Player.UnEquipItemByLayer('RightHand')
-            Stop
+            sys.exit()
                 
     Player.HeadMessage( msgColor, "No wands found!" )
     

@@ -18,6 +18,7 @@ beetleContainer = 0x439F1BD4 # Inspect item in beetle to get container
 
 restockChest = Items.FindBySerial(restockChestSerial)
 
+import sys
 def craftRecall():
     #pens = Items.FindByID(0x0FBF,-1,pack)
     pens = FindItem(0x0FBF, Player.Backpack)
@@ -180,10 +181,10 @@ def restock():
         Misc.Pause(dragTime)
     
     if Items.BackpackCount(scroll, -1) < 1 or Items.BackpackCount(bp, -1) < 1 or Items.BackpackCount(bm, -1) < 1 or Items.BackpackCount(mr, -1) < 1:
-        Stop
+        sys.exit()
     if Items.BackpackCount(pen, -1) < 1:
         Misc.SendMessage('Out of pens', 33)
-        Stop
+        sys.exit()
 for i in range(0,amountToMake):
     restock()    
     craftRecall()

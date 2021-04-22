@@ -1,3 +1,8 @@
+# Greater Heal Wand by MatsaMilla
+# equips and uses Greater Heal wand, then unequips after
+
+#[equip spellwand greater heal
+
 wandType = "Greater Heal"
 wands = [0xdf5,0xdf3,0xdf4,0xdf2]
 msgColor = 33

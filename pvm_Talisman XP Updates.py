@@ -30,7 +30,7 @@ def setupToolTips():
     temp = Items.GetPropStringByIndex(Talli, propLine)
     if temp == 'MAX':
         Misc.SendMessage('Talisman Maxxed, stopping', 33)
-        Stop
+        sys.exit()
     else:
         temp = temp.split(": ", 1)[1]
         temp = temp.split("/", 1)[0]
@@ -73,7 +73,7 @@ def talismanXpToolTips():
     temp = Items.GetPropStringByIndex(Talli, propLine)
     if temp == 'MAX':
         Misc.SendMessage('Talisman Maxxed, stopping', 33)
-        Stop
+        sys.exit()
     else:
         temp = temp.split(": ", 1)[1]
         temp = temp.split("/", 1)[0]
@@ -189,7 +189,7 @@ def setup():
     temp = Gumps.LastGumpGetLine(gumpLine)
     if temp == 'MAX':
         Misc.SendMessage('Talisman Maxxed, stopping', 33)
-        Stop
+        sys.exit()
     
     temp = temp.split("/", 1)[0]
     
@@ -250,7 +250,7 @@ else:
         Misc.SendMessage('Using Meta Stone', 33)
     else:
         Misc.SendMessage('Talisman Not Found, Stopping', 33)
-        Stop
+        sys.exit()
         
         #setup()
 
@@ -265,14 +265,14 @@ try:
             if pname in noTrackList:
                 Items.UseItem(Tallyserial)
                 Misc.Pause(200)
-                Stop
+                sys.exit()
             while True:
                 talismanXpToolTips()
     else:
         Items.UseItem(Tallyserial)
         Misc.Pause(200)
         if pname in noTrackList:
-            Stop
+            sys.exit()
         setup()
         while True:
             talismanXp()

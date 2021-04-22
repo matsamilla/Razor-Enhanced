@@ -3,6 +3,7 @@
 # adjust to your servers drag delay in ms
 dragDelay = 600
 
+import sys
 startX = 0
 startY = 0
 verticalIncrement = 0
@@ -101,19 +102,19 @@ if item.ItemID in gems:
         if items.ItemID in gems:
             Items.Move(items,dest,0)
             Misc.Pause(600)
-    Stop
+    sys.exit()
 elif item.ItemID in glowingRunes:
     for items in container.Contains:
         if items.ItemID in glowingRunes:
             Items.Move(items,dest,0)
             Misc.Pause(600)
-    Stop
+    sys.exit()
 elif item.ItemID in regs:
     for items in container.Contains:
         if items.ItemID in regs:
             Items.Move(items,dest,0)
             Misc.Pause(600)
-    Stop
+    sys.exit()
 else:
     for items in container.Contains:
         if items.ItemID == itemID and items.Hue == itemHue :
@@ -142,6 +143,6 @@ for items in itemsToMove:
     if Journal.Search('That container cannot hold more items.'):
         Player.HeadMessage( 66, "Container full, stopping" )
         Journal.Clear()
-        Stop
+        sys.exit()
     
 Player.HeadMessage( 76 ,'Items have been moved' )

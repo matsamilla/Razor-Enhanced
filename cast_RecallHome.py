@@ -14,65 +14,15 @@ elif Player.Name == "MGD":
     runebook = 0x402F6431
     runeNumber = 1
     
-elif Player.Name == "UhOh":
+elif Player.Name == "MatsaMilla":
     runebook = 0x40c0aa9a
     runeNumber = 2
     
-elif Player.Name == "EmGD":
-    runebook = 0x42FAD098
-    runeNumber = 11
-    
-elif Player.Name == "Mirunn":
-    runebook = 0x4701FFAE
-    runeNumber = 1
-    
-elif Player.Name == "Nalfein":
-    runebook = 0x423A667B
-    runeNumber = 1
-    
-elif Player.Name == "MGDexxer":
-    runebook = 0x423AE870
-    runeNumber = 1
-    
-elif Player.Name == "Vierna DoUrden":
-    runebook = 0x423AE2DE
-    runeNumber = 1
-    
-elif Player.Name == "Thicc":
-    runebook = 0x411AC13E
-    runeNumber = 1
-    
-elif Player.Name == "UselessGuy":
-    runebook = 0x40E104BB
+elif Player.Name == "Matsa-":
+    runebook = 0x40c0aa9a
     runeNumber = 2
     
-elif Player.Name == "MatsaMilla":
-    runebook = 0x41DB0F60
-    runeNumber = 1
-    
-elif Player.Name == "Matsa":
-    runebook = 0x423949E3
-    runeNumber = 1
-    
-elif Player.Name == "Matsa-":
-    runebook = 0x40788ED9
-    runeNumber = 1
-    
-elif Player.Name == "MatsaAxa":
-    runebook = 0x411C1DCD
-    runeNumber = 1
-    
-elif Player.Name == "Poinsettia":
-    runebook = 0x4114C90D
-    runeNumber = 1
-    
-elif Player.Name == "MatsaMaga":
-    runebook = 0x42106027
-    runeNumber = 6
-    
-elif Player.Name == "Hydragea":
-    runebook = 0x4239C87F
-    runeNumber = 1
+
     
 #***************************************************************#
     

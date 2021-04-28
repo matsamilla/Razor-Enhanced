@@ -1,5 +1,5 @@
 # Sallos SmartPot by MatsaMilla
-# Drinks cure if poisoned, otherwise drinks healV
+# Drinks cure if poisoned, otherwise drinks heal
 if Player.Poisoned:
     Player.ChatSay( 1 , '[drink greatercurepotion')
     Misc.Pause(100)

@@ -1,1 +1,0 @@
-Player.ChatSay(05, "Back Left One")

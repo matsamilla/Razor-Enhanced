@@ -1,7 +1,7 @@
 '''
 Author: Aga - original author of the uosteam script
 Other Contributors: TheWarDoctor95 - converted to Razor Enhanced script
-Last Contribution By: MatsaMilla - 1/11/21 (removed Wardoc's dependencies)
+Last Contribution By: MatsaMilla - 5/6/21 (Ignores killed tames now)
 
 Description: Tames nearby animals to train Animal Taming to GM
 '''

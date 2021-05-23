@@ -1,6 +1,7 @@
 # Bandage Timer by Wardoc
 # Contributions by Matsamilla
 # I have this always running, start at login.
+# version 1.1 - If running RazorEnhanced 7.7.23 or greater use this now, or change line 13 to match
 
 # True for overhead Bandage Available message, false for in system messages
 overheadMessage = True
@@ -9,7 +10,7 @@ msgcolor = 88
 Misc.SetSharedValue('bandageDone', True)
 def BandagesApplying():
     # Fetch the Journal entries (oldest to newest)
-    regularText = Journal.GetTextByType( 'Regular' )
+    regularText = Journal.GetTextByType( 'System' )
 
     # Reverse the Journal entries so that we read from newest to oldest
     regularText.Reverse()

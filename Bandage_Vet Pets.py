@@ -1,4 +1,4 @@
-# Pet Vet by Matsamilla, updated 4/19/21
+# Pet Vet by Matsamilla, updated 5/31/21 for RE 8+
 # This script relys on Bandage_Timer.py, if you do not have it, it will not work
 # Add the serials of pets you want to heal to the petList
 from System.Collections.Generic import List
@@ -27,7 +27,7 @@ while True:
     for i in petList:
         healPet = Mobiles.FindBySerial(i)
         if healPet:
-            if healPet.Hits != 0 and Player.InRangeMobile(healPet, 1.5):
+            if healPet.Hits != int(0) and Player.InRangeMobile(healPet, int(1.5)):
                 plist.append(healPet.Serial)
     for j in plist:
         if init == 0:
@@ -40,7 +40,7 @@ while True:
     if healing:
         pet2Heal = Mobiles.FindBySerial(healing.Serial)
         if pet2Heal:
-            if (pet2Heal.Hits < 23 or pet2Heal.Poisoned) and Player.InRangeMobile(pet2Heal, 1.5):
+            if (pet2Heal.Hits < int(23) or pet2Heal.Poisoned) and Player.InRangeMobile(pet2Heal, int(1.5)):
                 if Misc.ReadSharedValue('bandageDone') == True and Player.Visible:
                     prevTarget = Target.Last()
                     if Target.HasTarget( ) == False:

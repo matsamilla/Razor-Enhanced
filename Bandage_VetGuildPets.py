@@ -1,5 +1,6 @@
 # This script relys on Bandage_Timer.py, if you do not have it, it will not work
 # Bandages any guilded pet if within 1 tile
+# Updated 5/31/21 for RE 8+
 from System.Collections.Generic import List
 from System import Byte
 import sys
@@ -28,7 +29,7 @@ while True:
     for i in petList:
         healPet = Mobiles.FindBySerial(i.Serial)
         if healPet:
-            if healPet.Hits != 0 and Player.InRangeMobile(healPet, 1.5):
+            if healPet.Hits != int(0) and Player.InRangeMobile(healPet, int(1.5)):
                 plist.append(healPet.Serial)
     for j in plist:
         if init == 0:
@@ -41,7 +42,7 @@ while True:
     if healing:
         pet2Heal = Mobiles.FindBySerial(healing.Serial)
         if pet2Heal:
-            if (pet2Heal.Hits < 23 or pet2Heal.Poisoned) and Player.InRangeMobile(pet2Heal, 1.5):
+            if (pet2Heal.Hits < int(23) or pet2Heal.Poisoned) and Player.InRangeMobile(pet2Heal, int(1.5)):
                 if Misc.ReadSharedValue('bandageDone') == True and Player.Visible:
                     if Target.HasTarget( ) == False:
                         Misc.SendMessage("Healing " + pet2Heal.Name, 33)  

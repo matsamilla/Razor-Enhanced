@@ -518,7 +518,7 @@ def makePeace():
             Player.UseSkill( 'Peacemaking' )
             # Wait for journal entry to come up
             Misc.Pause( journalEntryDelayMilliseconds )
-            if Journal.SearchByType( 'What instrument shall you play?', 'Regular' ):
+            if Journal.SearchByType( 'What instrument shall you play?', 'System' ):
                 instrument = findInstrument()
                 if instrument == None:
                     Misc.SendMessage( 'No instruments to peacemake with.', 1100 )
@@ -527,7 +527,7 @@ def makePeace():
                     Target.WaitForTarget( 2000, False )
                     Target.TargetExecute( instrument.Serial )
 
-            if Journal.SearchByType( 'Whom do you wish to calm?', 'Regular' ):
+            if Journal.SearchByType( 'Whom do you wish to calm?', 'System' ):
                 Target.WaitForTarget( 2000, False )
                 Target.TargetExecute( enemyToPutToPeace )
                 Timer.Create( 'peacemakingTimer', peacemakingTimerMilliseconds )
@@ -740,12 +740,12 @@ def TrainAnimalTaming():
                 timesTried = 0
                 tameHandled = True
                 
-            elif ( Journal.SearchByType( 'You fail to tame the creature.', 'Regular' ) or
-                    Journal.SearchByType( 'The animal is too angry to continue taming.', 'Regular' ) or
-                    Journal.SearchByType( 'You must wait a few moments to use another skill.', 'Regular' ) ):
+            elif ( Journal.SearchByType( 'You fail to tame the creature.', 'System' ) or
+                    Journal.SearchByType( 'The animal is too angry to continue taming.', 'System' ) or
+                    Journal.SearchByType( 'You must wait a few moments to use another skill.', 'System' ) ):
                 tameHandled = True
                 
-            elif ( Journal.SearchByType( 'That is too far away.', 'Regular' ) or
+            elif ( Journal.SearchByType( 'That is too far away.', 'System' ) or
                     Journal.SearchByName( 'You are too far away to continue taming.', animalBeingTamed.Name ) ):
                 # Animal moved too far away, set to None so that another animal can be found
                 animalBeingTamed = None
@@ -754,7 +754,7 @@ def TrainAnimalTaming():
                 tameHandled = True
                 
             elif ( Journal.SearchByName( 'You have no chance of taming this creature', animalBeingTamed.Name ) or
-                    Journal.SearchByType( 'Target cannot be seen', 'Regular' ) or
+                    Journal.SearchByType( 'Target cannot be seen', 'System' ) or
                     Journal.Search( 'Do not have a clear path to the animal' ) or
                     Journal.Search( 'This animal has had too many owners' ) or
                     Journal.Search( 'That animal looks tame already' ) ):

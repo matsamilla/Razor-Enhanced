@@ -11,7 +11,7 @@ Description: Tames nearby animals to train Animal Taming to GM
 killTame = True
 # Change to the name that you want to rename the tamed animals to
 if killTame:
-    renameTamedAnimalsTo = 'Thanks'
+    renameTamedAnimalsTo = 'Thanks Matsa'
     killList = []
 else:
     renameTamedAnimalsTo = 'retame me'

@@ -1,8 +1,8 @@
 '''
 Author: Aga - original author of the uosteam script
 Other Contributors: TheWarDoctor95 - converted to Razor Enhanced script
-Last Contribution By: MatsaMilla - 5/6/21 (Ignores killed tames now)
-
+                    MatsaMilla - Converted to be all-in-1 script
+Last Contribution By: Reda - 6/9/21 (Updated for 2021)
 Description: Tames nearby animals to train Animal Taming to GM
 '''
 
@@ -11,7 +11,7 @@ Description: Tames nearby animals to train Animal Taming to GM
 killTame = True
 # Change to the name that you want to rename the tamed animals to
 if killTame:
-    renameTamedAnimalsTo = 'Thanks Matsa'
+    renameTamedAnimalsTo = 'Thanks'
     killList = []
 else:
     renameTamedAnimalsTo = 'retame me'
@@ -21,7 +21,7 @@ else:
 numberOfFollowersToKeep = 2
 
 # Set to the maximum number of times to attempt to tame a single animal. 0 == attempt until tamed
-maximumTameAttempts = 10
+maximumTameAttempts = 5
 
 # Set the minimum taming difficulty to use when finding animals to tame
 minimumTamingDifficulty = 31
@@ -31,17 +31,17 @@ minimumTamingDifficulty = 31
 # 'Healing' = use bandages (you should just use my Bandage_Self.py instead)
 # 'Magery' = uses the Heal and Greater Heal ability depending on how much health is missing
 # 'None' = do not auto-heal
-healUsing = 'None'
+healUsing = 'Healing'
 
 # True or False to use Peacemaking if needed
 enablePeacemaking = False
 
 # True or False to track the animal being tamed
-enableFollowAnimal = False
+enableFollowAnimal = True
 
 # Change depending on the latency to your UO shard
 journalEntryDelayMilliseconds = 100
-targetClearDelayMilliseconds = 100
+targetClearDelayMilliseconds = 600
 import sys
 
 if not Misc.CurrentScriptDirectory() in sys.path:
@@ -356,6 +356,7 @@ def FindAnimalToTame():
     animalFilter.RangeMax = 12
     animalFilter.IsHuman = 0
     animalFilter.IsGhost = 0
+    animalFilter.CheckLineOfSite = True
     animalFilter.Friend = False
     animalFilter.CheckIgnoreObject = True
 
@@ -642,6 +643,7 @@ def TrainAnimalTaming():
             if killTame:
                 Mobiles.Message( animalBeingTamed, 1100, 'Tried more than %i times to tame. Killing animal' % maximumTameAttempts )
                 Player.Attack( animalBeingTamed )
+                Misc.Pause(600)
                 Misc.IgnoreObject( animalBeingTamed )
             else:
                 Mobiles.Message( animalBeingTamed, 1100, 'Tried more than %i times to tame. Ignoring animal' % maximumTameAttempts )
@@ -704,7 +706,7 @@ def TrainAnimalTaming():
             Target.TargetExecute( animalBeingTamed )
 
             # Check if Animal Taming was successfully triggered
-            if Journal.SearchByType( 'Tame which animal?', 'Regular' ):
+            if Journal.Search( 'Tame which animal?' ):
                 timesTried += 1
                 
                 # Restart the timer so that it will go off when we will be able to use the skill again
@@ -717,7 +719,7 @@ def TrainAnimalTaming():
 
         if tameOngoing:
             if ( Journal.SearchByName( 'It seems to accept you as master.', animalBeingTamed.Name ) or
-                    Journal.SearchByType( 'That wasn\'t even challenging.', 'Regular' ) ):
+                    Journal.Search( 'That wasn\'t even challenging.' ) ):
                 # Animal was successfully tamed
                 if animalBeingTamed.Name != renameTamedAnimalsTo:
                     Misc.PetRename( animalBeingTamed, renameTamedAnimalsTo )
@@ -727,10 +729,11 @@ def TrainAnimalTaming():
                     Misc.ContextReply( animalBeingTamed.Serial, 8 )
                     Gumps.WaitForGump( 2426193729, 10000 )
                     Gumps.SendAction( 2426193729, 2 )
+                    Misc.Pause(600)
                 
                 if killTame:
                     Player.Attack(animalBeingTamed)
-                    Misc.Pause(50)
+                    Misc.Pause(600)
                     
                 Misc.IgnoreObject( animalBeingTamed )
                 animalBeingTamed = None

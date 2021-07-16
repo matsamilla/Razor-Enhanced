@@ -3,6 +3,7 @@
 # if only one weapon targeted, acts as a wep toggle.
 
 # Version 3.0: Works better with 1 handed & shields
+# updated 7-15-21
 
 leftHand = Player.GetItemOnLayer('LeftHand')
 rightHand = Player.GetItemOnLayer('RightHand')

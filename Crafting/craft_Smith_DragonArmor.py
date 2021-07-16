@@ -2,6 +2,7 @@ from System.Collections.Generic import List
 import sys
 # Dragon Armor Crafter by MatsaMilla
 # ToolTips must be enabled and must have a beetle
+# Target a bag with empty bags in it, it will fill the empty bags with dragon armor
 ####################################################
 
 scaleColor = 'blue' #pick color of scales, red, yellow, black, green, white, blue or blue2

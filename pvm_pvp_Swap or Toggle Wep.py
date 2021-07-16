@@ -2,7 +2,7 @@
 # Swaps between weps you target, last targeted is first equipted
 # if only one weapon targeted, acts as a wep toggle.
 
-# Version 2.0: Now will toggle wep if only one targeted.
+# Version 3.0: Works better with 1 handed & shields
 
 leftHand = Player.GetItemOnLayer('LeftHand')
 rightHand = Player.GetItemOnLayer('RightHand')

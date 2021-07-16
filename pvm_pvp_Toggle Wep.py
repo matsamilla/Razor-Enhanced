@@ -1,5 +1,5 @@
 # Toggle alternate wep by MatsaMilla
-# 
+# Updated 7-15-21
 
 leftHand = Player.GetItemOnLayer('LeftHand')
 rightHand = Player.GetItemOnLayer('RightHand')

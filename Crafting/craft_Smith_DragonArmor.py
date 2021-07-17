@@ -1,8 +1,8 @@
-# Dragon Armor Crafter by MatsaMilla, last edited 7/16/21
+from System.Collections.Generic import List
+import sys
+# Dragon Armor Crafter by MatsaMilla
 # ToolTips must be enabled and must have a beetle
-# Must edit setup section
-
-################# SETUP SECTION ###################################
+####################################################
 
 scaleColor = 'blue' #pick color of scales, red, yellow, black, green, white, blue or blue2
 
@@ -13,10 +13,7 @@ fillBags = True # if true: Fill a bag with as many
 beetle = 0x00215F22
 beetlePack = 0x434C292B # beetle container ID (inspect object in beetle pack for container ID
 
-################## END SETUP SECTION ###################################
-
-from System.Collections.Generic import List
-import sys
+#####################################################
 
 noColor = 0x0000
 self_pack = Player.Backpack.Serial
@@ -149,6 +146,9 @@ def craftDragArmor(bag):
                         break
                     else:
                         trashItem(craftedArmor)
+            else:
+                Player.HeadMessage(33,'No Smith Hammers!')
+                sys.exit()
         
 def trashItem(item):
     Items.Move(item, trashcan, 0)

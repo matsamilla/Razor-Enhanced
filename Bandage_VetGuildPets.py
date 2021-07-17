@@ -1,6 +1,5 @@
 # This script relys on Bandage_Timer.py, if you do not have it, it will not work
 # Bandages any guilded pet if within 1 tile
-# Updated 5/31/21 for RE 8+
 from System.Collections.Generic import List
 from System import Byte
 import sys
@@ -22,6 +21,7 @@ if Player.GetRealSkillValue('Veterinary') < 80:
     sys.exit()
     
 healing = None
+broodlings = [ 0x02D9,0x0014 ]
 while True:
     petList = find(2)
     init = 0
@@ -29,7 +29,7 @@ while True:
     for i in petList:
         healPet = Mobiles.FindBySerial(i.Serial)
         if healPet:
-            if healPet.Hits != int(0) and Player.InRangeMobile(healPet, int(1.5)):
+            if healPet.Hits != int(0) and Player.InRangeMobile(healPet, int(1.5)) and healPet.Body not in broodlings:
                 plist.append(healPet.Serial)
     for j in plist:
         if init == 0:

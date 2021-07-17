@@ -1,9 +1,8 @@
-from System.Collections.Generic import List
-import sys
-# Dragon Armor Crafter by MatsaMilla
+# Dragon Armor Crafter by MatsaMilla, last edited 7/16/21
 # ToolTips must be enabled and must have a beetle
-# Target a bag with empty bags in it, it will fill the empty bags with dragon armor
-####################################################
+# Must edit setup section
+
+################# SETUP SECTION ###################################
 
 scaleColor = 'blue' #pick color of scales, red, yellow, black, green, white, blue or blue2
 
@@ -14,7 +13,10 @@ fillBags = True # if true: Fill a bag with as many
 beetle = 0x00215F22
 beetlePack = 0x434C292B # beetle container ID (inspect object in beetle pack for container ID
 
-#####################################################
+################## END SETUP SECTION ###################################
+
+from System.Collections.Generic import List
+import sys
 
 noColor = 0x0000
 self_pack = Player.Backpack.Serial
@@ -53,6 +55,7 @@ elif scaleColor == 'blue2':
 
 player_bag = Items.FindBySerial(Player.Backpack.Serial)
 
+
 if fillBags:
     baseBag = Target.PromptTarget('Target bag with bags to fill')
 
@@ -75,6 +78,10 @@ else:
     global trashcan
     trashcan = trashcanhere[ 0 ]
     
+if Player.GetRealSkillValue('Tinkering') < 80:
+    craftOwnTools = False
+else:
+    craftOwnTools = True
 def restockScales():
     if Items.BackpackCount(dragonScales,-1) < 50:
         if Player.Mount:
@@ -85,33 +92,35 @@ def restockScales():
             else:
                 Misc.ContextReply(beetle, 0)
             Misc.Pause(dragTime)
-
-        beetleScales = Items.FindByID( dragonScales , -1  , beetlePack )
+        beetleScales = Items.FindByID( dragonScales , -1  , beetlePack, True )
         if beetleScales:
             Items.Move( beetleScales , self_pack , 300 )
             Misc.Pause(dragTime)
+        else:
+            Misc.SendMessage('Out of scales',33)
+            sys.exit()
         
 def craftTools():
-    currentTink = Items.FindByID(0x1EB8, -1, -1)
-    
-    if Items.BackpackCount(0x1BF2, noColor) < 10:
-        Misc.SendMessage('Out of Ignots',33)
-        winsound.PlaySound(error, winsound.SND_FILENAME)
-        sys.exit()
-    
-    if Items.BackpackCount(0x1EB8, noColor) < 2:
-        Items.UseItem(currentTink.Serial)
-        Gumps.WaitForGump(949095101, 1500)
-        Gumps.SendAction(949095101, 8)
-        Gumps.WaitForGump(949095101, 1500)
-        Gumps.SendAction(949095101, 23)
+    if craftOwnTools:
+        currentTink = Items.FindByID(0x1EB8, -1, Player.Backpack.Serial, True )
+        
+        if Items.BackpackCount(0x1BF2, noColor) < 10:
+            Misc.SendMessage('Out of Ignots',33)
+            sys.exit()
+        
+        if Items.BackpackCount(0x1EB8, noColor) < 2:
+            Items.UseItem(currentTink.Serial)
+            Gumps.WaitForGump(949095101, 1500)
+            Gumps.SendAction(949095101, 8)
+            Gumps.WaitForGump(949095101, 1500)
+            Gumps.SendAction(949095101, 23)
 
-    if Items.BackpackCount( smithHammer, noColor) < 1: 
-        Items.UseItem(currentTink.Serial)
-        Gumps.WaitForGump(949095101,1500)
-        Gumps.SendAction(949095101, 8)
-        Gumps.WaitForGump(949095101,1500)
-        Gumps.SendAction(949095101, 93)
+        if Items.BackpackCount( smithHammer, noColor) < 1: 
+            Items.UseItem(currentTink.Serial)
+            Gumps.WaitForGump(949095101,1500)
+            Gumps.SendAction(949095101, 8)
+            Gumps.WaitForGump(949095101,1500)
+            Gumps.SendAction(949095101, 93)
     
 def craftDragArmor(bag):
     Items.UseItem(bag)
@@ -120,7 +129,7 @@ def craftDragArmor(bag):
         while True:
             restockScales()
             craftTools()
-            hammer = Items.FindByID(smithHammer,-1,Player.Backpack.Serial)
+            hammer = Items.FindByID(smithHammer,-1,Player.Backpack.Serial,True)
             if Items.FindByID( i[1] , -1 , bag.Serial ):
                 break
             if hammer:

@@ -1,33 +1,35 @@
-# Pet Vet by Matsamilla, updated 5/31/21 for RE 8+
 # This script relys on Bandage_Timer.py, if you do not have it, it will not work
-# Add the serials of pets you want to heal to the petList
+# Bandages any guilded pet if within 1 tile
 from System.Collections.Generic import List
 from System import Byte
 import sys
 
-#Pet list you can add to it by putting the pets Serial number in the list. 
-petList = [
-# PetList
- 0x00120786,# Winged Snek
- 0x003FAA39,# Kuzco
- 0x00049A23,# Water Wyrm
- 0x0016D74B,# Pacha
- 0x001BF91B, # Matsa- Mare
-]
+def find(notoriety):
+    fil = Mobiles.Filter()
+    fil.Enabled = True
+    fil.RangeMax = 1.5
+    fil.IsHuman = False
+    fil.IsGhost = False
+    fil.Notorieties = List[Byte](bytes([notoriety]))
+    list = Mobiles.ApplyFilter(fil)
 
+    return list
+    
 # quits if you have less than 80 HP
 if Player.GetRealSkillValue('Veterinary') < 80:
     Misc.SendMessage('Not enough vet skill, stopping',33)
     sys.exit()
     
 healing = None
+broodlings = [ 0x02D9,0x0014 ]
 while True:
+    petList = find(2)
     init = 0
     plist = []
     for i in petList:
-        healPet = Mobiles.FindBySerial(i)
+        healPet = Mobiles.FindBySerial(i.Serial)
         if healPet:
-            if healPet.Hits != int(0) and Player.InRangeMobile(healPet, int(1.5)):
+            if healPet.Hits != int(0) and Player.InRangeMobile(healPet, int(1.5)) and healPet.Body not in broodlings:
                 plist.append(healPet.Serial)
     for j in plist:
         if init == 0:
@@ -42,7 +44,6 @@ while True:
         if pet2Heal:
             if (pet2Heal.Hits < int(23) or pet2Heal.Poisoned) and Player.InRangeMobile(pet2Heal, int(1.5)):
                 if Misc.ReadSharedValue('bandageDone') == True and Player.Visible:
-                    prevTarget = Target.Last()
                     if Target.HasTarget( ) == False:
                         Misc.SendMessage("Healing " + pet2Heal.Name, 33)  
                         Items.UseItemByID(0x0E21, -1)

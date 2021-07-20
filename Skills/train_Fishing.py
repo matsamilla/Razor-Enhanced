@@ -20,7 +20,7 @@ attack = True
 
 from System.Collections.Generic import List
 from System import Byte
-import winsound        
+import sys
 dragTime = 600
 journalEntryDelay = 200
 
@@ -215,11 +215,12 @@ def UseFishing():
     global moveForwardBackward
     
     fishingPole = Items.FindByID( 0x0DBF, -1 , Player.Backpack.Serial )
-    rightHand = Player.GetItemOnLayer('RightHand')
     
-    if fishingPole == None and rightHand.ItemID != 0x0DBF:
+    if fishingPole == None:
         Misc.SendMessage('No fishing poles!!', 33)
-
+        sys.exit()
+            
+    Misc.SendMessage(fishingPole)
     while True:
         x = Player.Position.X - 3
         y = Player.Position.Y - 3

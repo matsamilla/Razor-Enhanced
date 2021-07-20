@@ -221,7 +221,6 @@ def UseFishing():
         Misc.SendMessage('No fishing poles!!', 33)
         sys.exit()
             
-    Misc.SendMessage(fishingPole)
     while True:
         x = Player.Position.X - 3
         y = Player.Position.Y - 3

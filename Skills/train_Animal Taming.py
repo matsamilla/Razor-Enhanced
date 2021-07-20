@@ -11,10 +11,10 @@ Description: Tames nearby animals to train Animal Taming to GM
 killTame = False
 # Change to the name that you want to rename the tamed animals to
 if killTame:
-    renameTamedAnimalsTo = 'Thanks Matsa'
+    renameTamedAnimalsTo = 'kill me'
     killList = []
 else:
-    renameTamedAnimalsTo = 'retame me'
+    renameTamedAnimalsTo = 'Thanks Matsa'
 # Change to the number of followers you would like to keep.
 # The script will auto-release the most recently tamed animal if the follower number exceeds this number
 # Some animals have a follower count greater than one, which may cause them to be released if this number is not set high enough

@@ -2,13 +2,13 @@
 Author: Aga - original author of the uosteam script
 Other Contributors: TheWarDoctor95 - converted to Razor Enhanced script
                     MatsaMilla - Converted to be all-in-1 script
-Last Contribution By: Reda - 6/9/21 (Updated for 2021)
+Last Contribution By: MatsaMilla - 7/20.21 - updated some journal finds
 Description: Tames nearby animals to train Animal Taming to GM
 '''
 
 ## Script options ##
 # True to kill tame, false to not
-killTame = True
+killTame = False
 # Change to the name that you want to rename the tamed animals to
 if killTame:
     renameTamedAnimalsTo = 'Thanks Matsa'
@@ -18,7 +18,7 @@ else:
 # Change to the number of followers you would like to keep.
 # The script will auto-release the most recently tamed animal if the follower number exceeds this number
 # Some animals have a follower count greater than one, which may cause them to be released if this number is not set high enough
-numberOfFollowersToKeep = 2
+numberOfFollowersToKeep = 1
 
 # Set to the maximum number of times to attempt to tame a single animal. 0 == attempt until tamed
 maximumTameAttempts = 5
@@ -739,11 +739,11 @@ def TrainAnimalTaming():
                 animalBeingTamed = None
                 timesTried = 0
                 tameHandled = True
-                
-            elif ( Journal.SearchByType( 'You fail to tame the creature.', 'System' ) or
-                    Journal.SearchByType( 'The animal is too angry to continue taming.', 'System' ) or
+            elif ( Journal.SearchByName( 'You fail to tame the creature.', animalBeingTamed.Name ) or
+                    Journal.SearchByName( 'The animal is too angry to continue taming.', animalBeingTamed.Name ) or
                     Journal.SearchByType( 'You must wait a few moments to use another skill.', 'System' ) ):
                 tameHandled = True
+                Misc.SendMessage('Tame attempt ' + str(timesTried),66)
                 
             elif ( Journal.SearchByType( 'That is too far away.', 'System' ) or
                     Journal.SearchByName( 'You are too far away to continue taming.', animalBeingTamed.Name ) ):
@@ -770,7 +770,7 @@ def TrainAnimalTaming():
                 tameHandled = False
                 tameOngoing = False
 
-        # Wait a little bit so that the while loop doesn't consume as much CPU
+        # Wait a little bit so that the while loop does not consume as much CPU
         Misc.Pause( 50 )
         
 def findInstrument():

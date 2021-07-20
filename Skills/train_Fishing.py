@@ -4,6 +4,7 @@ Other Contributors:
     Last Contribution By: MatsaMilla - 7/19/21
 
 Description: Train fishing, Fishing up MIBs, nets, maps & scales
+Fishing pole must be in bag
 '''
 
 #############    Setup Section    ################

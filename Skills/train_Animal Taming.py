@@ -6,7 +6,7 @@ Last Contribution By: MatsaMilla - 7/20.21 - updated some journal finds
 Description: Tames nearby animals to train Animal Taming to GM
 '''
 
-## Script options ##
+########## Script options ###############
 # True to kill tame, false to not
 killTame = False
 # Change to the name that you want to rename the tamed animals to
@@ -15,6 +15,7 @@ if killTame:
     killList = []
 else:
     renameTamedAnimalsTo = 'Thanks Matsa'
+    
 # Change to the number of followers you would like to keep.
 # The script will auto-release the most recently tamed animal if the follower number exceeds this number
 # Some animals have a follower count greater than one, which may cause them to be released if this number is not set high enough
@@ -31,7 +32,7 @@ minimumTamingDifficulty = 31
 # 'Healing' = use bandages (you should just use my Bandage_Self.py instead)
 # 'Magery' = uses the Heal and Greater Heal ability depending on how much health is missing
 # 'None' = do not auto-heal
-healUsing = 'Healing'
+healUsing = 'None'
 
 # True or False to use Peacemaking if needed
 enablePeacemaking = False
@@ -42,6 +43,8 @@ enableFollowAnimal = True
 # Change depending on the latency to your UO shard
 journalEntryDelayMilliseconds = 100
 targetClearDelayMilliseconds = 600
+
+################ END SETUP SECTION ######################
 import sys
 
 if not Misc.CurrentScriptDirectory() in sys.path:

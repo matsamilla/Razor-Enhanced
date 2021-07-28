@@ -2,7 +2,7 @@
 Author: Aga - original author of the uosteam script
 Other Contributors: TheWarDoctor95 - converted to Razor Enhanced script
                     MatsaMilla - Converted to be all-in-1 script
-Last Contribution By: MatsaMilla - 7/20.21 - updated some journal finds
+Last Contribution By: MatsaMilla - 7/27/21
 Description: Tames nearby animals to train Animal Taming to GM
 '''
 
@@ -22,7 +22,7 @@ else:
 numberOfFollowersToKeep = 1
 
 # Set to the maximum number of times to attempt to tame a single animal. 0 == attempt until tamed
-maximumTameAttempts = 5
+maximumTameAttempts = 10
 
 # Set the minimum taming difficulty to use when finding animals to tame
 minimumTamingDifficulty = 31
@@ -35,7 +35,7 @@ minimumTamingDifficulty = 31
 healUsing = 'None'
 
 # True or False to use Peacemaking if needed
-enablePeacemaking = False
+enablePeacemaking = True
 
 # True or False to track the animal being tamed
 enableFollowAnimal = True
@@ -510,44 +510,54 @@ def makePeace():
             enemyToPutToPeace = enemy
             break
 
-    Timer.Create( 'peacemakingTimer', 1 )
+    #Timer.Create( 'peacemakingTimer', 1 )
+    #Timer.Create( 'skillTimer', 1 )
     while enemyAtWar:
-        if not Timer.Check( 'peacemakingTimer' ):
-            # Clear any previously selected target and the target queue
-            Target.ClearLastandQueue()
-            # Wait for the target to finish clearing
-            Misc.Pause( targetClearDelayMilliseconds )
-
-            Player.UseSkill( 'Peacemaking' )
-            # Wait for journal entry to come up
-            Misc.Pause( journalEntryDelayMilliseconds )
-            if Journal.SearchByType( 'What instrument shall you play?', 'System' ):
-                instrument = findInstrument()
-                if instrument == None:
-                    Misc.SendMessage( 'No instruments to peacemake with.', 1100 )
+        #if not Timer.Check( 'peacemakingTimer' ):
+        if not Timer.Check( 'skillTimer' ):
+            try:
+                enemyToPutToPeace = Mobiles.FindBySerial(enemyToPutToPeace.Serial)
+                if enemyToPutToPeace == None or enemyToPutToPeace.WarMode == False :
                     break
-                else:
+                
+                # Clear any previously selected target and the target queue
+                Target.ClearLastandQueue()
+                # Wait for the target to finish clearing
+                Misc.Pause( targetClearDelayMilliseconds )
+
+                Player.UseSkill( 'Peacemaking' )
+                # Wait for journal entry to come up
+                Misc.Pause( journalEntryDelayMilliseconds )
+                if Journal.SearchByType( 'What instrument shall you play?', 'System' ):
+                    instrument = findInstrument()
+                    if instrument == None:
+                        Misc.SendMessage( 'No instruments to peacemake with.', 1100 )
+                        break
+                    else:
+                        Target.WaitForTarget( 2000, False )
+                        Target.TargetExecute( instrument.Serial )
+
+                if Journal.SearchByType( 'Whom do you wish to calm?', 'System' ):
                     Target.WaitForTarget( 2000, False )
-                    Target.TargetExecute( instrument.Serial )
+                    Target.TargetExecute( enemyToPutToPeace )
+                    #Timer.Create( 'peacemakingTimer', peacemakingTimerMilliseconds )
+                    Timer.Create( 'skillTimer', peacemakingTimerMilliseconds )
 
-            if Journal.SearchByType( 'Whom do you wish to calm?', 'System' ):
-                Target.WaitForTarget( 2000, False )
-                Target.TargetExecute( enemyToPutToPeace )
-                Timer.Create( 'peacemakingTimer', peacemakingTimerMilliseconds )
-
-        enemyAtWar = False
-        enemyToPutToPeace = None
-        for enemy in enemies:
-            if enemy.WarMode:
-                enemyAtWar = True
-                enemyToPutToPeace = enemy
+                enemyAtWar = False
+                enemyToPutToPeace = None
+#                for enemy in enemies:
+#                    if enemy.WarMode:
+#                        enemyAtWar = True
+#                        enemyToPutToPeace = enemy
+#                        break
+            except:
                 break
 
-            # Wait a little bit so that the while loop does not consume as much CPU
-            Misc.Pause( 50 )
-
-        if Player.WarMode:
-            Player.SetWarMode( False )
+        # Wait a little bit so that the while loop does not consume as much CPU
+        Misc.Pause( 50 )
+        if killTame == False:
+            if Player.WarMode:
+                Player.SetWarMode( False )
 
 def heal():           
     if healUsing != 'None':
@@ -623,9 +633,9 @@ def TrainAnimalTaming():
     bandageBeingApplied = False
 
     # Initialize skill timers
-    Timer.Create( 'animalTamingTimer', 1 )
-    if enablePeacemaking:
-        Timer.Create( 'peacemakingTimer', 1 )
+#    Timer.Create( 'animalTamingTimer', 1 )
+#    if enablePeacemaking:
+#        Timer.Create( 'peacemakingTimer', 1 )
 
     if healUsing == 'Healing':
         Timer.Create( 'bandageTimer', 1 )
@@ -637,8 +647,9 @@ def TrainAnimalTaming():
     Misc.ClearIgnore()
 
     # Toggle war mode to make sure the player isn not going to kill the animal being tamed
-    Player.SetWarMode( True )
-    Player.SetWarMode( False )
+    if killTame == False:
+        Player.SetWarMode( True )
+        Player.SetWarMode( False )
 
     while not Player.IsGhost:
         
@@ -697,7 +708,8 @@ def TrainAnimalTaming():
             makePeace()
 
         # Tame the animal if a tame is not currently being attempted and enough time has passed since last using Animal Taming
-        if not tameOngoing and not Timer.Check( 'animalTamingTimer' ):
+#        if not tameOngoing and not Timer.Check( 'animalTamingTimer' ):
+        if not tameOngoing and not Timer.Check( 'skillTimer' ):
             # Clear any previously selected target and the target queue
             Target.ClearLastandQueue()
             # Wait for the target to finish clearing
@@ -713,7 +725,8 @@ def TrainAnimalTaming():
                 timesTried += 1
                 
                 # Restart the timer so that it will go off when we will be able to use the skill again
-                Timer.Create( 'animalTamingTimer', animalTamingTimerMilliseconds )
+#                Timer.Create( 'animalTamingTimer', animalTamingTimerMilliseconds )
+                Timer.Create( 'skillTimer', animalTamingTimerMilliseconds )
 
                 # Set tameOngoing to true to start the journal checks that will handle the result of the taming
                 tameOngoing = True
@@ -721,6 +734,12 @@ def TrainAnimalTaming():
                 continue
 
         if tameOngoing:
+            try:
+                animalBeingTamed = Mobiles.FindBySerial(animalBeingTamed.Serial)
+                if animalBeingTamed == None:
+                    break
+            except:
+                break
             if ( Journal.SearchByName( 'It seems to accept you as master.', animalBeingTamed.Name ) or
                     Journal.Search( 'That wasn\'t even challenging.' ) ):
                 # Animal was successfully tamed
@@ -753,19 +772,21 @@ def TrainAnimalTaming():
                 # Animal moved too far away, set to None so that another animal can be found
                 animalBeingTamed = None
                 timesTried = 0
-                Timer.Create( 'animalTamingTimer', 1 )
+                Timer.Create( 'skillTimer', 1 )
+                #Timer.Create( 'animalTamingTimer', 1 )
                 tameHandled = True
                 
             elif ( Journal.SearchByName( 'You have no chance of taming this creature', animalBeingTamed.Name ) or
                     Journal.SearchByType( 'Target cannot be seen', 'System' ) or
-                    Journal.Search( 'Do not have a clear path to the animal' ) or
+                    Journal.SearchByType( 'Do not have a clear path to the animal','System' ) or
                     Journal.Search( 'This animal has had too many owners' ) or
                     Journal.Search( 'That animal looks tame already' ) ):
                 # Ignore the object and set to None so that another animal can be found
                 Misc.IgnoreObject( animalBeingTamed )
                 animalBeingTamed = None
                 timesTried = 0
-                Timer.Create( 'animalTamingTimer', 1 )
+                Timer.Create( 'skillTimer', 1 )
+                #Timer.Create( 'animalTamingTimer', 1 )
                 tameHandled = True
 
             if tameHandled:

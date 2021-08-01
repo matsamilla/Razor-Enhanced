@@ -748,7 +748,8 @@ def TrainAnimalTaming():
                 if Player.Followers > numberOfFollowersToKeep:
                     # Release recently tamed animal
                     Misc.WaitForContext( animalBeingTamed.Serial, 2000 )
-                    Misc.ContextReply( animalBeingTamed.Serial, 8 )
+                    #Misc.ContextReply( animalBeingTamed.Serial, 8 )
+                    Misc.ContextReply( animanBeingTamed.Serial, 'Release')
                     Gumps.WaitForGump( 2426193729, 10000 )
                     Gumps.SendAction( 2426193729, 2 )
                     Misc.Pause(600)

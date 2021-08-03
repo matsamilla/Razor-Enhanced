@@ -8,7 +8,7 @@ How to set up CUO + RE: 2 methods
 How to add scripts & some basic use of Enhanced:
   https://www.youtube.com/watch?v=W7s7ylopA0Q
   
-Targeting Video Instructions: https://www.youtube.com/watch?v=vGvUT-bFI8g
+Targeting Video Instructions: https://youtu.be/vqCYRl_IKME
   
 Razor Enhanced Wiki: http://razorenhanced.net/dokuwiki/doku.php
 ClassicUO: https://www.classicuo.eu/

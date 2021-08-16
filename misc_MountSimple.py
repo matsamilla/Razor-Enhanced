@@ -21,10 +21,13 @@ else:
         Player.HeadMessage(66,"Target Mount")
         mountSerial = Target.PromptTarget("Target Mount",33)
         mount = Mobiles.FindBySerial( mountSerial )
-        Misc.SetSharedValue('mount'+ str(Player.Serial),mountSerial)
-        while Player.DistanceTo(mount) > 1:
-            if Timer.Check('MountTimer') == False:
-                Player.ChatSay(66, mount.Name + ' Come')
-                Timer.Create('MountTimer', 500)
-            Misc.Pause(50)
-        Mobiles.UseMobile(mount)
+        if mount:
+            Misc.SetSharedValue('mount'+ str(Player.Serial),mountSerial)
+            while Player.DistanceTo(mount) > 1:
+                if Timer.Check('MountTimer') == False:
+                    Player.ChatSay(66, mount.Name + ' Come')
+                    Timer.Create('MountTimer', 500)
+                Misc.Pause(50)
+            Mobiles.UseMobile(mount)
+        else:
+            Player.HeadMessage(33, 'Not Valid')

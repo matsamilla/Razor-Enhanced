@@ -1,8 +1,14 @@
 # Sallos . recall and . gate commands
-# By MatsaMilla, Version 1.3 4/8/21 - fixed crash error if no text passed
+# By MatsaMilla, Version 2.0 - UOAges Compatible
 
 Misc.Pause(5000)
 runebookDelay = 600
+
+if Misc.ShardName() == "UO Ages":
+    runebookID = 0x0EFA
+    runebookDelay = 800
+else:
+    runebookID = 0x22C5
 
 if Player.GetRealSkillValue('Magery') > 35:
     mageRecall = True
@@ -13,15 +19,16 @@ else:
 def makeRunebookList( ):
     sortedRuneList = []
     for i in Player.Backpack.Contains:
-        if i.ItemID == 0x22C5:
+        if i.ItemID == runebookID:
             # opens runebook
             Items.UseItem( i )
-            Misc.Pause(120)
-            Gumps.WaitForGump( 1431013363, 10000 )
+            Misc.Pause(120) 
+            Gumps.WaitForGump( 1431013363, 500 )
             if Journal.Search('You must wait'):
                 Misc.SendMessage('trying runebook again')
                 Items.UseItem( i )
-                Gumps.WaitForGump( 1431013363, 10000 )
+                Gumps.WaitForGump( 1431013363, 500 )
+                Journal.Clear()
             
             bookSerial = i.Serial
             runeNames = []
@@ -62,16 +69,18 @@ def recall( str ):
             Gumps.WaitForGump(1431013363, 1000)
             Gumps.SendAction(1431013363, f[2])
             Player.HeadMessage(66, '- ' + str + ' -')
-            #Misc.SendMessage('Recalling to ' + str,11)    
         
 def chargeRecall( str ):
     for f in runeNames:
         if str == f[1]:
             Items.UseItem(f[0])
+            Misc.Pause(50)
             Gumps.WaitForGump(1431013363, 1000)
             Gumps.SendAction(1431013363, f[3])
             Player.HeadMessage(66, '- ' + str + ' -')
-            # Misc.SendMessage('Recalling to ' + str,11)
+#            Items.WaitForProps(f[0],500)
+#            charges = Items.GetPropValue(f[0],'Charges')
+#            Player.HeadMessage(66, str(int(charges)) + ' charges left' )
 
             
 def gate( str ):
@@ -145,6 +154,8 @@ else:
      Misc.SendMessage('Runes Still In Memory', 66)
 
 Journal.Clear()
+while Player.IsGhost:
+    Misc.Pause(5000)
 
 while True:
     if Journal.SearchByName(". recall", Player.Name):

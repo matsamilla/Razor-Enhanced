@@ -11,10 +11,15 @@ scrolls = [0x1f2d,0x1f2e,0x1f2f,0x1f30,0x1f31,0x1f32,0x1f33,0x1f34,0x1f35,0x1f36
 0x1f59,0x1f5a,0x1f5b,0x1f5c,0x1f5d,0x1f5e,0x1f5f,0x1f60,0x1f61,0x1f62,0x1f63,0x1f64,0x1f65,0x1f66,0x1f67,
 0x1f68,0x1f69,0x1f6a,0x1f6b,0x1f6c]
 
+
+if Misc.ShardName() == "UO Ages":
+    contextResponse = 0
+else Misc.ShardName() == "Ultima Forever":
+    contextResponse = 1
 for l in scrolls:
     currentScroll = Items.FindByID(l,-1,-1)
     if currentScroll:
         Misc.WaitForContext(currentScroll, 1000)
-        Misc.ContextReply(currentScroll, 1)
+        Misc.ContextReply(currentScroll, contextResponse)
         Target.WaitForTarget(1000, False)
         Target.TargetExecute(spellBook)

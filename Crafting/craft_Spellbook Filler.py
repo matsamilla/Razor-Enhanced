@@ -14,8 +14,9 @@ scrolls = [0x1f2d,0x1f2e,0x1f2f,0x1f30,0x1f31,0x1f32,0x1f33,0x1f34,0x1f35,0x1f36
 
 if Misc.ShardName() == "UO Ages":
     contextResponse = 0
-else Misc.ShardName() == "Ultima Forever":
+else:
     contextResponse = 1
+
 for l in scrolls:
     currentScroll = Items.FindByID(l,-1,-1)
     if currentScroll:

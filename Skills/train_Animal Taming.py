@@ -2,11 +2,13 @@
 Author: Aga - original author of the uosteam script
 Other Contributors: TheWarDoctor95 - converted to Razor Enhanced script
                     MatsaMilla - Converted to be all-in-1 script
-Last Contribution By: MatsaMilla - 7/27/21
+Last Contribution By: MatsaMilla - 8-28-21
 Description: Tames nearby animals to train Animal Taming to GM
 '''
 
 ########## Script options ###############
+Misc.ClearIgnore()
+
 # True to kill tame, false to not
 killTame = False
 # Change to the name that you want to rename the tamed animals to
@@ -19,7 +21,7 @@ else:
 # Change to the number of followers you would like to keep.
 # The script will auto-release the most recently tamed animal if the follower number exceeds this number
 # Some animals have a follower count greater than one, which may cause them to be released if this number is not set high enough
-numberOfFollowersToKeep = 1
+numberOfFollowersToKeep = 0
 
 # Set to the maximum number of times to attempt to tame a single animal. 0 == attempt until tamed
 maximumTameAttempts = 10
@@ -35,14 +37,14 @@ minimumTamingDifficulty = 31
 healUsing = 'None'
 
 # True or False to use Peacemaking if needed
-enablePeacemaking = True
+enablePeacemaking = False
 
 # True or False to track the animal being tamed
 enableFollowAnimal = True
 
 # Change depending on the latency to your UO shard
 journalEntryDelayMilliseconds = 100
-targetClearDelayMilliseconds = 600
+targetClearDelayMilliseconds = 100
 
 ################ END SETUP SECTION ######################
 import sys
@@ -417,17 +419,13 @@ def FollowMobile( mobile, maxDistanceToMobile = 2, startPlayerStuckTimer = False
     if mobilePosition.X < playerPosition.X and mobilePosition.Y < playerPosition.Y:
         directions.append( 'Up' )
     if mobilePosition.X > playerPosition.X and mobilePosition.Y == playerPosition.Y:
-        directions.append( 'Down' )
-        directions.append( 'Right' )
+        directions.append( 'East' )
     if mobilePosition.X < playerPosition.X and mobilePosition.Y == playerPosition.Y:
-        directions.append( 'Up' )
-        directions.append( 'Left' )
+        directions.append( 'West' )
     if mobilePosition.X == playerPosition.X and mobilePosition.Y > playerPosition.Y:
-        directions.append( 'Down' )
-        directions.append( 'Left' )
+        directions.append( 'South' )
     if mobilePosition.X == playerPosition.X and mobilePosition.Y < playerPosition.Y:
-        directions.append( 'Up' )
-        directions.append( 'Right' )
+        directions.append( 'North' )
 
     if startPlayerStuckTimer:
         Timer.Create( 'playerStuckTimer', playerStuckTimerMilliseconds )
@@ -457,7 +455,7 @@ def FollowMobile( mobile, maxDistanceToMobile = 2, startPlayerStuckTimer = False
 
     if Player.DistanceTo( mobile ) > maxDistanceToMobile:
         # This pause may need further tuning
-        # Don't want to create a ton of infinite calls if the player is stuck, but also don't want to not be able to catch up to animals
+        # Dont want to create a ton of infinite calls if the player is stuck, but also dont want to not be able to catch up to animals
         Misc.Pause( 100 )
         FollowMobile( mobile, maxDistanceToMobile )
         #pathfindToMobile( mobile )
@@ -474,24 +472,20 @@ def pathfindToMobile(mobile):
     mobileCoords.Y = mobilePosition.Y
 
     if PathFinding.Go(mobileCoords):
-        Misc.SendMessage('First Try')
         Misc.NoOperation()
     else:
         mobileCoords.X = mobilePosition.X + 1
         if PathFinding.Go(mobileCoords):
-            Misc.SendMessage('Second Try')
             Misc.NoOperation()
         else:
             mobileCoords.X = mobilePosition.X
             mobileCoords.Y = mobilePosition.Y - 1
             if PathFinding.Go(mobileCoords):
-                Misc.SendMessage('Third Try')
                 Misc.NoOperation()
             else:
                 mobileCoords.Y = mobilePosition.Y + 1
                 PathFinding.Go(mobileCoords)
-                Misc.SendMessage('Last Try')
-
+                
 def makePeace():
     enemyFilter = Mobiles.Filter()
     enemyFilter.Enabled = True
@@ -510,10 +504,7 @@ def makePeace():
             enemyToPutToPeace = enemy
             break
 
-    #Timer.Create( 'peacemakingTimer', 1 )
-    #Timer.Create( 'skillTimer', 1 )
     while enemyAtWar:
-        #if not Timer.Check( 'peacemakingTimer' ):
         if not Timer.Check( 'skillTimer' ):
             try:
                 enemyToPutToPeace = Mobiles.FindBySerial(enemyToPutToPeace.Serial)
@@ -540,7 +531,6 @@ def makePeace():
                 if Journal.SearchByType( 'Whom do you wish to calm?', 'System' ):
                     Target.WaitForTarget( 2000, False )
                     Target.TargetExecute( enemyToPutToPeace )
-                    #Timer.Create( 'peacemakingTimer', peacemakingTimerMilliseconds )
                     Timer.Create( 'skillTimer', peacemakingTimerMilliseconds )
 
                 enemyAtWar = False
@@ -633,9 +623,7 @@ def TrainAnimalTaming():
     bandageBeingApplied = False
 
     # Initialize skill timers
-#    Timer.Create( 'animalTamingTimer', 1 )
-#    if enablePeacemaking:
-#        Timer.Create( 'peacemakingTimer', 1 )
+    Timer.Create( 'skillTimer', 1 )
 
     if healUsing == 'Healing':
         Timer.Create( 'bandageTimer', 1 )
@@ -644,7 +632,7 @@ def TrainAnimalTaming():
 
     # Initialize the journal and ignore object list
     Journal.Clear()
-    Misc.ClearIgnore()
+    
 
     # Toggle war mode to make sure the player isn not going to kill the animal being tamed
     if killTame == False:
@@ -662,9 +650,11 @@ def TrainAnimalTaming():
             else:
                 Mobiles.Message( animalBeingTamed, 1100, 'Tried more than %i times to tame. Ignoring animal' % maximumTameAttempts )
                 Misc.IgnoreObject( animalBeingTamed )
+                Misc.Pause(600)
             animalBeingTamed = None
             timesTried = 0
-
+            tameHandled = False
+            tameOngoing = False
 
         if enablePeacemaking:
             makePeace()
@@ -677,7 +667,7 @@ def TrainAnimalTaming():
             animalBeingTamed = FindAnimalToTame()
             if animalBeingTamed == None:
                 # No animals in the area. Pause for a while so that this is constantly running until something is available to tame
-                Misc.Pause( 1000 )
+                Misc.Pause( 500 )
                 continue
             else:
                 Mobiles.Message( animalBeingTamed, 90, 'Found animal to tame' )
@@ -708,7 +698,6 @@ def TrainAnimalTaming():
             makePeace()
 
         # Tame the animal if a tame is not currently being attempted and enough time has passed since last using Animal Taming
-#        if not tameOngoing and not Timer.Check( 'animalTamingTimer' ):
         if not tameOngoing and not Timer.Check( 'skillTimer' ):
             # Clear any previously selected target and the target queue
             Target.ClearLastandQueue()
@@ -725,7 +714,6 @@ def TrainAnimalTaming():
                 timesTried += 1
                 
                 # Restart the timer so that it will go off when we will be able to use the skill again
-#                Timer.Create( 'animalTamingTimer', animalTamingTimerMilliseconds )
                 Timer.Create( 'skillTimer', animalTamingTimerMilliseconds )
 
                 # Set tameOngoing to true to start the journal checks that will handle the result of the taming
@@ -745,10 +733,11 @@ def TrainAnimalTaming():
                 # Animal was successfully tamed
                 if animalBeingTamed.Name != renameTamedAnimalsTo:
                     Misc.PetRename( animalBeingTamed, renameTamedAnimalsTo )
+                    Misc.Pause(200)
                 if Player.Followers > numberOfFollowersToKeep:
                     # Release recently tamed animal
+                    #Player.ChatSay(55,animalBeingTamed.Name + " release")
                     Misc.WaitForContext( animalBeingTamed.Serial, 2000 )
-                    #Misc.ContextReply( animalBeingTamed.Serial, 8 )
                     Misc.ContextReply( animalBeingTamed.Serial, 'Release')
                     Gumps.WaitForGump( 2426193729, 10000 )
                     Gumps.SendAction( 2426193729, 2 )
@@ -778,8 +767,9 @@ def TrainAnimalTaming():
                 tameHandled = True
                 
             elif ( Journal.SearchByName( 'You have no chance of taming this creature', animalBeingTamed.Name ) or
+                    Journal.SearchByName( 'already taming', animalBeingTamed.Name ) or
                     Journal.SearchByType( 'Target cannot be seen', 'System' ) or
-                    Journal.SearchByType( 'Do not have a clear path to the animal','System' ) or
+                    Journal.SearchByType( 'not have a clear path to the animal','System' ) or
                     Journal.Search( 'This animal has had too many owners' ) or
                     Journal.Search( 'That animal looks tame already' ) ):
                 # Ignore the object and set to None so that another animal can be found
@@ -787,7 +777,6 @@ def TrainAnimalTaming():
                 animalBeingTamed = None
                 timesTried = 0
                 Timer.Create( 'skillTimer', 1 )
-                #Timer.Create( 'animalTamingTimer', 1 )
                 tameHandled = True
 
             if tameHandled:

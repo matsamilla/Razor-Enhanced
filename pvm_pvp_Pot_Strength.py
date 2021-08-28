@@ -1,8 +1,8 @@
 leftHand = Player.GetItemOnLayer('LeftHand')
-chugtime = 800
+chugtime = 650
 msgColor = 66
 noBow = True
-bows = [0x13B2,0x26C2,0x0F50,0x13FD]
+bows = [ 0x13B2,0x26C2,0x0F50,0x13FD,0x0A12,0x0F6B] # 0x0A12,0x0F6B = torch
 basestr = 101
 
 if not leftHand:
@@ -11,11 +11,13 @@ elif leftHand.ItemID in bows:
     noBow = False
 elif leftHand:
     noBow = True
-
-Journal.Clear()
-if Player.Str < basestr:
-    Player.HeadMessage(msgColor, "Buffing Str")
     
+def potDrink():
+    Journal.Clear()
+    if Player.Str < basestr:
+        Player.HeadMessage(msgColor, "Already over 100 str.")
+        return
+
     if leftHand and noBow:
         Player.UnEquipItemByLayer('LeftHand')
         Misc.Pause(650)
@@ -33,5 +35,28 @@ if Player.Str < basestr:
             Player.HeadMessage(msgColor, "No Strength pots!")
         else:
             Misc.NoOperation()
+        
+def usePot():
+    if Player.Str < basestr:
+        Player.HeadMessage(msgColor, "Already over 100 str.")
+        return
+    
+    pot = Items.FindByID(0x0F09,0,Player.Backpack.Serial,True)
+    if pot:
+        if leftHand and noBow:
+            Player.UnEquipItemByLayer('LeftHand')
+            Misc.Pause(chugtime)
+            Items.UseItem(pot)
+            Misc.Pause(chugtime)
+            Player.EquipItem(leftHand)
+            Misc.Pause(50)
+        else:
+            Items.UseItem(pot)
+    else:
+        Player.HeadMessage(msgColor, "No Strength pots!")
+            
+        
+if Misc.ShardName() == "Ultima Forever":
+    potDrink()
 else:
-    Player.HeadMessage(msgColor, "Full Strength Buff")
+    usePot()

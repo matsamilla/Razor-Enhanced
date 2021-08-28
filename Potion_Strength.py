@@ -3,7 +3,6 @@ chugtime = 650
 msgColor = 66
 noBow = True
 bows = [ 0x13B2,0x26C2,0x0F50,0x13FD,0x0A12,0x0F6B] # 0x0A12,0x0F6B = torch
-basestr = 101
 
 if not leftHand:
     noBow = True
@@ -13,11 +12,6 @@ elif leftHand:
     noBow = True
     
 def potDrink():
-    Journal.Clear()
-    if Player.Str < basestr:
-        Player.HeadMessage(msgColor, "Already over 100 str.")
-        return
-
     if leftHand and noBow:
         Player.UnEquipItemByLayer('LeftHand')
         Misc.Pause(650)

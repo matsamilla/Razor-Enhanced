@@ -31,10 +31,6 @@ def potDrink():
             Misc.NoOperation()
         
 def usePot():
-    if Player.Str < basestr:
-        Player.HeadMessage(msgColor, "Already over 100 str.")
-        return
-    
     pot = Items.FindByID(0x0F09,0,Player.Backpack.Serial,True)
     if pot:
         if leftHand and noBow:

@@ -1,4 +1,7 @@
-delayTime = 600
+if Misc.ShardName() == "UO Ages":
+    delaytime = 800
+else:
+    delayTime = 600
 
 # add (Name, PlayerSerial, MountSerial, True/False) to list 
 #   True if you want toon to DISMOUNT + ALL KILL + TARGET LAST
@@ -35,23 +38,29 @@ def dismount(mountSerial, attack):
             Mobiles.UseMobile(Player.Serial)
             Misc.Pause(120)
             mount = Mobiles.FindBySerial(mountSerial)
+            #Misc.Pause(120)
             if mount:
                 if mount.Body == 0x0317:
                     Misc.WaitForContext(mount, 1500)
                     Misc.Pause(150)
                     if Player.Visible:
+                        #Misc.ContextReply(mount, 10)
                         Misc.ContextReply(mountSerial, "Open Backpack")
                     else:
+                        #Misc.ContextReply(mount, 0)
                         Misc.ContextReply(mountSerial, "Open Backpack")
     
     elif mountSerial != None:
         mount = Mobiles.FindBySerial(mountSerial)
-        while Player.DistanceTo(mount) > 1:
-            if Timer.Check('MountTimer') == False:
-                Player.ChatSay(66, mount.Name + ' Come')
-                Timer.Create('MountTimer', 500)
-            Misc.Pause(50)
-        Mobiles.UseMobile(mountSerial)
+        if mount:
+            while Player.DistanceTo(mount) > 1:
+                if Timer.Check('MountTimer') == False:
+                    Player.ChatSay(66, mount.Name + ' Come')
+                    Timer.Create('MountTimer', 500)
+                Misc.Pause(50)
+            Mobiles.UseMobile(mountSerial)
+        else:
+            Player.HeadMessage(33,'Mount not found')
 
         
 for d in dismountList: 

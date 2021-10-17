@@ -1,5 +1,5 @@
 # Automatic Potion Butler Filler by MatsaMilla 
-#   - Version 2, updated 12/9/20
+#   - Version 3, updated 10-17-21
 
 # Must have TOOLTIPSON ([toggletooltips in game to turn off/on)
 
@@ -17,9 +17,10 @@ Player.HeadMessage(66,'Target Restock Chest')
 restockChest = Items.FindBySerial( Target.PromptTarget('Target Restock Chest') )
 #Player.HeadMessage(66,'Mortar Restock Bag (optional)')
 #mortarBag = Items.FindBySerial( Target.PromptTarget('Mortar Restock Bag (optional)') )
+
+import sys
         
 keg = Items.FindByID( 0x1940 , -1 ,  Player.Backpack.Serial )
-import sys
 if keg:
     Misc.SendMessage('Using keg in pack', 66)
 else:
@@ -178,13 +179,12 @@ Journal.Clear()
 Misc.Pause(1000)
 Mobiles.UseMobile(butler)
 Misc.Pause(1000)
-
-# check for dye tub, adjust buttons if yes
+    
 if Gumps.LastGumpTextExist( 'Remove Leather Tub?' ):
     Misc.SendMessage('Leather Tub Detected')
-    fillList = [('explode',37),('strength',38),('refresh',39),('agility',40),('heal',41),('cure',42)]
+    fillList = [('cure',37),('agility',38),('strength',39),('refresh',40),('heal',41),('explode',42)]
 else:
-    fillList = [('explode',35),('strength',36),('refresh',37),('agility',38),('heal',39),('cure',40)]
+    fillList = [('cure',35),('agility',36),('strength',37),('refresh',38),('heal',39),('explode',40)]
 
 while True:
     # verify its butler gump

@@ -1,11 +1,7 @@
 # ButlerHelper by Spatchel & Matsamilla
 # use with ButlerProfiles.py for best results, update butlerID with butler serial below
 
-# Last updated 3/16/21 - 
-#    •Cap option
-#    •Wont grab armor if layer is occupied
-#    •Stops if butler not found
-#    •Waits until in range of butler
+# Last updated 10/17/21 
 
 ###########################################################
 # Add your butlers serial below                           #

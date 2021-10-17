@@ -25,12 +25,15 @@ switch = List[int]([0,4])
 ###########################################################
 # If you dont run ButlerProfiles.py, this will load       #
 ###########################################################
-regs = 50 # default reg count if not profile
+regs = 30 # default reg count if not profile
 armor = 0 # default armor, 0=no 1=yes
 cap = 0 # cap in default profile,  0=no 1=yes
-bandies = 100 # default bandage count
+bandies = 0 # default bandage count
 arrows = 0
 bolts = 0
+cure = 10
+heal = 10
+refresh = 10
 
 ######## NO TOUCHY BELOW THIS #############################
 
@@ -125,33 +128,33 @@ for i in layers:
             legs5 = 0
         
 # Explode Pots Count
-if Misc.CheckSharedValue('exp'):
-    exp14 = Misc.ReadSharedValue('exp')
+if Misc.CheckSharedValue('cure'):
+    exp14 = Misc.ReadSharedValue('cure')
 else: 
-    exp14 = 0
+    exp14 = cure
 # Strength Pots Count
-if Misc.CheckSharedValue('str'):
-    str15 = Misc.ReadSharedValue('str')
+if Misc.CheckSharedValue('agil'):
+    str15 = Misc.ReadSharedValue('agil')
 else: 
     str15 = 0
 # Refresh Pots Count
-if Misc.CheckSharedValue('refresh'):
-    refresh16 = Misc.ReadSharedValue('refresh')
+if Misc.CheckSharedValue('str'):
+    refresh16 = Misc.ReadSharedValue('str')
 else: 
     refresh16 = 0
 # Agility Pots Count    
-if Misc.CheckSharedValue('agil'):
-    agi17 = Misc.ReadSharedValue('agil')
+if Misc.CheckSharedValue('refresh'):
+    agi17 = Misc.ReadSharedValue('refresh')
 else: 
-    agi17 = 0
+    agi17 = refresh
 # Heal Pots Count    
 if Misc.CheckSharedValue('heal'):
     heal18 = Misc.ReadSharedValue('heal')
 else: 
-    heal18 = 0
+    heal18 = heal
 # Cure Pots Count    
-if Misc.CheckSharedValue('cure'):
-    cure19 = Misc.ReadSharedValue('cure')
+if Misc.CheckSharedValue('exp'):
+    cure19 = Misc.ReadSharedValue('exp')
 else: 
     cure19 = 0
 # Bandages Pots Count    
@@ -311,6 +314,7 @@ def saveProfile(textid, text):
     if Gumps.CurrentGump() != 989312372:
         tempGump = Gumps.CurrentGump()
         Gumps.CloseGump(tempGump)
+        Misc.Pause(200)
         Mobiles.UseMobile(butlerID)
     Gumps.WaitForGump(989312372, 2000)
     Gumps.SendAdvancedAction(989312372, saveSwitch, switch, textid, text)

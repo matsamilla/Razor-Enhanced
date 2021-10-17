@@ -91,7 +91,7 @@ def craftPot (potType):
         sys.exit()
     
     while not Items.GetPropValue(keg,'The Keg Is Completely Full.'): 
-    #while not Journal.SearchByType('The keg will not hold any more!', 'Regular'): # non-tool tips change
+    #while not Journal.SearchByType('The keg will not hold any more!', 'System'): # non-tool tips change
         
         worldSave()
         
@@ -133,6 +133,8 @@ def craftPot (potType):
             Items.Move(pot, keg, 0)
             Misc.Pause(dragTime)
             pot = FindItem( potID , Player.Backpack)
+            if Journal.SearchByType('The keg will not hold any more!', 'System'):
+                break
         
         # make sure you have empty bottle
         if Items.BackpackCount(0x0F0E) < 1:

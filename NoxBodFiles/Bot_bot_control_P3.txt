@@ -1,0 +1,375 @@
+from pyautogui import *
+import pyautogui
+import os
+import time
+import keyboard
+import random
+import win32api, win32con
+import win32gui
+from datetime import datetime, timedelta
+
+#need pip install opencv_python
+
+######CONSTANTS######
+directory = 'C:/Users/Jason/PycharmProjects/BodBot/'
+arrowimg = 'uoarrow.png' #arrow png
+uo2img = 'uo2.png'
+accountimg = 'accountname.png'
+passwordimg = 'password.png'
+shardimg = 'shard.png'
+#characterimg = 'character.png'
+characterimg = 'characterselect.png'
+characterarrowimg= 'characterarrow.png'
+agents = 'REagents.png'
+vendorsell = 'vendorsell.png'
+enable = 'agentenable.png'
+
+offset = 165 #amount to offset mouse from character 2 to select 1 or 3 might have to change this
+
+account = ['account 1', account 2', 'account 3']
+password = ['password 1 ', 'password 2','password 3']
+Bodder = [[True, False, True, True, True, True, False],[True, True, True, False, True, True, True],[True, True, False, False, True, True, True]]
+
+timefile = directory + 'MastBod'
+alphatime = 5
+
+
+def initialize(): #run once per computer or when you make a new bodder
+    resetrazor()
+    for i in range(3): #three accounts
+        for y in range(7): # 7 characters 0-6
+            print('initializing: ' + account[i] + ' Character ' + str(y))
+            if Bodder[i][y]:
+                charactertimefile = timefile + str(account[i]) + str(y) + ".txt"
+                f = open(charactertimefile, 'w')
+                x = datetime.now()- timedelta(hours=8)
+                print('setting last bod time to : ' + str(x))
+                f.write(str(x))
+                f.close()
+                time.sleep(3)
+
+
+
+
+def webhook(msg):
+    from discord_msg_lite import Discord_msg
+    URI = 'https://discordapp.com/api/webhooks/654131394854781018/KySfeUnLjoFmqfmf154_1V22nxkzGnDmOP6-j8Kj__Ei8boMeHwzir6irC57rIY65_6q'
+    dmsg = Discord_msg(URI)
+    dmsg.send(msg)
+
+
+def OpenFile():
+    os.startfile("C:/Program Files (x86)/UOForever/UO/ClassicUO/ClassicUO.exe")
+    for x in range(1,10):
+       time.sleep(1)
+       print(x)
+
+def CloseFile():
+    try:
+        os.system('TASKKILL /F /IM ClassicUO.exe')
+    except Exception:
+        print('kill file failed')
+
+def click(x,y):
+    print(x)
+    print(y)
+    win32api.SetCursorPos((x,y))
+    time.sleep(1)
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,0,0)
+    time.sleep(0.1)
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,0,0)
+
+def clickimgOLD(img): #keeping this for record but not used anymore.
+    imagetoclick = directory + img
+    pr
+    int(imagetoclick)
+    location = None
+    while location == None:
+        try:
+            location = pyautogui.locateOnScreen(imagetoclick, grayscale='true', confidence=0.9)
+        except Exception as e:
+            print(e)
+    time.sleep(0.5)
+    pyautogui.click(location)
+    time.sleep(1)
+    return
+
+def clickimg(img):
+    imagetoclick = directory + img
+    print(imagetoclick)
+    for number in range (15):
+        print('try to click ' + str(number))
+        if pyautogui.locateOnScreen(imagetoclick, grayscale='true', confidence=0.9):
+            location = pyautogui.locateOnScreen(imagetoclick, grayscale='true', confidence=0.9)
+            time.sleep(0.5)
+            pyautogui.click(location)
+            time.sleep(1)
+            return
+        if number > 9:
+            print("timed out and giving up to restart")
+            main()
+        time.sleep(1)
+
+
+
+
+
+
+def clickimg2(img):
+    imagetoclick = directory + img
+
+    print(imagetoclick)
+    while True:
+        if pyautogui.locateOnScreen(imagetoclick, grayscale='true', confidence=0.9) is not None:
+            x = pyautogui.locateOnScreen(imagetoclick, grayscale='true', confidence=0.9)
+            time.sleep(0.75)
+            pyautogui.click(x)
+            print(x)
+            time.sleep(1)
+            return
+        time.sleep(0.5)
+
+def login(account, password, character):
+    resetrazor()
+    OpenFile() #open uo
+
+    if focuswindow("enhanced", 1100, 500, 700, 450) == True: #added this 2021-07-01 to move razor out of the way first
+        print("couldnt find UO window restarting loop")
+        time.sleep(1)
+    else:
+        print("RE Login Failed restarting mainloop")
+        webhook("RE Login Failed restarting mainloop")
+        CloseFile()
+        main()
+    if focuswindow("classicuo", -10, 0 , 500, 500) == False:
+        print("couldnt find UO window restarting loop")
+        main()
+    time.sleep(1)
+    clickimg(accountimg)
+    pyautogui.write(account, interval=0.05)
+    time.sleep(2)
+    clickimg(passwordimg)
+    pyautogui.write(password, interval=0.05)
+    keyboard.press('enter')
+    time.sleep(2)
+    clickimg(shardimg)
+
+   # this enter messes up nightbot but is required for hte other two accounts
+    # consider adding an if statement to look for shard image and click it if it sees it
+    # could be 2nd character on account. Need an error trap here to check if its right likely first character on account
+    # neds the enter but second doesnt.
+
+    if checkimg(shardimg): #see if shard image is still on screen before hitting enter some times 2x click required
+        keyboard.press('enter')
+
+    time.sleep(1)
+    choosecharacter(character)
+    keyboard.press('enter')
+    time.sleep(14)
+    if focuswindow("enhanced", 1100, 500, 700, 450) == True:
+        print("couldnt find UO window restarting loop")
+        time.sleep(1)
+        startsellagent()
+    else:
+        print("RE Login Failed restarting mainloop")
+        webhook("RE Login Failed restarting mainloop")
+        CloseFile()
+
+        main()
+    temptimer = 0
+    while True:
+        if readfromrazor("done"): #checks to see if razor finished
+            CloseFile()
+            print("Account " + str(account) + " Character " + str(character) + " finished succesfully closing window")
+            webhook("pycharm: Account " + str(account) + " Character " + str(character) + " finished succesfully closing window")
+            writetime(account, character)
+            main()
+        else:
+            temptimer = temptimer + 1
+            time.sleep(30)
+            if temptimer > 20:
+                print("Account " + str(account) + " Character " + str(character) + " RE timed out trying to get bods")
+                webhook("pycharm: Account " + str(account) + " Character " + str(character) + " RE timed out trying to get bods")
+                CloseFile()
+                main()
+
+
+def checkimg(image): #checks to see if an image is on the screen. Returns true if it is false if it isnt
+    print("checking to see if I can find " + image)
+    if pyautogui.locateOnScreen(image, grayscale='true', confidence=0.9):
+        return True
+    else:
+        return False
+
+
+def choosecharacter(number):
+    print("Marker1")
+    imagetoclick = directory + characterimg
+    print(imagetoclick)
+    location = None
+    for tempcounter in range(15):
+        time.sleep(1)
+        print("Marker2")
+        if pyautogui.locateOnScreen(imagetoclick, grayscale='true', confidence=0.9):
+            print("Marker3")
+            location = pyautogui.locateOnScreen(imagetoclick, grayscale='true', confidence=0.9)
+            s = pyautogui.center(location)
+            d = list(s)
+            time.sleep(2)
+            if number == 0:
+                print("trying to click first character")
+                click(d[0], d[1]-260)
+            elif number == 1:
+                print("trying to click second character")
+                click(d[0], d[1]-220)
+            elif number == 2:
+                print("trying to click third character")
+                click(d[0], d[1]-180)
+            elif number == 3:
+                print("trying to click fourth character")
+                click(d[0], d[1]-140)
+            elif number == 4:
+                print("trying to click fifth character")
+                click(d[0], d[1] - 100)
+
+            elif number == 5:
+                print("trying to click dix character")
+                click(d[0], d[1] - 60)
+
+            elif number == 6:
+                print("trying to click dix character")
+                click(d[0], d[1] - 20)
+            time.sleep(3)
+
+
+            return
+        tempcounter = tempcounter + 1
+        time.sleep(1)
+        if tempcounter > 9:
+            print("timed out on character select screen")
+            main()
+
+
+def movemouse(img):
+    imagetoclick = directory + img
+    print(imagetoclick)
+    k = pyautogui.locateOnScreen(imagetoclick, grayscale='true', confidence = 0.9)
+    s = pyautogui.center(k)
+    d = list(s)
+    print(d[1])
+    pyautogui.moveTo(d[0], d[1], duration=1)
+    #d[1] = d[1] - 100
+    #pyautogui.moveTo(d[0], d[1], duration=1)
+    #d[1] = d[1] + (46*2)
+    #print(d[1])
+    #pyautogui.moveTo(d[0], d[1], duration=1)
+
+
+
+def windowlister(hwnd, top_windows):
+    top_windows.append((hwnd, win32gui.GetWindowText(hwnd)))
+
+def focuswindow(findwindow ,x,y , xsize, ysize): #send lower case string
+    results = []
+    top_windows = []
+    win32gui.EnumWindows(windowlister, top_windows)
+    for i in top_windows:
+        print(i)
+        if findwindow in i[1].lower():
+            print(i)
+            win32gui.ShowWindow(i[0], 5)
+            #win32gui.SetForegroundWindow(i[0])
+            win32gui.MoveWindow(i[0], x, y, xsize, ysize, True)
+            return True
+    return False
+
+def writetime(account, character):
+    charactertimefile = timefile + str(account) + str(character) + ".txt"
+    f = open(charactertimefile, 'w')
+    x = datetime.now()
+    f.write(str(x))
+    f.close()
+
+def readfromrazor(status):
+    f = open('C:/Users/Jason/PycharmProjects/BodBot/MastBodStatus.txt', 'r')
+    x = f.read()
+    print('pycharm: reading RE macro status: ' +  x)
+    webhook('pycharm: reading RE macro status: ' + x)
+    f.close()
+    if status == x:
+        return True
+    else:
+        return False
+
+
+
+
+
+def resetrazor():
+    f = open('C:/Users/Jason/PycharmProjects/BodBot/MastBodStatus.txt', 'w')
+    f.write("")
+    f.close()
+    time.sleep(1)
+
+
+def readtime(i, character):
+    charactertimefile = timefile + str(account[i]) + str(character) + ".txt"
+    f = open(charactertimefile, 'r')
+    txtMsg = f.read()
+    timeLeft = datetime.now() - datetime.strptime(txtMsg, "%Y-%m-%d %H:%M:%S.%f")
+
+    if timeLeft > timedelta(hours=alphatime):
+        print("Account " + str(account[i]) + " Character " +str(character) + " ellapsed time: " + str(timeLeft)+ " logging in")
+        webhook("pycharm: Account " + str(account[i]) + " Character " +str(character) + " ellapsed time: " + str(timeLeft)+ " logging in")
+        #writetime()
+        f.close()
+        return True
+    else:
+        f.close()
+        return False
+
+
+def startsellagent():
+    time.sleep(1)
+    clickimg(agents)
+    clickimg(vendorsell)
+    clickimg(enable)
+    time.sleep(1)
+
+def Masterloop():
+    for i in range(3):
+        for y in range(7):  #characters 0-6 (seven in total)
+            print('Checking account: ' + account[i] + ' Character ' + str(y))
+            if Bodder[i][y]:  # bodder is two dim array that holds if each character is a boder or not
+                if readtime(i, y):
+                    login(account[i], password[i], y)
+                    time.sleep(10)
+
+
+
+def main():
+    while True:
+        Masterloop()
+
+        charactertimefile2 = timefile + str(account[0]) + str(0) + ".txt"
+        f = open(charactertimefile2, 'r')
+        txtMsg = f.read()
+        timeLeft2 = datetime.now() - datetime.strptime(txtMsg, "%Y-%m-%d %H:%M:%S.%f")
+        f.close()
+
+        print("Masterloop run - pausing for 10min - " + str(timeLeft2) + " has passed" )
+        webhook("pycharm: Masterloop run - pausing for 10min -  " + str(timeLeft2) + " has passed" )
+        time.sleep(600)
+
+
+main()
+#initialize()
+
+#debug headers
+#clickimgtest(accountimg)
+#choosecharacter(6)
+
+
+
+
+

@@ -1,0 +1,493 @@
+small  exceptional agapite ingots 10
+small  exceptional 10spear: 0
+small  exceptional 15spear: 0
+small  exceptional 20spear: 0
+small  exceptional 10dagger: 0
+small  exceptional 15dagger: 0
+small  exceptional 20dagger: 0
+small  exceptional 10kryss: 0
+small  exceptional 15kryss: 0
+small  exceptional 20kryss: 0
+small  exceptional 10battle axe: 0
+small  exceptional 15battle axe: 0
+small  exceptional 20battle axe: 0
+small  exceptional 10double axe: 0
+small  exceptional 15double axe: 0
+small  exceptional 20double axe: 0
+small  exceptional 10large battle axe: 0
+small  exceptional 15large battle axe: 0
+small  exceptional 20large battle axe: 0
+small  exceptional 10broadsword: 0
+small  exceptional 15broadsword: 0
+small  exceptional 20broadsword: 0
+small  exceptional 10war axe: 0
+small  exceptional 15war axe: 0
+small  exceptional 20war axe: 0
+small  exceptional 10two handed axe: 0
+small  exceptional 15two handed axe: 0
+small  exceptional 20two handed axe: 0
+small  exceptional 10war hammer: 0
+small  exceptional 15war hammer: 0
+small  exceptional 20war hammer: 0
+small  exceptional 10axe: 0
+small  exceptional 15axe: 0
+small  exceptional 20axe: 0
+small  exceptional 10war mace: 0
+small  exceptional 15war mace: 0
+small  exceptional 20war mace: 0
+small  exceptional 10hammer pick: 0
+small  exceptional 15hammer pick: 0
+small  exceptional 20hammer pick: 0
+small  exceptional 10katana: 0
+small  exceptional 15katana: 0
+small  exceptional 20katana: 0
+small  exceptional 10longsword: 0
+small  exceptional 15longsword: 0
+small  exceptional 20longsword: 0
+small  exceptional 10halberd: 0
+small  exceptional 15halberd: 0
+small  exceptional 20halberd: 0
+small  exceptional 10maul: 0
+small  exceptional 15maul: 0
+small  exceptional 20maul: 0
+small  exceptional 10mace: 0
+small  exceptional 15mace: 0
+small  exceptional 20mace: 0
+small  exceptional 10bardiche: 0
+small  exceptional 15bardiche: 0
+small  exceptional 20bardiche: 0
+small  exceptional 10executioner's axe: 0
+small  exceptional 15executioner's axe: 0
+small  exceptional 20executioner's axe: 0
+small  exceptional 10cutlass: 0
+small  exceptional 15cutlass: 0
+small  exceptional 20cutlass: 0
+small  exceptional 10scimitar: 0
+small  exceptional 15scimitar: 0
+small  exceptional 20scimitar: 0
+small  exceptional 10viking sword: 0
+small  exceptional 15viking sword: 0
+small  exceptional 20viking sword: 0
+small  exceptional 10war fork: 0
+small  exceptional 15war fork: 0
+small  exceptional 20war fork: 0
+small  exceptional 10short spear: 0
+small  exceptional 15short spear: 0
+small  exceptional 20short spear: 0
+small  exceptional 10platemail gorget: 0
+small  exceptional 15platemail gorget: 0
+small  exceptional 20platemail gorget: 0
+small  exceptional 10platemail tunic: 0
+small  exceptional 15platemail tunic: 0
+small  exceptional 20platemail tunic: 0
+small  exceptional 10bascinet: 0
+small  exceptional 15bascinet: 0
+small  exceptional 20bascinet: 0
+small  exceptional 10heater shield: 0
+small  exceptional 15heater shield: 0
+small  exceptional 20heater shield: 0
+small  exceptional shadow iron ingots 10metal shield: 0
+small  exceptional shadow iron ingots 15metal shield: 0
+small  exceptional shadow iron ingots 20metal shield: 0
+small  exceptional shadow iron ingots 10female plate: 0
+small  exceptional shadow iron ingots 15female plate: 0
+small  exceptional shadow iron ingots 20female plate: 0
+small  exceptional dull copper ingots 10metal kite shield: 0
+small  exceptional dull copper ingots 15metal kite shield: 0
+small  exceptional dull copper ingots 20metal kite shield: 0
+small  exceptional copper ingots 10metal kite shield: 0
+small  exceptional copper ingots 15metal kite shield: 0
+small  exceptional copper ingots 20metal kite shield: 0
+small  exceptional shadow iron ingots 10metal kite shield: 0
+small  exceptional shadow iron ingots 15metal kite shield: 0
+small  exceptional shadow iron ingots 20metal kite shield: 0
+small  exceptional bronze ingots 10metal kite shield: 0
+small  exceptional bronze ingots 15metal kite shield: 0
+small  exceptional bronze ingots 20metal kite shield: 0
+small  exceptional dull copper ingots 10tear kite shield: 0
+small  exceptional dull copper ingots 15tear kite shield: 0
+small  exceptional dull copper ingots 20tear kite shield: 0
+small  exceptional shadow iron ingots 10tear kite shield: 0
+small  exceptional shadow iron ingots 15tear kite shield: 0
+small  exceptional shadow iron ingots 20tear kite shield: 0
+small  exceptional copper ingots 10tear kite shield: 0
+small  exceptional copper ingots 15tear kite shield: 0
+small  exceptional copper ingots 20tear kite shield: 0
+small  exceptional bronze ingots 10tear kite shield: 0
+small  exceptional bronze ingots 15tear kite shield: 0
+small  exceptional bronze ingots 20tear kite shield: 0
+small  exceptional dull copper ingots 10bronze shield: 0
+small  exceptional dull copper ingots 15bronze shield: 0
+small  exceptional dull copper ingots 20bronze shield: 0
+small  exceptional shadow iron ingots 10bronze shield: 0
+small  exceptional shadow iron ingots 15bronze shield: 0
+small  exceptional shadow iron ingots 20bronze shield: 0
+small  exceptional copper ingots 10bronze shield: 0
+small  exceptional copper ingots 15bronze shield: 0
+small  exceptional copper ingots 20bronze shield: 0
+small  exceptional bronze ingots 10bronze shield: 0
+small  exceptional bronze ingots 15bronze shield: 0
+small  exceptional bronze ingots 20bronze shield: 0
+small  exceptional 10ringmail sleeves: 0
+small  exceptional 15ringmail sleeves: 0
+small  exceptional 20ringmail sleeves: 0
+small  exceptional 10ringmail leggings: 0
+small  exceptional 15ringmail leggings: 0
+small  exceptional 20ringmail leggings: 0
+small  exceptional bronze ingots 10helmet: 0
+small  exceptional bronze ingots 15helmet: 0
+small  exceptional bronze ingots 20helmet: 0
+small  exceptional copper ingots 10helmet: 0
+small  exceptional copper ingots 15helmet: 0
+small  exceptional copper ingots 20helmet: 0
+small  exceptional shadow iron ingots 10helmet: 0
+small  exceptional shadow iron ingots 15helmet: 0
+small  exceptional shadow iron ingots 20helmet: 0
+small  exceptional dull copper ingots 10helmet: 0
+small  exceptional dull copper ingots 15helmet: 0
+small  exceptional dull copper ingots 20helmet: 0
+small  exceptional 10chainmail leggings: 0
+small  exceptional 15chainmail leggings: 0
+small  exceptional 20chainmail leggings: 0
+large  exceptional 10broadsword: 0cutlass: 0katana: 0longsword: 0scimitar: 0viking sword: 0
+large  exceptional 15broadsword: 0cutlass: 0katana: 0longsword: 0scimitar: 0viking sword: 0
+large  exceptional 20broadsword: 0cutlass: 0katana: 0longsword: 0scimitar: 0viking sword: 0
+large  exceptional 10chainmail coif: 0chainmail leggings: 0chainmail tunic: 0
+large  exceptional 15chainmail coif: 0chainmail leggings: 0chainmail tunic: 0
+large  exceptional 20chainmail coif: 0chainmail leggings: 0chainmail tunic: 0
+large  exceptional 10axe: 0battle axe: 0double axe: 0executioner's axe: 0large battle axe: 0two handed axe: 0
+large  exceptional 15axe: 0battle axe: 0double axe: 0executioner's axe: 0large battle axe: 0two handed axe: 0
+large  exceptional 20axe: 0battle axe: 0double axe: 0executioner's axe: 0large battle axe: 0two handed axe: 0
+large  exceptional 10dagger: 0short spear: 0spear: 0war fork: 0kryss: 0
+large  exceptional 15dagger: 0short spear: 0spear: 0war fork: 0kryss: 0
+large  exceptional 20dagger: 0short spear: 0spear: 0war fork: 0kryss: 0
+large  exceptional verite ingots 15ringmail gloves: 0ringmail tunic: 0ringmail sleeves: 0ringmail leggings: 0
+large  exceptional 10bardiche: 0halberd: 0
+large  exceptional 15bardiche: 0halberd: 0
+large  exceptional 20bardiche: 0halberd: 0
+large  exceptional 10war axe: 0hammer pick: 0mace: 0maul: 0war hammer: 0war mace: 0
+large  exceptional 15war axe: 0hammer pick: 0mace: 0maul: 0war hammer: 0war mace: 0
+large  exceptional 20war axe: 0hammer pick: 0mace: 0maul: 0war hammer: 0war mace: 0
+large  exceptional dull copper ingots 10chainmail coif: 0chainmail leggings: 0chainmail tunic: 0
+large  exceptional dull copper ingots 15chainmail coif: 0chainmail leggings: 0chainmail tunic: 0
+large  exceptional dull copper ingots 20chainmail coif: 0chainmail leggings: 0chainmail tunic: 0
+small  exceptional dull copper ingots 20platemail tunic: 0
+small  exceptional dull copper ingots 20platemail gorget: 0
+small  exceptional dull copper ingots 10ringmail gloves: 0
+small  exceptional dull copper ingots 20ringmail gloves: 0
+small  exceptional dull copper ingots 10chainmail coif: 0
+small  exceptional dull copper ingots 15chainmail coif: 0
+small  exceptional dull copper ingots 20chainmail coif: 0
+small  exceptional shadow iron ingots 10chainmail leggings: 0
+small  exceptional shadow iron ingots 15chainmail leggings: 0
+small  exceptional 10ringmail gloves: 0
+small  exceptional 15ringmail gloves: 0
+small  exceptional 20ringmail gloves: 0
+small  exceptional shadow iron ingots 15platemail gorget: 0
+small  exceptional shadow iron ingots 10platemail gorget: 0
+small  exceptional dull copper ingots 10chainmail tunic: 0
+small  exceptional dull copper ingots 15chainmail tunic: 0
+small  exceptional dull copper ingots 20chainmail tunic: 0
+small  exceptional dull copper ingots 10ringmail leggings: 0
+small  exceptional dull copper ingots 20ringmail leggings: 0
+small  exceptional copper ingots 10ringmail sleeves: 0
+small  exceptional copper ingots 15ringmail sleeves: 0
+small  exceptional copper ingots 20ringmail sleeves: 0small  exceptional 10norse helm: 0
+small  exceptional bronze ingots 10ringmail gloves: 0
+small  exceptional dull copper ingots 20plate helm: 0
+small  exceptional copper ingots 10ringmail tunic: 0
+small  exceptional copper ingots 15ringmail tunic: 0
+small  exceptional copper ingots 20ringmail tunic: 0
+small  exceptional copper ingots 10ringmail sleeves: 0
+small  exceptional copper ingots 15ringmail sleeves: 0
+small  exceptional copper ingots 20ringmail sleeves: 0
+large bulk orderamount to make: 10ringmail gloves: 0ringmail tunic: 0ringmail sleeves: 0ringmail leggings: 0
+small  exceptional 10helmet: 0
+small  exceptional 15helmet: 0
+small  exceptional 20helmet: 0
+small  exceptional bronze ingots 15chainmail coif: 0
+small  exceptional bronze ingots 10chainmail coif: 0
+small  exceptional shadow iron ingots 10buckler : 0
+large  exceptional 10ringmail gloves: 0ringmail tunic: 0ringmail sleeves: 0ringmail leggings: 0
+large  exceptional 15ringmail gloves: 0ringmail tunic: 0ringmail sleeves: 0ringmail leggings: 0
+large  exceptional 20ringmail gloves: 0ringmail tunic: 0ringmail sleeves: 0ringmail leggings: 0
+large bulk orderamount to make: 10war axe: 0hammer pick: 0mace: 0maul: 0war hammer: 0war mace: 0
+large bulk orderamount to make: 15war axe: 0hammer pick: 0mace: 0maul: 0war hammer: 0war mace: 0
+large bulk orderamount to make: 20war axe: 0hammer pick: 0mace: 0maul: 0war hammer: 0war mace: 0
+small  exceptional gold ingots 20norse helm: 0
+small  exceptional gold ingots 10norse helm: 0
+small  exceptional 10plate helm: 0
+small  exceptional 15plate helm: 0
+small  exceptional 20plate helm: 0
+small  exceptional dull copper ingots 20platemail legs: 0
+small  exceptional dull copper ingots 20platemail gloves: 0
+large  exceptional shadow iron ingots 10platemail arms: 0platemail legs: 0plate helm: 0platemail gorget: 0platemail gloves: 0platemail tunic: 0
+large  exceptional shadow iron ingots 15platemail arms: 0platemail legs: 0plate helm: 0platemail gorget: 0platemail gloves: 0platemail tunic: 0
+large  exceptional shadow iron ingots 20platemail arms: 0platemail legs: 0plate helm: 0platemail gorget: 0platemail gloves: 0platemail tunic: 0
+small  exceptional bronze ingots 15ringmail gloves: 0
+small  exceptional bronze ingots 10ringmail gloves: 0
+small  exceptional 10chainmail tunic: 0
+small  exceptional 15chainmail tunic: 0
+small  exceptional 20chainmail tunic: 0
+small  exceptional dull copper ingots 20ringmail tunic: 0
+small  exceptional shadow iron ingots 10ringmail tunic: 0
+small  exceptional 10chainmail coif: 0
+small  exceptional 15chainmail coif: 0
+small  exceptional 20chainmail coif: 0
+small  exceptional copper ingots 20ringmail gloves: 0
+small  exceptional shadow iron ingots 10norse helm: 0
+small  exceptional shadow iron ingots 15norse helm: 0
+small  exceptional shadow iron ingots 20norse helm: 0
+large bulk orderamount to make: 10bardiche: 0halberd: 0
+large bulk orderamount to make: 15bardiche: 0halberd: 0
+large bulk orderamount to make: 20bardiche: 0halberd: 0
+small  exceptional bronze ingots 10buckler : 0
+small  exceptional bronze ingots 15buckler : 0
+small  exceptional bronze ingots 20buckler : 0
+small  exceptional dull copper ingots 10heater shield: 0
+small  exceptional dull copper ingots 15heater shield: 0
+small  exceptional dull copper ingots 20heater shield: 0
+small  exceptional agapite ingots 10bascinet: 0
+small  exceptional 10close helmet: 0
+small  exceptional 15close helmet: 0
+small  exceptional 20close helmet: 0
+small  exceptional dull copper ingots 10ringmail sleeves: 0
+small  exceptional shadow iron ingots 10chainmail tunic: 0
+small  exceptional gold ingots 20close helmet: 0
+small  exceptional 10norse helm: 0
+small  exceptional 15norse helm: 0
+small  exceptional 20norse helm: 0
+small  exceptional shadow iron ingots 10bascinet: 0
+small  exceptional shadow iron ingots 15bascinet: 0
+small  exceptional shadow iron ingots 20bascinet: 0
+small  exceptional 10metal shield: 0
+small  exceptional 15metal shield: 0
+small  exceptional 20metal shield: 0
+small  exceptional dull copper ingots 10close helmet: 0
+small  exceptional dull copper ingots 15close helmet: 0
+small  exceptional dull copper ingots 20close helmet: 0
+small  exceptional 10norse helm: 0
+small  exceptional 15norse helm: 0
+small  exceptional 20norse helm: 0
+large bulk orderamount to make: 10axe: 0battle axe: 0double axe: 0executioner's axe: 0large battle axe: 0two handed axe: 0
+large bulk orderamount to make: 15axe: 0battle axe: 0double axe: 0executioner's axe: 0large battle axe: 0two handed axe: 0
+large bulk orderamount to make: 20axe: 0battle axe: 0double axe: 0executioner's axe: 0large battle axe: 0two handed axe: 0
+small  exceptional dull copper ingots 10metal shield: 0
+small  exceptional dull copper ingots 15metal shield: 0
+small  exceptional dull copper ingots 20metal shield: 0
+small  exceptional shadow iron ingots 10norse helm: 0
+small  exceptional shadow iron ingots 15norse helm: 0
+small  exceptional shadow iron ingots 20norse helm: 0
+large bulk orderamount to make: 10dagger: 0short spear: 0spear: 0war fork: 0kryss: 0
+small  exceptional gold ingots 10metal shield: 0
+small  exceptional gold ingots 10metal shield: 0
+small  exceptional shadow iron ingots 10chainmail coif: 0
+small  exceptional copper ingots 15norse helm: 0
+small  exceptional shadow iron ingots 10ringmail leggings: 0
+small  exceptional bronze ingots 10metal shield: 0
+small  exceptional bronze ingots 15metal shield: 0
+small  exceptional bronze ingots 20metal shield: 0
+small  exceptional dull copper ingots 20platemail arms: 0
+small  exceptional dull copper ingots 20female plate: 0
+small  exceptional dull copper ingots 10buckler : 0
+small  exceptional dull copper ingots 15buckler : 0
+small  exceptional dull copper ingots 20buckler : 0
+small  exceptional shadow iron ingots 20ringmail gloves: 0
+small  exceptional shadow iron ingots 20buckler : 0
+large  exceptional dull copper ingots 20platemail arms: 0platemail legs: 0plate helm: 0platemail gorget: 0platemail gloves: 0platemail tunic: 0
+large  exceptional shadow iron ingots 10chainmail coif: 0chainmail leggings: 0chainmail tunic: 0
+small  exceptional shadow iron ingots 10ringmail sleeves: 0
+small  exceptional copper ingots 10female plate: 0
+small  exceptional bronze ingots 10chainmail tunic: 0
+large bulk orderamount to make: 10dagger: 0short spear: 0spear: 0war fork: 0kryss: 0
+large bulk orderamount to make: 15dagger: 0short spear: 0spear: 0war fork: 0kryss: 0
+large bulk orderamount to make: 20dagger: 0short spear: 0spear: 0war fork: 0kryss: 0
+small  exceptional copper ingots 10close helmet: 0
+small  exceptional copper ingots 15close helmet: 0
+small  exceptional copper ingots 20close helmet: 0
+small  exceptional bronze ingots 15ringmail sleeves: 0
+large bulk orderamount to make: 10broadsword: 0cutlass: 0katana: 0longsword: 0scimitar: 0viking sword: 0
+large bulk orderamount to make: 15broadsword: 0cutlass: 0katana: 0longsword: 0scimitar: 0viking sword: 0
+large bulk orderamount to make: 20broadsword: 0cutlass: 0katana: 0longsword: 0scimitar: 0viking sword: 0
+small  exceptional 10buckler : 0
+small  exceptional 15buckler : 0
+small  exceptional 20buckler : 0
+small  exceptional 10platemail arms: 0
+small  exceptional 15platemail arms: 0
+small  exceptional 20platemail arms: 0
+small  exceptional 10metal kite shield: 0
+small  exceptional 15metal kite shield: 0
+small  exceptional 20metal kite shield: 0
+small  exceptional 10platemail legs: 0
+small  exceptional 15platemail legs: 0
+small  exceptional 20platemail legs: 0
+small  exceptional shadow iron ingots 20close helmet: 0
+large  made with dull copper ingots 20ringmail gloves: 0ringmail tunic: 0ringmail sleeves: 0ringmail leggings: 0
+large  exceptional shadow iron ingots 15chainmail coif: 0chainmail leggings: 0chainmail tunic: 0
+large  made with bronze ingots 10chainmail coif: 0chainmail leggings: 0chainmail tunic: 0
+small  exceptional bronze ingots 10heater shield: 0
+small  exceptional dull copper ingots 15norse helm: 0
+small  exceptional dull copper ingots 10bascinet: 0
+small  exceptional copper ingots 10metal shield: 0
+small  exceptional 20tear kite shield: 0
+small  exceptional copper ingots 15heater shield: 0
+small  exceptional 15platemail legs: 0
+small  exceptional 20platemail arms: 0
+large  exceptional 20platemail arms: 0platemail legs: 0plate helm: 0platemail gorget: 0platemail gloves: 0platemail tunic: 0
+large  exceptional 20platemail arms: 0platemail legs: 0plate helm: 0platemail gorget: 0platemail gloves: 0platemail tunic: 0
+large  exceptional gold ingots 15chainmail coif: 0chainmail leggings: 0chainmail tunic: 0
+small  exceptional shadow iron ingots 10plate helm: 0
+small  exceptional bronze ingots 20bascinet: 0
+large  exceptional copper ingots 15ringmail gloves: 0ringmail tunic: 0ringmail sleeves: 0ringmail leggings: 0
+small  exceptional 10platemail legs: 0
+small  exceptional 20tear kite shield: 0
+large  made with agapite ingots 15ringmail gloves: 0ringmail tunic: 0ringmail sleeves: 0ringmail leggings: 0
+small  exceptional bronze ingots 15close helmet: 0
+small bulk orderamount to make: 20war axe: 0
+small  exceptional copper ingots 20chainmail coif: 0
+small  exceptional shadow iron ingots 15plate helm: 0
+small  exceptional shadow iron ingots 10close helmet: 0
+small  exceptional copper ingots 20heater shield: 0
+small  exceptional gold ingots 20female plate: 0
+small  exceptional 15ringmail tunic: 0
+large  exceptional 15platemail arms: 0platemail legs: 0plate helm: 0platemail gorget: 0platemail gloves: 0platemail tunic: 0
+small  exceptional 10ringmail tunic: 0
+small  exceptional shadow iron ingots 20ringmail leggings: 0
+small  exceptional gold ingots 20bronze shield: 0
+small  exceptional copper ingots 20chainmail tunic: 0
+
+large  exceptional agapite ingots 10ringmail gloves: 0ringmail tunic: 0ringmail sleeves: 0ringmail leggings: 0
+small  exceptional 10bronze shield: 0
+large  exceptional bronze ingots 10chainmail coif: 0chainmail leggings: 0chainmail tunic: 0
+small  exceptional gold ingots 20helmet: 0
+large  exceptional 10platemail arms: 0platemail legs: 0plate helm: 0platemail gorget: 0platemail gloves: 0platemail tunic: 0
+small  exceptional dull copper ingots 20norse helm: 0
+small  exceptional 20female plate: 0
+small  exceptional 15bronze shield: 0
+small  exceptional dull copper ingots 20ringmail sleeves: 0
+large  exceptional dull copper ingots 10ringmail gloves: 0ringmail tunic: 0ringmail sleeves: 0ringmail leggings: 0
+large  exceptional copper ingots 10ringmail gloves: 0ringmail tunic: 0ringmail sleeves: 0ringmail leggings: 0
+small  exceptional gold ingots 20ringmail leggings: 0
+small  exceptional shadow iron ingots 20ringmail tunic: 0
+large  exceptional 10platemail arms: 0platemail legs: 0plate helm: 0platemail gorget: 0platemail gloves: 0platemail tunic: 0
+small  exceptional 20platemail gloves: 0
+small  exceptional dull copper ingots 20ringmail sleeves: 0
+small  exceptional 20bronze shield: 0
+
+small  exceptional 20bronze shield: 0
+small  exceptional dull copper ingots 20chainmail leggings: 0
+small  exceptional 15female plate: 0
+small  exceptional bronze ingots 10female plate: 0
+large  made with copper ingots 20ringmail gloves: 0ringmail tunic: 0ringmail sleeves: 0ringmail leggings: 0
+small  exceptional agapite ingots 10metal shield: 0
+small  exceptional shadow iron ingots 20ringmail sleeves: 0
+small  exceptional shadow iron ingots 10platemail tunic: 0
+small  exceptional bronze ingots 20close helmet: 0
+small  exceptional dull copper ingots 15bascinet: 0
+small  exceptional gold ingots 20metal kite shield: 0
+small  exceptional copper ingots 10bascinet: 0
+small  exceptional shadow iron ingots 15close helmet: 0
+small  exceptional shadow iron ingots 15buckler : 0
+small  exceptional copper ingots 15ringmail leggings: 0
+small  exceptional gold ingots 20metal shield: 0
+small  exceptional gold ingots 10female plate: 0
+small  exceptional gold ingots 20ringmail tunic: 0
+small  exceptional shadow iron ingots 15platemail tunic: 0
+small  exceptional shadow iron ingots 20heater shield: 0
+small  exceptional bronze ingots 20heater shield: 0
+small  exceptional gold ingots 20tear kite shield: 0
+small  exceptional copper ingots 10chainmail tunic: 0
+large bulk orderamount to make: 15platemail arms: 0platemail legs: 0plate helm: 0platemail gorget: 0platemail gloves: 0platemail tunic: 0
+small bulk orderamount to make: 20platemail legs: 0
+small  exceptional copper ingots 15ringmail gloves: 0
+small  exceptional bronze ingots 15norse helm: 0
+small  exceptional copper ingots 20ringmail leggings: 0
+large bulk orderamount to make: 20platemail arms: 0platemail legs: 0plate helm: 0platemail gorget: 0platemail gloves: 0platemail tunic: 0
+small  exceptional 20ringmail tunic: 0
+small  exceptional shadow iron ingots 10platemail arms: 0
+small  exceptional 15platemail gloves: 0
+small bulk orderamount to make: 20cutlass: 0
+small  exceptional dull copper ingots 10ringmail tunic: 0
+large  made with dull copper ingots 10ringmail gloves: 0ringmail tunic: 0ringmail sleeves: 0ringmail leggings: 0
+small  exceptional dull copper ingots 20bascinet: 0
+small  exceptional bronze ingots 10ringmail sleeves: 0
+small  exceptional bronze ingots 10ringmail tunic: 0
+small  exceptional copper ingots 20metal shield: 0
+large  exceptional copper ingots 20chainmail coif: 0chainmail leggings: 0chainmail tunic: 0
+small  exceptional shadow iron ingots 10platemail legs: 0
+large  made with dull copper ingots 15chainmail coif: 0chainmail leggings: 0chainmail tunic: 0
+large  made with bronze ingots 15chainmail coif: 0chainmail leggings: 0chainmail tunic: 0
+large  exceptional dull copper ingots 20ringmail gloves: 0ringmail tunic: 0ringmail sleeves: 0ringmail leggings: 0
+small  exceptional shadow iron ingots 10heater shield: 0
+small  exceptional gold ingots 10tear kite shield: 0
+small  exceptional copper ingots 10norse helm: 0
+large  exceptional copper ingots 20ringmail gloves: 0ringmail tunic: 0ringmail sleeves: 0ringmail leggings: 0
+small  exceptional bronze ingots 15chainmail tunic: 0
+large  made with bronze ingots 10ringmail gloves: 0ringmail tunic: 0ringmail sleeves: 0ringmail leggings: 0
+large  exceptional shadow iron ingots 20ringmail gloves: 0ringmail tunic: 0ringmail sleeves: 0ringmail leggings: 0
+small  exceptional bronze ingots 15ringmail tunic: 0
+small bulk orderamount to make: 10war axe: 0
+small  exceptional agapite ingots 10bronze shield: 0
+small  exceptional bronze ingots 10norse helm: 0
+small bulk orderamount to make: 20halberd: 0
+small  exceptional 10platemail gloves: 0
+large  made with shadow iron ingots 15chainmail coif: 0chainmail leggings: 0chainmail tunic: 0
+small  exceptional copper ingots 10heater shield: 0
+small  exceptional dull copper ingots 15chainmail leggings: 0
+small  exceptional agapite ingots 10norse helm: 0
+small  exceptional copper ingots 15buckler : 0
+large bulk orderamount to make: 10chainmail coif: 0chainmail leggings: 0chainmail tunic: 0
+small bulk orderamount to make: 15platemail arms: 0
+small  exceptional copper ingots 20norse helm: 0
+small  exceptional dull copper ingots 15female plate: 0
+small  exceptional bronze ingots 10bascinet: 0
+small bulk orderamount to make: 15war axe: 0
+small  exceptional gold ingots 10heater shield: 0
+small  exceptional shadow iron ingots 15heater shield: 0
+small  exceptional copper ingots 20bascinet: 0
+small  exceptional copper ingots 20buckler : 0
+large bulk orderamount to make: 20ringmail gloves: 0ringmail tunic: 0ringmail sleeves: 0ringmail leggings: 0
+large  exceptional 20axe: 0battle axe: 0double axe: 0executioner's axe: 0large battle axe: 0two handed axe: 0
+small  exceptional shadow iron ingots 15close helmet: 0
+small  exceptional 10dagger: 0
+small  exceptional copper ingots 20ringmail leggings: 0
+small  exceptional dull copper ingots 20metal shield: 0
+small  exceptional 10platemail gloves: 0
+small  exceptional gold ingots 10metal kite shield: 0
+small  exceptional 10chainmail tunic: 0
+small  exceptional shadow iron ingots 15platemail legs: 0
+small  exceptional 20hammer pick: 0
+small  exceptional 20platemail arms: 0
+small  exceptional dull copper ingots 20helmet: 0
+small  exceptional 20war hammer: 0
+small  exceptional 20metal shield: 0
+small  exceptional 20halberd: 0
+small  exceptional 20platemail gloves: 0
+small  exceptional 10war axe: 0
+small  made with dull copper ingots 20ringmail gloves: 0
+small  made with bronze ingots 20buckler : 0
+large  exceptional gold ingots 20ringmail gloves: 0ringmail tunic: 0ringmail sleeves: 0ringmail leggings: 0
+small  exceptional dull copper ingots 10chainmail leggings: 0
+small  exceptional gold ingots 20heater shield: 0
+small  exceptional 15tear kite shield: 0
+small  made with gold ingots 20helmet: 0
+small bulk orderamount to make: 10scimitar: 0
+small  exceptional dull copper ingots 10norse helm: 0
+small  made with dull copper ingots 20platemail gloves: 0
+small  exceptional bronze ingots 20female plate: 0
+small  exceptional copper ingots 20chainmail leggings: 0
+small  exceptional bronze ingots 10close helmet: 0
+small bulk orderamount to make: 10bardiche: 0
+small  exceptional copper ingots 10ringmail gloves: 0
+large  made with dull copper ingots 20chainmail coif: 0chainmail leggings: 0chainmail tunic: 0
+small  exceptional copper ingots 20female plate: 0
+large  made with dull copper ingots 10chainmail coif: 0chainmail leggings: 0chainmail tunic: 0
+small  exceptional gold ingots 10bascinet: 0
+small  exceptional agapite ingots 10buckler : 0
+small  exceptional gold ingots 10buckler : 0
+small  exceptional shadow iron ingots 15chainmail tunic: 0
+small bulk orderamount to make: 20war hammer: 0
+small  exceptional bronze ingots 10chainmail leggings: 0
+small  exceptional gold ingots 10bronze shield: 0
+large  exceptional shadow iron ingots 10ringmail gloves: 0ringmail tunic: 0ringmail sleeves: 0ringmail leggings: 0
+small  exceptional bronze ingots 15female plate: 0

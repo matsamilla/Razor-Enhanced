@@ -1,7 +1,7 @@
 # Bandage Timer by Wardoc
 # Contributions by Matsamilla
 # I have this always running, start at login.
-# version 1.1 - If running RazorEnhanced 7.7.23 or greater use this now, or change line 13 to match
+# version 2.0 - If running RazorEnhanced 7.7.23 or greater use this now, or change line 13 to match
 
 # True for overhead Bandage Available message, false for in system messages
 overheadMessage = True
@@ -59,9 +59,9 @@ def WaitForBandagesToApply():
     return
 
 def worldSave():
-    if Journal.SearchByType('The world is saving, please wait.', 'Regular' ):
+    if Journal.SearchByType('The world is saving, please wait.', 'System' ):
         Misc.SendMessage('Pausing for world save', 33)
-        while not Journal.SearchByType('World save complete.', 'Regular'):
+        while not Journal.SearchByType('World save complete.', 'System'):
             Misc.Pause(1000)
         Misc.SendMessage('Continuing', 33)
         Journal.Clear()    

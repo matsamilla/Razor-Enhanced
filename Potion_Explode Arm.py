@@ -23,14 +23,9 @@ def potArmOrThrow():
     # starts charging pot 
     else:
         usePot()
-        Misc.Pause(120)
-        if Journal.Search('You should throw it now!'):
-            Player.HeadMessage(msgcolor,'Exp Pot Armed')
-            Timer.Create( 'ex' + Player.Name , 4500)
-            if cancelTarget:
-                Target.TargetExecute(fakeTarget)
-                Misc.Pause(100)
-                Target.SetLast(lastTarget)
+        Timer.Create( 'ex' + Player.Name , 4500)
+        if cancelTarget:
+            Target.Cancel()
     
 def usePot():
     if Misc.ShardName() == "Ultima Forever":

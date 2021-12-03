@@ -1,4 +1,5 @@
 # Runebook copy by Wardoctor. Upated by MatsaMilla
+# Last update: 12/3/21
 
 # If copying a locked down book, DO THIS BEFORE STARTING
 #   Mark a rune for a location close to runebook being copied
@@ -112,7 +113,7 @@ def CopyRunebook():
 
         runebookToCopy = Items.FindBySerial( runebookToCopy.Serial )
 
-        if runebookToCopy.RootContainer != Player.Serial:
+        if runebookToCopy.RootContainer != Player.Backpack.Serial:
             runebookMoveable = False
             recallRunebook = Target.PromptTarget( 'Select item to recall off of to return to runebook being copied' )
 

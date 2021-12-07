@@ -314,12 +314,12 @@ def ProvoEnemies():
             # Wait for the journal entry to appear
             Misc.Pause( journalEntryDelayMilliseconds )
 
-            if Journal.SearchByType( 'You must wait a few moments to use another skill.', 'Regular' ):
+            if Journal.SearchByType( 'You must wait a few moments to use another skill.', 'System' ):
                 # Something is on cooldown, nothing we can do
                 Player.HeadMessage( 55, 'Skill Timer, try again')
                 Journal.Clear()
                 return
-            elif Journal.SearchByType( 'What instrument shall you play?', 'Regular' ):
+            elif Journal.SearchByType( 'What instrument shall you play?', 'System' ):
                 instrument = FindInstrument( Player.Backpack )
                 if instrument == None:
                     Misc.SendMessage( 'No instrument to provo with!', colors[ 'red' ] )
@@ -334,7 +334,7 @@ def ProvoEnemies():
             # Wait for the journal entry to appear
             Misc.Pause( journalEntryDelayMilliseconds )
 
-            if Journal.SearchByType( 'Target cannot be seen', 'Regular' ):
+            if Journal.SearchByType( 'Target cannot be seen', 'System' ):
                 if showTargets:
                     Mobiles.Message( enemyToProvo1, colors[ 'red' ], 'Target 1 cannot be seen' )
                 Misc.IgnoreObject( enemyToProvo1 )
@@ -362,7 +362,7 @@ def ProvoEnemies():
             # Wait for the journal entry to appear
             Misc.Pause( journalEntryDelayMilliseconds )
 
-            if Journal.SearchByType( 'Target cannot be seen', 'Regular' ):
+            if Journal.SearchByType( 'Target cannot be seen', 'System' ):
                 if showTargets:
                     Mobiles.Message( enemyToProvo2, colors[ 'red' ], 'Target 2 cannot be seen' )
                 Misc.IgnoreObject( enemyToProvo2 )
@@ -378,7 +378,7 @@ def ProvoEnemies():
             # Wait for the journal entry to appear
             Misc.Pause( journalEntryDelayMilliseconds )
 
-            if Journal.SearchByType( 'Your music succeeds, as you start a fight.', 'Regular' ):
+            if Journal.SearchByType( 'Your music succeeds, as you start a fight.', 'System' ):
                 Journal.Clear()
                 newEntry = '%i`%i' % ( enemyToProvo1.Serial, enemyToProvo2.Serial )
                 enemiesAlreadyProvodCheck = Misc.CheckSharedValue( enemiesProvodSharedValue )

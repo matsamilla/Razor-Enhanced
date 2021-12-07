@@ -1,7 +1,7 @@
 '''
 Author: TheWarDoctor95
 Other Contributors:
-    Last Contribution By: Matsamilla - 10/20/20 - updated to not need imports
+    Last Contribution By: Matsamilla - 12/7/21
 
 Description: Selects enemies to use the Provocation skill on.
     • Automatically selects an instrument if one is needed

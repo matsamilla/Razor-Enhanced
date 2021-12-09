@@ -1,5 +1,5 @@
 # Runebook copy by Wardoctor. Upated by MatsaMilla
-# Last update: 12/3/21
+# Last update: 12/9/21
 
 # If copying a locked down book, DO THIS BEFORE STARTING
 #   Mark a rune for a location close to runebook being copied
@@ -8,8 +8,6 @@
 #   Set the rune as the default location for the book
 #   Select the correct book when the target comes up for Select item to recall off of to return to runebook being copied
 
-import re
-import config
 
 def PromptRunebook( promptString ):
     runebookSerial = Target.PromptTarget( promptString )
@@ -26,7 +24,7 @@ def GetNamesOfRunesInBook( runebook ):
     Items.UseItem( runebook )
 
     # Pause here since the next part goes pretty quick
-    Misc.Pause( config.dragDelayMilliseconds )
+    Misc.Pause( 650 )
 
     Gumps.WaitForGump( 1431013363, 5000 )
     while Gumps.CurrentGump() != 1431013363:
@@ -68,7 +66,7 @@ def CopyRunebookName( runebookToCopy, runebookToPlaceIn, runebookMoveable ):
         Gumps.SendAction( 1431013363, 0 )
 
     Items.SingleClick( runebookToCopy.Serial )
-    Misc.Pause( config.journalEntryDelayMilliseconds )
+    Misc.Pause( 200 )
     runebookName = None
     if runebookMoveable:
         for line in Journal.GetTextByType( 'Label' ):
@@ -83,7 +81,7 @@ def CopyRunebookName( runebookToCopy, runebookToPlaceIn, runebookMoveable ):
     if runebookName != None and runebookName != '':
         Items.UseItem( runebookToPlaceIn )
         Gumps.WaitForGump( 1431013363, 10000 )
-        Misc.Pause( config.journalEntryDelayMilliseconds )
+        Misc.Pause( 200 )
         Gumps.SendAction( 1431013363, 1 )
         Misc.WaitForPrompt( 1000 )
         Misc.ResponsePrompt( runebookName )
@@ -109,7 +107,7 @@ def CopyRunebook():
     recallRunebook = None
     if runebookToCopy.RootContainer != Player.Serial:
         Items.Move( runebookToCopy, Player.Backpack, 0 )
-        Misc.Pause( config.dragDelayMilliseconds + 100 ) # plus 100 to be extra safe
+        Misc.Pause( 650 + 100 ) # plus 100 to be extra safe
 
         runebookToCopy = Items.FindBySerial( runebookToCopy.Serial )
 
@@ -144,7 +142,7 @@ def CopyRunebook():
     # Copy the runebook
     for i in range( numberOfRunesInNewBook, numberOfRunesInOldBook ):
         Items.UseItem( runebookToCopy )
-        Misc.Pause( config.dragDelayMilliseconds )
+        Misc.Pause( 650 )
         Gumps.WaitForGump( 1431013363, 5000 )
 
         if i == 0:
@@ -164,7 +162,7 @@ def CopyRunebook():
         markScrolls = Items.FindByID( 0x1F59, 0x0000, Player.Backpack.Serial )
         if markScrolls != None:
             Items.UseItem( markScrolls )
-            Timer.Create( 'markScrollDragDelay', config.dragDelayMilliseconds )
+            Timer.Create( 'markScrollDragDelay', 650 )
         else:
             Spells.CastMagery( 'Mark' )
 
@@ -181,10 +179,10 @@ def CopyRunebook():
 
         Misc.WaitForPrompt( 1000 )
         Misc.ResponsePrompt( runeNames[ i ] )
-        Misc.Pause( config.dragDelayMilliseconds )
+        Misc.Pause( 650 )
 
         Items.Move( runeToMark, runebookToPlaceIn, 0 )
-        Misc.Pause( config.dragDelayMilliseconds )
+        Misc.Pause( 650 )
 
         if runebookMoveable:
             if Player.Mana < 41:
@@ -218,7 +216,7 @@ def CopyRunebook():
                         Player.UseSkill( 'Meditation' )
                     Misc.Pause( 50 )
 
-    Misc.Pause( config.dragDelayMilliseconds )
+    Misc.Pause( 650 )
     CopyRunebookName( runebookToCopy, runebookToPlaceIn, runebookMoveable )
 
     Player.HeadMessage( 33, 'Done copying runebook!' )

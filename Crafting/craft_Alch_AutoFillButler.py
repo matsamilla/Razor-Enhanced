@@ -169,10 +169,10 @@ def craftPot (potType):
     Journal.Clear()
     
 def worldSave():
-    if Journal.SearchByType('The world is saving, please wait.', 'Regular' ):
-#    if Journal.SearchByType('The world will save in 1 minute.', 'Regular' ):
+    if Journal.SearchByType('The world is saving, please wait.', 'System' ):
+#    if Journal.SearchByType('The world will save in 1 minute.', 'System' ):
         Misc.SendMessage('Pausing for world save', 33)
-        while not Journal.SearchByType('World save complete.', 'Regular'):
+        while not Journal.SearchByType('World save complete.', 'System'):
             Misc.Pause(1000)
         Misc.SendMessage('Continuing', 33)
         Journal.Clear()

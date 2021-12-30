@@ -1,7 +1,8 @@
 # T-Map ID & Pull by MatsaMilla
-# Last Edit 4/22/21
+# Last Edit 12/29/21
 # Disable auto-open corpses to run smoother
 # Uses wands if ID skill below 80.
+# Must use tooltips
 
 #*********** SETUP SECTION*********************************
 
@@ -13,9 +14,6 @@ beetleBag = True
 
 # True if you want to keep scrolls
 sortScrolls = False
-
-# turn to true if client has tool tips enabled
-toolTipsOn = True
 
 # Will use ID Wand if skill Item ID below 80
 if Player.GetRealSkillValue('Item ID') < 80:
@@ -69,9 +67,11 @@ def GetBag ( sharedValue, promptString ):
     if Misc.CheckSharedValue( sharedValue ):
         bag = Misc.ReadSharedValue( sharedValue )
         if not Items.FindBySerial( bag ):
+            Player.HeadMessage(66,promptString)
             bag = Target.PromptTarget( promptString )
             Misc.SetSharedValue( sharedValue, bag )
     else:
+        Player.HeadMessage(66,promptString)
         bag = Target.PromptTarget( promptString )
         Misc.SetSharedValue( sharedValue, bag )
     return bag
@@ -96,11 +96,17 @@ def checkWeight():
         sys.exit()
 
 def checkDistance():
-    Timer.Create('Distance', 5000)
-    while mapChest.DistanceTo(self) > int(2):
+    reopenChest = False
+    while mapChest.DistanceTo(self) > int(1):
+        Misc.Pause(1000)
+        reopenChest = True
         if not Timer.Check('Distance'):
             Player.HeadMessage(msgColor, 'Too Far Away')
             Timer.Create('Distance', 2500)
+    if reopenChest == True:
+        Items.UseItem(mapChest)
+        Misc.Pause(dragTime)
+        reopenChest = False
 
 def goldToBeetle():
     #moves gold to beetle
@@ -309,6 +315,8 @@ def equipWand():
         Player.ChatSay(33, "No Wands Found, Stopping Script")
         sys.exit()
         
+    
+        
 def idTarget():
     if idWand:
         equipWand()
@@ -321,8 +329,15 @@ def idTarget():
         
 
 goldToBeetle()
-pullGems()
-pull()
-itemID() 
-trashStuff()           
+chestitems = Items.GetPropValue(mapChest,'Items')
+if chestitems:
+    while chestitems > 1:
+        pullGems()
+        pull()
+        itemID() 
+        trashStuff()
+        chestitems = Items.GetPropValue(mapChest,'Items')
+else:
+    Player.HeadMessage(msgColor, 'That is not a chest!')
+    sys.exit()
 Player.HeadMessage(msgColor, 'Chest Cleared, Thanks MatsaMilla!')

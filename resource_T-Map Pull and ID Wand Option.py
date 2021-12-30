@@ -97,7 +97,7 @@ def checkWeight():
 
 def checkDistance():
     Timer.Create('Distance', 5000)
-    while mapChest.DistanceTo(self) > 2:
+    while mapChest.DistanceTo(self) > int(2):
         if not Timer.Check('Distance'):
             Player.HeadMessage(msgColor, 'Too Far Away')
             Timer.Create('Distance', 2500)

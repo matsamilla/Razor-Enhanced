@@ -18,6 +18,9 @@ sortScrolls = False
 # True to ID & Pull, false to just pull weps & armor
 idAllItems = True
 
+# Modify for item delay of server or to slow down / speed up script
+dragTime = 800
+
 #********** Wep Mods To KEEP *******************************************
 
 # modify list to keep armor matching strings below, must match in both keepArmorMods & keepArmorHPMods
@@ -40,7 +43,6 @@ slayerProps = ['Silver','Undead','Snake','Lizardman','Dragon','Reptile','Teratha
 import sys
 Misc.SendMessage('Starting TMap Pull and ID', 33)
 skillTimer = 0
-dragTime = 800
 msgColor = 68
 self = Mobiles.FindBySerial(Player.Serial)
 heavy = Player.MaxWeight - 10
@@ -206,13 +208,13 @@ def itemID(container):
         for i in container.Contains:
             if i.ItemID in armor:
                 Items.Move(i,armorBag,0)
-                Misc.Pause(600)
+                Misc.Pause(dragTime)
             elif i.ItemID in weps:
                 Items.Move(i,wepBag,0)
-                Misc.Pause(600)
+                Misc.Pause(dragTime)
             elif i.ItemID in boneArmor:
                 Items.Move(i,wepBag,0)
-                Misc.Pause(600)
+                Misc.Pause(dragTime)
                 
 def pullGems():
     for i in mapChest.Contains :

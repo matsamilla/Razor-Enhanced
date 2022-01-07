@@ -1,10 +1,10 @@
 # T-Map ID & Pull by MatsaMilla
-# Last Edit 12/29/21
+# Last Edit 1/4/21
 # Disable auto-open corpses to run smoother
 # Uses wands if ID skill below 80.
 # Must use tooltips
 
-#*********** SETUP SECTION*********************************
+#*********** SETUP SECTION*********************************************
 
 # Replace with beetle serial if you have one 
 beetle = 0x0006EB2A
@@ -15,13 +15,28 @@ beetleBag = True
 # True if you want to keep scrolls
 sortScrolls = False
 
-# Will use ID Wand if skill Item ID below 80
-if Player.GetRealSkillValue('Item ID') < 80:
-    idWand = True
-else:
-    idWand = False
+# True to ID & Pull, false to just pull weps & armor
+idAllItems = True
 
-#**********************************************************
+#********** Wep Mods To KEEP *******************************************
+
+# modify list to keep armor matching strings below, must match in both keepArmorMods & keepArmorHPMods
+keepArmorMods = ['Invulnerability','Exceptional'] #'Fortification', 'Hardening', 'Guarding', 'Defence'
+keepArmorHPMods = ['Indestructible','Fortified','Massive'] # 'Substantial' , 'Durable'
+
+# always keep wep mods
+keepProps = ['Vanquishing']
+
+# keep wep mods if matching keepWepDmgMods  or keepWepAccuracyMods
+keepWepDmgMods = ['Power'] # 'Force', 'Might', 'Ruin'
+keepWepAccuracyMods = ['Supremely Accurate','Exceedingly Accurate'] # 'Eminently Accurate', 'Surpassingly Accurate', 'Accurate'
+
+# keep slayers if matching in this list
+slayerProps = ['Silver','Undead','Snake','Lizardman','Dragon','Reptile','Terathan',
+'Orc Slaying','Ogre','Water','Earth','Elemental','Repond','Fey','Daemon','Exorcism','Poison','Arachnid']
+# 'Scorpion','Flame','Vacuum','Gargoyle','Spider'
+
+#*********************NO TOUCH BELOW*************************************
 import sys
 Misc.SendMessage('Starting TMap Pull and ID', 33)
 skillTimer = 0
@@ -29,6 +44,12 @@ dragTime = 800
 msgColor = 68
 self = Mobiles.FindBySerial(Player.Serial)
 heavy = Player.MaxWeight - 10
+
+# Will use ID Wand if skill Item ID below 80
+if Player.GetRealSkillValue('Item ID') < 80:
+    idWand = True
+else:
+    idWand = False
 
 #loot includes gate, recall & lvl 8 summoning scrolls
 loot = [0x2260,0x1f4c,0x1f60,0x1f66,0x1f68,0x1f69,0x1f6a,0x1f6b,0x1f6c]
@@ -48,19 +69,15 @@ scrolls = [0x1f2d,0x1f2e,0x1f2f,0x1f30,0x1f31,0x1f32,0x1f33,0x1f34,0x1f35,0x1f36
 trash = [0x1717,0x1718,0x1544,0x1540,0x1713,0x1715,0x1714,0x1716,0x1717,0x1718,0x1719,0x171a,0x171b,
 0x171c,0x2306,0x13f6,0xec4,0x1716,0xe81,0xe86,]
 
-# Anything in keepProps will be kept after ID. Anything in slashprops & sub slash props will be kept if it matches both
-slashProps = ['Invulnerability','Exceptional','Power']
-subSlashProps = ['Indestructable', 'Fortified', 'Massive','Substantial','Supremely Accurate','Exceedingly Accurate','Eminently Accurate']
-keepProps = ['Vanquishing','Silver','Undead','Snake','Lizardman','Dragon','Reptilian','Terathan','Scorpion',
-'Spider','Orc Slaying','Ogre','Water','Earth','Elemental','Flame','Vacuum','Repond','Fey','Gargoyle',
-'Daemon','Exorcism','Poison', 'Arachnid']
+boneArmor = [0x1450,0x1f0b,0x1452,0x144f,0x1451,0x144e]
 
-idItems = [0x1b72,0x1b73,0x1b7b,0x1b74,0x1b79,0x1b7a,0x1b76,0x1408,0x1410,0x1411,0x1412,0x1413,0x1414,0x1415,
+weps = [0xf62,0x1403,0xe87,0x1405,0x1401,0xf52,0x13b0,0xdf0,0x1439,0x1407,0xe89,0x143d,0x13b4,0xe81,0x13f8,
+0xf5c,0x143b,0x13b9,0xf61,0x1441,0x13b6,0xec4,0x13f6,0xf5e,0x13ff,0xec3,0xf43,0xf45,0xf4d,0xf4b,0x143e,
+0x13fb,0x1443,0xf47,0xf49,0xe85,0xe86,0x13fd,0xf50,0x13b2,]
+
+armor = [0x1b72,0x1b73,0x1b7b,0x1b74,0x1b79,0x1b7a,0x1b76,0x1408,0x1410,0x1411,0x1412,0x1413,0x1414,0x1415,
 0x140a,0x140c,0x140e,0x13bb,0x13be,0x13bf,0x13ee,0x13eb,0x13ec,0x13f0,0x13da,0x13db,0x13d5,0x13d6,0x13dc,
-0x13c6,0x13cd,0x13cc,0x13cb,0x13c7,0x1db9,0x1c04,0x1c0c,0x1c02,0x1c00,0x1c08,0x1c06,0x1c0a,0x1450,0xf62,
-0x1403,0xe87,0x1405,0x1401,0xf52,0x13b0,0xdf0,0x1439,0x1407,0xe89,0x143d,0x13b4,0xe81,0x13f8,0xf5c,
-0x143b,0x13b9,0xf61,0x1441,0x13b6,0xec4,0x13f6,0xf5e,0x13ff,0xec3,0xf43,0xf45,0xf4d,0xf4b,0x143e,0x13fb,
-0x1443,0xf47,0xf49,0xe85,0xe86,0x13fd,0xf50,0x13b2,]
+0x13c6,0x13cd,0x13cc,0x13cb,0x13c7,0x1db9,0x1c04,0x1c0c,0x1c02,0x1c00,0x1c08,0x1c06,0x1c0a,]
 
 # check / set bags. Idea from Wardoc (thanks!)
 def GetBag ( sharedValue, promptString ):
@@ -77,13 +94,18 @@ def GetBag ( sharedValue, promptString ):
     return bag
     
 regBag = GetBag( 'regBag', 'Select Bag for Regs' )
-sellBag = GetBag( 'sellBag', 'Select Bag for BAD weps and armor' )
-keepBag = GetBag( 'keepBag', 'Select Bag for GOOD weps and armor' )
 gemBag = GetBag( 'gemBag', 'Select Bag for Gems' )
 trashCan = GetBag( 'trashCan', 'Select corpse to dump on')
+if idAllItems:
+    sellBag = GetBag( 'sellBag', 'Select Bag for BAD weps and armor' )
+    keepBag = GetBag( 'keepBag', 'Select Bag for GOOD weps and armor' )
+else:
+    armorBag = GetBag( 'armorBag', 'Select Bag for armor' )
+    wepBag = GetBag( 'wepBag', 'Select Bag for weapons' )
 if sortScrolls:
     scrollBag = GetBag( 'scrollBag', 'Select Bag for Scrolls' )
 
+Player.HeadMessage(66,"Select Treasure Chest")
 chest = Target.PromptTarget('Select Treasure Chest')
 
 mapChest = Items.FindBySerial(chest)
@@ -124,8 +146,6 @@ def goldToBeetle():
                     Misc.Pause(dragTime)
                     
 def idStuffToolTips(container, type):
-    idContainer = Items.FindBySerial(container)
-    
     if type == 'weps':
         idItems = weps
         tier1 = keepWepDmgMods
@@ -143,7 +163,7 @@ def idStuffToolTips(container, type):
         worthlessBag = trashCan
     
         
-    for i in idContainer.Contains:
+    for i in container.Contains:
         worldSave()
         if i.ItemID in idItems:
             checkWeight()
@@ -177,75 +197,22 @@ def idStuffToolTips(container, type):
                 Items.Move(i, worthlessBag, 0)
                 Misc.Pause(dragTime)
             
-def itemID():        
-    for i in mapChest.Contains:
-        if i.ItemID in idItems:
-            checkWeight()
-            checkDistance()
-            Journal.Clear()
-            idTarget()
-            Target.WaitForTarget(1500)
-            Target.TargetExecute(i.Serial)
-            Misc.Pause(dragTime)
-            Items.SingleClick(i)
-            if Journal.Search('Unidentified'):
-                idTarget()
-                Target.WaitForTarget(1500)
-                Target.TargetExecute(i.Serial)
-                Misc.Pause(200)
-                Items.SingleClick(i)
-                Misc.Pause(dragTime)
-            if any(Journal.Search(keep) for keep in keepProps):
-                #** Good Stuff Move **
-                Items.Move(i, keepBag, 0)
-                Misc.Pause(dragTime)
-            elif any(Journal.Search(slash) for slash in slashProps):
-                if any(Journal.Search(sub) for sub in subSlashProps):
-                    #** Good Stuff Move **
-                    Items.Move(i, keepBag, 0)
-                    Misc.Pause(dragTime)
-                else:
-                    #** Sell Stuff Move **
-                    Items.Move(i, sellBag, 0)
-                    Misc.Pause(dragTime)
-            else:
-                #** Sell Stuff Move **
-                Items.Move(i, sellBag, 0)
-                Misc.Pause(dragTime)
-        elif i.ItemID in boneArmor:
-            checkWeight()
-            checkDistance()
-            Journal.Clear()
-            idTarget()
-            Target.WaitForTarget(1500)
-            Target.TargetExecute(i.Serial)
-            Misc.Pause(200)
-            Items.SingleClick(i)
-            Misc.Pause(dragTime)
-            if Journal.Search('Unidentified'):
-                idTarget()
-                Target.WaitForTarget(1500)
-                Target.TargetExecute(i.Serial)
-                Misc.Pause(200)
-                Items.SingleClick(i)
-                Misc.Pause(dragTime)
-            if any(Journal.Search(keep) for keep in keepProps):
-                #** Good Stuff Move **
-                Items.Move(i, keepBag, 0)
-                Misc.Pause(dragTime)
-            elif any(Journal.Search(slash) for slash in slashProps):
-                if any(Journal.Search(sub) for sub in subSlashProps):
-                    #** Good Stuff Move **
-                    Items.Move(i, keepBag, 0)
-                    Misc.Pause(dragTime)
-                else:
-                    #** Sell Stuff Move **
-                    Items.Move(i, trashCan, 0)
-                    Misc.Pause(dragTime)
-            else:
-                #** Sell Stuff Move **
-                Items.Move(i, trashCan, 0)
-                Misc.Pause(dragTime)
+def itemID(container):
+    if idAllItems:
+        idStuffToolTips(container, 'weps')
+        idStuffToolTips(container, 'armor')
+        idStuffToolTips(container, 'bone')
+    else:
+        for i in container.Contains:
+            if i.ItemID in armor:
+                Items.Move(i,armorBag,0)
+                Misc.Pause(600)
+            elif i.ItemID in weps:
+                Items.Move(i,wepBag,0)
+                Misc.Pause(600)
+            elif i.ItemID in boneArmor:
+                Items.Move(i,wepBag,0)
+                Misc.Pause(600)
                 
 def pullGems():
     for i in mapChest.Contains :
@@ -298,6 +265,14 @@ def trashStuff():
             Items.Move(i, trashCan, 0)
             Misc.Pause(dragTime)
             
+def worldSave():
+    if Journal.SearchByType('The world is saving, please wait.', 'Regular' ):
+        Misc.SendMessage('Pausing for world save', 33)
+        while not Journal.SearchByType('World save complete.', 'Regular'):
+            Misc.Pause(1000)
+        Misc.SendMessage('Continuing', 33)
+        Journal.Clear()
+            
 def equipWand():
     global wandSerial
     player_bag = Items.FindBySerial(Player.Backpack.Serial)
@@ -334,7 +309,7 @@ if chestitems:
     while chestitems > 1:
         pullGems()
         pull()
-        itemID() 
+        itemID(mapChest)
         trashStuff()
         chestitems = Items.GetPropValue(mapChest,'Items')
 else:

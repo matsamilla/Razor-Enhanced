@@ -1,7 +1,7 @@
 # T-Map ID & Pull by MatsaMilla
-# Last Edit 1/4/21
+# Last Edit 1/9/2022
 # Disable auto-open corpses to run smoother
-# Uses wands if ID skill below 80.
+# Uses wands if ID skill below 80. Set idAllItems to false to not ID at all.
 # Must use tooltips
 
 #*********** SETUP SECTION*********************************************
@@ -38,6 +38,10 @@ keepWepAccuracyMods = ['Supremely Accurate','Exceedingly Accurate'] # 'Eminently
 slayerProps = ['Silver','Undead','Snake','Lizardman','Dragon','Reptile','Terathan',
 'Orc Slaying','Ogre','Water','Earth','Elemental','Repond','Fey','Daemon','Exorcism','Poison','Arachnid']
 # 'Scorpion','Flame','Vacuum','Gargoyle','Spider'
+
+# useless items no matter how good they are, aka bad shields & ringmail
+sellItems = [ 0x1B72,0x13DB,0x13D5,0x13DA,0x1B7B,0x1DB9,0x13BB,0x1B79,0x13EB,0x1B7A,0x13F0,0x1C02,0x1C0C,
+0x13EC,0x1B73,0x13DC,0x13BE,0x13EE,0x13D6,0x13BF ]
 
 #*********************NO TOUCH BELOW*************************************
 import sys

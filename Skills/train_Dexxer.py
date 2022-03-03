@@ -154,7 +154,7 @@ def attkHealTarget():
     if dummy.Hits < 25 and Misc.ReadSharedValue('bandageDone') == True:
         Items.UseItemByID(0x0E21, 0)
         Target.WaitForTarget(10000, False)
-        Target.TargetExecute(uhoh)
+        Target.TargetExecute(dummy)
         Misc.Pause (500)
     if dummy.Hits < 10:
         Player.SetWarMode(False)

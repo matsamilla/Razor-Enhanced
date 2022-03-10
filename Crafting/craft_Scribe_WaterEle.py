@@ -1,106 +1,110 @@
-restockBeetle = False
+# Craft Summon Water Elemental Scrolls, by MatsaMilla
+#     - updated 3/10/22
 
-amountToMake = 5000
-restockChest = 0x43510513
+# Put all crafting materials in a secured chest in your house, then target it.
+# it will make as many as it can from the materials in the chest. 
+
+Player.HeadMessage(66,'Target the OPENED Restock Chest')
+restockChest = Target.PromptTarget()
 dragTime = 600
 bp = 0x0F7A
 bm = 0x0F7B
 mr = 0x0F86
 ss = 0x0F8D
-pen = 0x0FBF
 scroll = 0x0EF3
-recall = 0x1F4C3
 waterScroll = 0x1F6C
-noColor = 0x0000
-pack = Player.Backpack.Serial
-
-beetle = 0x0023F0A0
-beetleContainer = 0x439F1BD4 # Inspect item in beetle to get container
-
 import sys
-def craftRecall():
-    pens = Items.FindByID(0x0FBF,-1,pack)
-    Items.UseItem(pens)
-    Gumps.WaitForGump(949095101, 2000)
-    Gumps.SendAction(949095101, 22)
-    Gumps.WaitForGump(949095101, 2000)
-    Gumps.SendAction(949095101, 51)
-    Gumps.WaitForGump(949095101, 2000)
-    
-    if Player.Mana < 20:
-        med()
+
+if Player.GetRealSkillValue('Inscription') < 100:
+    Player.HeadMessage(33,"Wait, you arent even GM scribe? Git Gud")
+    sys.exit()
         
 def craftWaterEle():
-    pens = Items.FindByID(0x0FBF,-1,pack)
-    Items.UseItem(pens)
-    Gumps.WaitForGump(949095101, 2000)
+    if not Gumps.CurrentGump() == 949095101:
+        pen = Items.FindByID(0x0FBF,-1,Player.Backpack.Serial)
+        if pen:
+            Items.UseItem(pen)
+        else:
+            restock()
+        Gumps.WaitForGump(949095101, 2000)
     Gumps.SendAction(949095101, 50)
     Gumps.WaitForGump(949095101, 2000)
     Gumps.SendAction(949095101, 51)
-    Gumps.WaitForGump(949095101, 2000)
+    Gumps.WaitForGump(949095101, 5000)
     
-    if Player.Mana < 20:
-        med()
+    # mana check
+    if Player.Mana < 50:
         
-def med():
-    Player.UseSkill('Meditation')
-    Timer.Create('med', 7000)
-    Misc.Pause(dragTime)
-    while Player.Mana < Player.ManaMax:
-        if not Player.BuffsExist('Meditation') and Timer.Check('med') == False:
-            Misc.Pause(2000)
-            Player.UseSkill('Meditation')
-            Timer.Create('med', 7000)
-        Misc.Pause(100)
-    
+        Player.UseSkill('Meditation')
+        
+        # dont do anything until full mana
+        while Player.Mana < Player.ManaMax:
+            Misc.Pause(100)
 
 def unload():
-    scrolls = Items.FindByID(waterScroll, -1, pack)
-    if scrolls:
-        Items.Move(scrolls, restockChest, 0)
-        Misc.Pause(dragTime)
+    if Items.BackpackCount(waterScroll,-1) > 100:
+        elescrolls = Items.FindByID(waterScroll, -1, Player.Backpack.Serial)
+        if elescrolls:
+            Items.Move(elescrolls, restockChest, 0)
+            Misc.Pause(dragTime)
         
 
 def restock():
+    # restock pen, stop if out
+    if Items.BackpackCount(0x0FBF, -1) < 1:
+        restockPen = Items.FindByID (0x0FBF ,-1,restockChest, True)
+        if restockPen:
+            Items.Move(restockPen,Player.Backpack.Serial,1)
+            Misc.Pause(dragTime)
+        else:
+            Player.HeadMessage(33,'Out of pens')
+            sys.exit()
 
+    # restock scrolls, stop if out
     if Items.BackpackCount(scroll, -1) < 1:
-        Items.UseItem(restockChest)
-        Misc.Pause(dragTime)
-        scrolls = Items.FindByID (scroll ,-1,restockChest)
-        Items.Move(scrolls, pack, 100)
-        Misc.Pause(dragTime)
-        unload()
+        scrolls = Items.FindByID (scroll ,-1,restockChest, True)
+        if scrolls:
+            Items.Move(scrolls, Player.Backpack.Serial, 100)
+            Misc.Pause(dragTime)
+        else:
+            Player.HeadMessage(33,'Out of blank scrolls')
+            sys.exit()
         
+    # restock silk, stop if out
     if Items.BackpackCount(ss, -1) < 1:
-        Items.UseItem(restockChest)
-        Misc.Pause(dragTime)
-        sss = Items.FindByID (ss ,-1,restockChest)
-        Items.Move(sss, pack, 100)
-        Misc.Pause(dragTime)
-        unload()
+        silk = Items.FindByID (ss ,-1,restockChest, True)
+        if silk:
+            Items.Move(silk, Player.Backpack.Serial, 100)
+            Misc.Pause(dragTime)
+        else:
+            Player.HeadMessage(33,'Out of silk')
+            sys.exit()
     
+    # restock moss, stop if out
     if Items.BackpackCount(bm, -1) < 1:
-        Items.UseItem(restockChest)
-        Misc.Pause(dragTime)
-        bms = Items.FindByID (bm ,-1,restockChest)
-        Items.Move(bms, pack, 100)
-        Misc.Pause(dragTime)
-        unload()
+        bloodmoss = Items.FindByID (bm ,-1,restockChest, True)
+        if bloodmoss:
+            Items.Move(bloodmoss, Player.Backpack.Serial, 100)
+            Misc.Pause(dragTime)
+        else:
+            Player.HeadMessage(33,'Out of blood moss')
+            sys.exit()
         
+    # restock root, stop if out
     if Items.BackpackCount(mr, -1) < 1:
-        Items.UseItem(restockChest)
-        Misc.Pause(dragTime)
-        mrs = Items.FindByID (mr ,-1,restockChest)
-        Items.Move(mrs, pack, 100)
-        Misc.Pause(dragTime)
+        root = Items.FindByID (mr ,-1,restockChest, True)
+        if root:
+            Items.Move(root, Player.Backpack.Serial, 100)
+            Misc.Pause(dragTime)
+        else:
+            Player.HeadMessage(33,'Out of mandrake root')
+            sys.exit()
         unload()
     
-    if Items.BackpackCount(scroll, -1) < 1 or Items.BackpackCount(ss, -1) < 1 or Items.BackpackCount(bm, -1) < 1 or Items.BackpackCount(mr, -1) < 1:
-        sys.exit()
+    
+    unload()
 
-for i in range(0,amountToMake):
+while True:
     restock()    
     craftWaterEle()
-    if Items.BackpackCount(pen, -1) < 1:
-        Misc.SendMessage('Out of pens', 33)
-        sys.exit()
+   

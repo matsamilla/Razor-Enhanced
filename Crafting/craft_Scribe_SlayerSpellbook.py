@@ -1,24 +1,22 @@
 # Slayer Spellbook Crafter by MatsaMilla
-# Last edit: Matsamilla 10/19/20
+# Last edit: Matsamilla 3/16/22
 #
 # Restocks blank scrolls from beetle (1k at a time)
 # Moves slayers to beetle
+# Must have tooltips enabled
 from System.Collections.Generic import List
-import winsound
-import sys
 
 #***************SETUP SECTION**********************************
-#ItemSerials
-beetle = 0x0023F0A0 # inspect beetle, copy serial of beetle here
-beetleContainer = 0x439F1BD4 # inspect an item inside your beetles pack, copy container ID here (https://imgur.com/a/Yjfn8mB)
-ignoreBook = 0x458CD42E # do not throw away your full spellbook
+
 keepAll = False # true to keep all slayers, false keeps only ones in keepSlayerProps
 
-toolTipsOn = True #true if using tool tips
+keepSlayerProps = ['Silver','Reptilian Death','Elemental Ban','Repond','Exorcism','Arachnid Doom','Fey Slayer',
+    'Balron Damnation','Daemon Dismissal','Orc Slaying','Dragon Slaying'] 
+
 #**************************************************************
 
-error = "Sounds\error.wav"
-cheer = "Sounds\cheer.wav"
+
+
 dragTime = 600
 pen = 0xfbf
 scrolls = 0x0EF3
@@ -28,9 +26,32 @@ self_pack = Player.Backpack.Serial
 self = Player.Serial
 rightHand = Player.CheckLayer('RightHand')
 
-keepSlayerProps = ['Silver','Reptilian Death','Elemental Ban','Repond','Exorcism','Arachnid Doom','Fey',
-                    'Balron Damnation','Daemon Dismissal','Orc Slaying','Dragon Slaying', 'Blood Drinking'] 
-    #'Blood Drinking','Balron Damnation','Daemon Dismissal','Ogre Thrashing','Dragon Slaying','Orc Slaying'
+fullSpellbook = Items.FindByID(0x0EFA,0x0000,Player.Backpack.Serial)
+if fullSpellbook:
+    Items.WaitForProps(fullSpellbook, 500)
+    if "64 Spells" in str(fullSpellbook.Properties):
+        if not Player.CheckLayer("RightHand"):
+            Player.HeadMessage(66,'Equiping full spellbook to not trash')
+            Player.EquipItem(fullSpellbook)
+            Misc.Pause(dragTime)
+        else:
+            Player.HeadMessage(33,'You have a full spellbook in your pack and cant equip to save it. Stopping.')
+
+Player.HeadMessage(66,'Target Pack Animal')
+beetle = Target.PromptTarget()
+
+Player.HeadMessage(66,'Target an Item in Pack Animals Backpack')
+beetleContainer = Items.FindBySerial(Target.PromptTarget())
+beetleContainer = beetleContainer.RootContainer
+
+isitabeetle = Mobiles.FindBySerial(beetle)
+
+if isitabeetle.Body == 0x0317:
+    itsAbeetle = True
+else:
+    itsAbeetle = False
+
+
     
 if not keepAll:
     Player.HeadMessage(66, 'Keeping:')
@@ -40,15 +61,23 @@ if not keepAll:
 else:
     Player.HeadMessage(66, 'Keeping All Slayers')
     
-slayers = ['Silver','Reptilian Death','Elemental Ban','Repond','Exorcism','Arachnid Doom','Fey',
-                    'Balron Damnation','Daemon Dismissal','Orc Slaying', 'Blood Drinking', 'Troll Slaughter',
-                    'Ogre Thrashing','Dragon Slaying','Earth Shatter','Elemental Health','Flame Dousing',
-                    'Summer Wind','Vacuum','Water Dissipation','Gargoyles Foe','Scorpions Bane','Spiders Death',
-                    'Terathan','Lizardman Slaughter','Ophidian','Snakes Bane']
+slayers = ['Silver','Reptilian Death','Elemental Ban','Repond','Exorcism','Arachnid Doom','Fey Slayer',
+            'Balron Damnation','Daemon Dismissal','Orc Slaying', 'Blood Drinking', 'Troll Slaughter',
+            'Ogre Thrashing','Dragon Slaying','Earth Shatter','Elemental Health','Flame Dousing',
+            'Summer Wind','Vacuum','Water Dissipation','Gargoyles Foe','Scorpions Bane','Spiders Death',
+            'Terathan','Lizardman Slaughter','Ophidian','Snakes Bane']
+
+slayersLower = []
+keepSlayerPropsLower = []
+            
+for i in range(len(keepSlayerProps)):
+   slayersLower.append(keepSlayerProps[i].lower())
     
-if not rightHand:
-    Player.EquipItem(ignoreBook)
-    Misc.Pause(dragTime)
+for k in range(len(slayers)):
+    keepSlayerPropsLower.append(slayers[k].lower())
+    
+    
+
 
 # Use neraby trashcan
 trashBarrelFilter = Items.Filter()
@@ -62,19 +91,21 @@ trashcanhere = Items.ApplyFilter( trashBarrelFilter )
 
 if not trashcanhere:
     Player.HeadMessage( 1100, 'No trashcan nearby!' )
-    sys.exit()
+    Misc.ScriptStop( 'craft_SlayerSpellbook.py' )
+    Misc.Pause(5000)
+    Stop
 else:
     global trashcan
     trashcan = trashcanhere[ 0 ]
 
 def moveSlayerBookToBeetle():
-    if Player.Mount:
+    if Player.Mount and itsAbeetle:
         Mobiles.UseMobile(self)
         Misc.Pause(dragTime)
-        Items.Move(craftedBook, beetle, 1)
-        Misc.Pause(dragTime)
-        Mobiles.UseMobile(beetle)
-        Misc.Pause(dragTime)
+    Items.Move(craftedBook, beetle, 1)
+    Misc.Pause(dragTime)
+    Mobiles.UseMobile(beetle)
+    Misc.Pause(dragTime)
         
 def trashSpellbook():
     if craftedBook:
@@ -92,30 +123,30 @@ def checkMats():
         Misc.Pause(dragTime)
         if Items.BackpackCount(scrolls, -1) < 16:
             Misc.SendMessage('Out of Scrolls',33)
-            Misc.Beep()
-            if not Player.Mount:
+            if not Player.Mount and itsAbeetle:
                 Mobiles.UseMobile(beetle)
                 Misc.Pause(dragTime)
-            sys.exit()
+            Stop
             
 def restockScrolls():
-    if Player.Mount:
+    if Player.Mount and itsAbeetle:
         Mobiles.UseMobile(self)
         Misc.Pause(dragTime)
-        Mobiles.SingleClick(beetle)
-        Misc.WaitForContext(beetle, 1500)
-        if Player.Visible:
-            Misc.ContextReply(beetle, 10)
-        else:
-            Misc.ContextReply(beetle, 0)
+        
+    Mobiles.SingleClick(beetle)
+    Misc.WaitForContext(beetle, 1500)
+    if Player.Visible:
+        Misc.ContextReply(beetle, "Open Backpack") #10
+    else:
+        Misc.ContextReply(beetle, "Open Backpack") #0
+    Misc.Pause(dragTime)
+    beetleScrolls = Items.FindByID(scrolls, noColor, beetleContainer)
+    if beetleScrolls:
+        Player.HeadMessage (66, 'Restocking')
+        Items.Move(beetleScrolls, self_pack, 500)
         Misc.Pause(dragTime)
-        beetleScrolls = Items.FindByID(scrolls, noColor, beetleContainer)
-        if beetleScrolls:
-            Player.HeadMessage (66, 'Restocking')
-            Items.Move(beetleScrolls, self_pack, 500)
-            Misc.Pause(dragTime)
     
-    if not Player.Mount:
+    if not Player.Mount and itsAbeetle:
         Mobiles.UseMobile(beetle)
         Misc.Pause(dragTime)
         
@@ -146,7 +177,7 @@ def FindItem( itemID, container, color = -1, ignoreContainer = [] ):
             return foundItem
         
 def craftBook():
-    currentPen = FindItem(pen, Player.Backpack)#Items.FindByID(pen, -1, -1)
+    currentPen = FindItem(pen, Player.Backpack) #Items.FindByID(pen, -1, -1,True) 
     if currentPen:
         if Gumps.CurrentGump() != 0x38920abd:
             Items.UseItem(currentPen.Serial)
@@ -158,56 +189,35 @@ def craftBook():
     else:
         Misc.SendMessage('Out of Pens',33)
         Misc.Beep()
-        if not Player.Mount:
-                Mobiles.UseMobile(beetle)
-                Misc.Pause(dragTime)
-        sys.exit()
+        if not Player.Mount and itsAbeetle:
+            Mobiles.UseMobile(beetle)
+            Misc.Pause(dragTime)
+        Stop
+
 def slayerCheck():
     global craftedBook
     craftedBook = Items.FindByID(spellbook, -1, self_pack)
     
-    if toolTipsOn:
+    while craftedBook:
         if keepAll:
             Items.WaitForProps(craftedBook, 1500)
             props = Items.GetPropStringList(craftedBook)
-            if any(elem in slayers for elem in props):
-                Player.HeadMessage (66, props[3]) 
+            if any(elem in slayers for elem in props) or any(elem in slayersLower for elem in props):
+                Player.HeadMessage (66, props[3]) #
                 moveSlayerBookToBeetle()
             else:
                 trashSpellbook()
         else:
             Items.WaitForProps(craftedBook, 1500)
             props = Items.GetPropStringList(craftedBook)
-            if any(elem in keepSlayerProps for elem in props):
-                Player.HeadMessage (66, props[3])
+            if any(elem in keepSlayerProps for elem in props) or any(elem in keepSlayerPropsLower for elem in props):
+                Player.HeadMessage (66, props[3]) #
                 moveSlayerBookToBeetle()
             else:
                 trashSpellbook()
+                
+        craftedBook = Items.FindByID(spellbook, -1, self_pack)
     
-    else:
-        if Journal.SearchByType('You have successfully crafted a slayer spellbook.', 'Regular'):
-            if keepAll:
-                moveSlayerBookToBeetle()
-                Journal.Clear()
-            else:
-                if toolTipsOn:
-                    Items.WaitForProps(craftedBook, 1500)
-                    props = Items.GetPropStringList(craftedBook)
-                    if any(elem in keepSlayerProps for elem in props):
-                        moveSlayerBookToBeetle()
-                    else:
-                        trashSpellbook()
-                else:
-                    Items.SingleClick(craftedBook.Serial)
-                    
-                    Misc.Pause(dragTime)
-                    if any(Journal.Search(keep) for keep in keepSlayerProps):
-                        moveSlayerBookToBeetle()
-                        Journal.Clear()
-                    else:
-                        trashSpellbook()
-        else:
-            trashSpellbook()
     
             
 while True:
@@ -218,6 +228,6 @@ while True:
     craftBook()
     while Items.BackpackCount(spellbook, -1) > 0:
         slayerCheck()
-    if not Player.Mount:
+    if not Player.Mount and itsAbeetle:
         Mobiles.UseMobile(beetle)
         Misc.Pause(dragTime)

@@ -29,7 +29,7 @@ elif Player.Name == "Matsa-":
 def recallMagery(book, rune):
     if targetBook:
         Spells.CastMagery('Recall')
-        Target.WaitForTarget(1500,False)
+        Target.WaitForTarget(3500,False)
         Target.TargetExecute(book)
         
     else:

@@ -1,5 +1,5 @@
 # T-Map ID & Pull by MatsaMilla
-# Last Edit 1/9/2022
+# Last Edit 3/18322
 # Disable auto-open corpses to run smoother
 # Uses wands if ID skill below 80. Set idAllItems to false to not ID at all.
 # Must use tooltips
@@ -310,15 +310,12 @@ def idTarget():
         
 
 goldToBeetle()
-chestitems = Items.GetPropValue(mapChest,'Items')
-if chestitems:
-    while chestitems > 1:
-        pullGems()
-        pull()
-        itemID(mapChest)
-        trashStuff()
-        chestitems = Items.GetPropValue(mapChest,'Items')
-else:
-    Player.HeadMessage(msgColor, 'That is not a chest!')
-    sys.exit()
+
+while mapChest:
+    pullGems()
+    pull()
+    itemID(mapChest)
+    trashStuff()
+    mapChest = Items.FindBySerial(chest)
+    
 Player.HeadMessage(msgColor, 'Chest Cleared, Thanks MatsaMilla!')

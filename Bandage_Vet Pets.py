@@ -4,7 +4,7 @@ from System.Collections.Generic import List
 from System import Byte
 import sys
 
-#Pet list you can add to it by putting the mobileID number in the list. 
+#Pet list you can add to it by putting the Serial of the pet in the list. 
 petList = [
  0x00120786,# Winged Snek
  0x003FAA39,# Kuzco

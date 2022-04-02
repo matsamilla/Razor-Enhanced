@@ -1,7 +1,7 @@
 # ButlerHelper by Spatchel & Matsamilla
 # use with ButlerProfiles.py for best results, update butlerID with butler serial below
 
-# Last updated 10/17/21 
+# Last updated 4/2/22
 
 ###########################################################
 # Add your butlers serial below                           #
@@ -44,8 +44,8 @@ while Player.DistanceTo(butler) > 2.5:
     if Timer.Check('butler') == False:
         Mobiles.Message(butler,33, 'Come closer to restock.')
         Timer.Create('butler',2500)
-    
-#moss
+
+#moss count
 if Misc.CheckSharedValue('moss'):
     moss6 = Misc.ReadSharedValue('moss')
 else: 
@@ -85,89 +85,79 @@ if Misc.CheckSharedValue('silk'):
     silk13 = Misc.ReadSharedValue('silk')
 else: 
     silk13 = regs
-# armor cap
-if Misc.CheckSharedValue('cap'):
-    cap0 = Misc.ReadSharedValue('cap')
-else: 
-    cap0 = cap
 # Armor
 if Misc.CheckSharedValue('armor'):
     armorS = Misc.ReadSharedValue('armor')
+    if cap:
+        cap0 = armorS
+    else:
+        cap0 = 0
     gorget1 = armorS
     sleeves2 = armorS
     gloves3 = armorS
     tunic4 = armorS
     legs5 = armorS
 else:
-    cap0 = cap
+    if cap:
+        cap0 = armor
+    else:
+        cap0 = 0
     gorget1 = armor
     sleeves2 = armor
     gloves3 = armor
     tunic4 = armor
     legs5 = armor
     
-# Check if layer is taken, dont grab armor if is
-layers = [ ('Head',0),('Neck',1), ('Arms',2), ('Gloves',3),('InnerTorso',4),('Pants',5) ]
-for i in layers:
-    if Player.CheckLayer(i[0]):
-        if i[1] == 0:
-            cap0 = 0
-        elif i[1] == 1:
-            gorget1 = 0
-        elif i[1] == 2:
-            sleeves2 = 0
-        elif i[1] == 3:
-            gloves3 = 0
-        elif i[1] == 4:
-            tunic4 = 0
-        elif i[1] == 5:
-            legs5 = 0
-        
-# Explode Pots Count
-if Misc.CheckSharedValue('cure'):
-    exp14 = Misc.ReadSharedValue('cure')
-else: 
-    exp14 = cure
-# Strength Pots Count
-if Misc.CheckSharedValue('agil'):
-    str15 = Misc.ReadSharedValue('agil')
-else: 
-    str15 = 0
-# Refresh Pots Count
-if Misc.CheckSharedValue('str'):
-    refresh16 = Misc.ReadSharedValue('str')
-else: 
-    refresh16 = 0
 # Agility Pots Count    
-if Misc.CheckSharedValue('refresh'):
-    agi17 = Misc.ReadSharedValue('refresh')
+if Misc.CheckSharedValue('agil'):
+    agiImput = Misc.ReadSharedValue('agil')
 else: 
-    agi17 = refresh
+    agiImput = 5
+# Cure Pots Count    
+if Misc.CheckSharedValue('cure'):
+    cureImput = Misc.ReadSharedValue('cure')
+else: 
+    cureImput = 5
+# Explode Pots Count
+if Misc.CheckSharedValue('exp'):
+    expImput = Misc.ReadSharedValue('exp')
+else: 
+    expImput = 0
 # Heal Pots Count    
 if Misc.CheckSharedValue('heal'):
-    heal18 = Misc.ReadSharedValue('heal')
+    healImput = Misc.ReadSharedValue('heal')
 else: 
-    heal18 = heal
-# Cure Pots Count    
-if Misc.CheckSharedValue('exp'):
-    cure19 = Misc.ReadSharedValue('exp')
+    healImput = 5
+# Deadlypoison Pots Count    
+if Misc.CheckSharedValue('deadlypoison'):
+    dpImput = Misc.ReadSharedValue('deadlypoison')
 else: 
-    cure19 = 0
-# Bandages Pots Count    
+    dpImput = 0
+# Refresh Pots Count
+if Misc.CheckSharedValue('refresh'):
+    refreshImput = Misc.ReadSharedValue('refresh')
+else: 
+    refreshImput = 5
+# Strength Pots Count
+if Misc.CheckSharedValue('str'):
+    strImput = Misc.ReadSharedValue('str')
+else: 
+    strImput = 5
+# Bandages Count    
 if Misc.CheckSharedValue('bandies'):
-    bandages20 = Misc.ReadSharedValue('bandies')
+    bandages21 = Misc.ReadSharedValue('bandies')
 else: 
-    bandages20 = bandies
+    bandages21 = bandies
 # Arrows
 if Misc.CheckSharedValue('arrows'):
-    arrows24 = Misc.ReadSharedValue('arrows')
+    arrows25 = Misc.ReadSharedValue('arrows')
 else: 
-    arrows24 = arrows    
+    arrows25 = arrows    
 # Bolts
 if Misc.CheckSharedValue('bolts'):
-    bolts25 = Misc.ReadSharedValue('bolts')
+    bolts26 = Misc.ReadSharedValue('bolts')
 else: 
-    bolts25 = bolts
+    bolts26 = bolts
 
 def dumpBottles():
     for i in player_bag.Contains:
@@ -253,39 +243,44 @@ def butler():
     saveProfile(textid, text)
     
     #################### Potions ###################################
-    #explode
+    # Cure 
     textid = List[int]([14])
-    text = List[str]([str(exp14)])
+    text = List[str]([str(cureImput)])
     saveProfile(textid, text)
-    
-    #Strength
+
+    # Agility
     textid = List[int]([15])
-    text = List[str]([str(str15)])
+    text = List[str]([str(agiImput)])
     saveProfile(textid, text)
-    
-    #Refresh
+
+    #Strength
     textid = List[int]([16])
-    text = List[str]([str(refresh16)])
+    text = List[str]([str(strImput)])
     saveProfile(textid, text)
     
-    #Agility
+    #Deadlypoison 
     textid = List[int]([17])
-    text = List[str]([str(agi17)])
+    text = List[str]([str(dpImput)])
     saveProfile(textid, text)
-    
+
     #Heal
-    textid = List[int]([18])
-    text = List[str]([str(heal18)])
-    saveProfile(textid, text)
-    
-    #Cure
     textid = List[int]([19])
-    text = List[str]([str(cure19)])
+    text = List[str]([str(healImput)])
+    saveProfile(textid, text)
+
+    #Refresh
+    textid = List[int]([18])
+    text = List[str]([str(refreshImput)])
+    saveProfile(textid, text)
+  
+    #Explode
+    textid = List[int]([20])
+    text = List[str]([str(expImput)])
     saveProfile(textid, text)
     
     #################### Bandages ###################################
-    textid = List[int]([20])
-    text = List[str]([str(bandages20)])
+    textid = List[int]([21])
+    text = List[str]([str(bandages21)])
     saveProfile(textid, text)
     
     #################### Petals #####################################
@@ -293,13 +288,13 @@ def butler():
     text = List[str]([str(0)])
     saveProfile(textid, text)
     
-    textid = List[int]([24])
-    text = List[str]([str(arrows24)])
+    textid = List[int]([25])
+    text = List[str]([str(arrows25)])
     saveProfile(textid, text)
     
     #################### Arrows/Bolts ###############################
-    textid = List[int]([25])
-    text = List[str]([str(bolts25)])
+    textid = List[int]([26])
+    text = List[str]([str(bolts26)])
     saveProfile(textid, text)
 
     Gumps.WaitForGump(989312372, 2000)
@@ -310,7 +305,6 @@ def saveProfile(textid, text):
     if Gumps.CurrentGump() != 989312372:
         tempGump = Gumps.CurrentGump()
         Gumps.CloseGump(tempGump)
-        Misc.Pause(200)
         Mobiles.UseMobile(butlerID)
     Gumps.WaitForGump(989312372, 2000)
     Gumps.SendAdvancedAction(989312372, saveSwitch, switch, textid, text)

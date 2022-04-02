@@ -18,7 +18,7 @@ if disarmTarget:
     rightHand = disarmTarget.GetItemOnLayer('RightHand')
     leftHand = disarmTarget.GetItemOnLayer('LeftHand')
     
-    if righHand:
+    if rightHand:
         stealTarget = rightHand
     
     elif leftHand:

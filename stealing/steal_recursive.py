@@ -137,9 +137,22 @@ def run_continuously():
             snoop_recursive(mark.Backpack, mark)
             Misc.Pause(short_delay)
         Misc.Pause(600)
+        
+# filter
+def find():
+    fil = Mobiles.Filter()
+    fil.Enabled = True
+    fil.RangeMax = 1
+    fil.IsHuman = True
+    fil.IsGhost = False
+    fil.Friend = False
+    fil.Notorieties = List[Byte](bytes(1,3,4,5,6))
+    list = Mobiles.ApplyFilter(fil)
+
+    return list
 
 def run_once():
-    mark = Target.GetTargetFromList("stealtarget")
+    mark = Mobiles.Select(find(),'Next') # Target.GetTargetFromList("stealtarget")
     
     if mark != None and Player.DistanceTo(mark) < 2:
         snoop_recursive(mark.Backpack, mark)

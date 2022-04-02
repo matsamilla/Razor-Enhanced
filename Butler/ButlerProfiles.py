@@ -1,4 +1,5 @@
 # ButlerProfiles.py by MatsaMilla - 2 part script, part 1 is ButlerHelper.py
+# updated 4/2/22 - new field: Misc.SetSharedValue('deadlypoison', 0)  
 
 # You need to set up a "profile" for each toon based on name
 # see examples below
@@ -30,6 +31,7 @@ if name == 'matsamilla': #Replace matsamilla with toon name, no caps or spaces
     Misc.SetSharedValue('bolts', 0)  
     Misc.SetSharedValue('armor', 1)
     Misc.SetSharedValue('cap', 1)
+    Misc.SetSharedValue('deadlypoison', 0)  
 #******************
 # copy, paste and edit as many as this next section as you need for toons
 elif name == 'playername': #Replace playername with toon name, no caps or spaces
@@ -53,6 +55,7 @@ elif name == 'playername': #Replace playername with toon name, no caps or spaces
     Misc.SetSharedValue('bolts', 0)  
     Misc.SetSharedValue('armor', 0)   
     Misc.SetSharedValue('cap', 0)
+    Misc.SetSharedValue('deadlypoison', 0)  
     
 #******************
 

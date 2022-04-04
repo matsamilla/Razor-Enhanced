@@ -1,5 +1,5 @@
 # Automatic Potion Butler Filler by MatsaMilla 
-#   - Version 3, updated 10-17-21
+#   - Version 4, updated 4/3/22 (Includes DP now)
 
 # Must have TOOLTIPSON ([toggletooltips in game to turn off/on)
 
@@ -8,6 +8,9 @@
 #       Empty keg in toons backpack.
 
 # Makes Make sure restock chest & motar restock bags are open
+
+#mark false to NOT fill DP
+fillDeadlyPoison = False
 
 #*******************************************************************#
 
@@ -125,7 +128,7 @@ def craftPot (potType):
                     break
             else:
                 Misc.SendMessage('Out of regs for this pot type, moving to next pot', 33)
-                break
+                return False
             
         # move pot to keg  
         pot = FindItem( potID , Player.Backpack)
@@ -169,10 +172,10 @@ def craftPot (potType):
     Journal.Clear()
     
 def worldSave():
-    if Journal.SearchByType('The world is saving, please wait.', 'System' ):
-#    if Journal.SearchByType('The world will save in 1 minute.', 'System' ):
+    if Journal.SearchByType('The world is saving, please wait.', 'Regular' ):
+#    if Journal.SearchByType('The world will save in 1 minute.', 'Regular' ):
         Misc.SendMessage('Pausing for world save', 33)
-        while not Journal.SearchByType('World save complete.', 'System'):
+        while not Journal.SearchByType('World save complete.', 'Regular'):
             Misc.Pause(1000)
         Misc.SendMessage('Continuing', 33)
         Journal.Clear()
@@ -184,9 +187,9 @@ Misc.Pause(1000)
     
 if Gumps.LastGumpTextExist( 'Remove Leather Tub?' ):
     Misc.SendMessage('Leather Tub Detected')
-    fillList = [('cure',37),('agility',38),('strength',39),('refresh',40),('heal',41),('explode',42)]
+    fillList = [('cure',37),('agility',38),('strength',39),('DP',40),('refresh',41),('heal',42),('explode',43)]
 else:
-    fillList = [('cure',35),('agility',36),('strength',37),('refresh',38),('heal',39),('explode',40)]
+    fillList = [('cure',35),('agility',36),('strength',37),('DP',38),('refresh',39),('heal',40),('explode',41)]
 
 while True:
     # verify its butler gump
@@ -196,6 +199,8 @@ while True:
             # read gump line
             fillNumber = fillStopNumber - int(float(Gumps.LastGumpGetLine(i[1])))
             while fillNumber > 100: #int(float(Gumps.LastGumpGetLine(i[1]))) < fillStopNumber:
+                if str(i[0]) == 'DP' and fillDeadlyPoison == False:
+                    break
                 Gumps.CloseGump(butlerGump)
                 Misc.SendMessage('Filling ' + str(i[0])+ ', ' + str(fillNumber) + ' left', 66)
                 Misc.Pause(dragTime)

@@ -27,7 +27,7 @@ def usePot():
         else:
             Player.HeadMessage(33, "No Heal pots!")
 
-if Misc.ShardName() == "Ultima Forever":
+if Misc.ShardName() == "Ultima Forever" or Misc.ShardName() == "UOForever":
     potDrink()
 else:
     usePot()

@@ -14,7 +14,6 @@ def stealCheck():
         Player.HeadMessage(66, 'Wep Stolen!')
 
 if disarmTarget:
-    
     rightHand = disarmTarget.GetItemOnLayer('RightHand')
     leftHand = disarmTarget.GetItemOnLayer('LeftHand')
     
@@ -34,7 +33,7 @@ if disarmTarget:
         Player.WeaponDisarmSA( )
         Misc.Pause(120)
 
-        if Journal.Search("You decide to not try to stun anyone."):
+        if Journal.SearchByType("You decide to not try to disarm anyone.",'System'):
             Player.WeaponDisarmSA( )
 
         while Player.DistanceTo(disarmTarget) > 1:

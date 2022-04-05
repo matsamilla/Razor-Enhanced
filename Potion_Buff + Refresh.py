@@ -141,7 +141,7 @@ def buffUpPots():
         Player.HeadMessage(msgColor, 'Buffed and full stam')
 
 
-if Misc.ShardName() == "Ultima Forever":
+if Misc.ShardName() == "Ultima Forever" or Misc.ShardName() == "UOForever":
     buffUp()
 else:
     buffUpPots()

@@ -53,7 +53,7 @@ def curePot():
     else:
         Player.HeadMessage(msgColor, "Not Poisoned")
         
-if Misc.ShardName() == "Ultima Forever":
+if Misc.ShardName() == "Ultima Forever" or Misc.ShardName() == "UOForever":
     cureDrink()
 else:
     curePot()

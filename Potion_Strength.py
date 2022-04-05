@@ -46,7 +46,7 @@ def usePot():
         Player.HeadMessage(msgColor, "No Strength pots!")
             
         
-if Misc.ShardName() == "Ultima Forever":
+if Misc.ShardName() == "Ultima Forever" or Misc.ShardName() == "UOForever":
     potDrink()
 else:
     usePot()

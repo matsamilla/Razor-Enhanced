@@ -470,7 +470,6 @@ def idItemToolTips(item):
 
 # equips a wand, hopefully ID wand
 def equipWand():
-def equipWand():
     global wandSerial
     if Player.CheckLayer('LeftHand') :
         Player.UnEquipItemByLayer('LeftHand')

@@ -1,11 +1,13 @@
 from System.Collections.Generic import List
-# Wep crafter by MatsaMilla; Last edit: Matsamilla 12/28/21
+# Wep crafter by MatsaMilla; Last edit: Matsamilla 4/6/22
 #
-# Only have 1 type of wood on you at a time
+# Only have 1 type of wood on you at a time, it adjusts wood type automagically
+#
+# will restock same wood type from beetle
 #
 # crafts weps for fletching and carpentry, wep list below (comment out ones not crafting)
 #
-# Moves good weps to beetle *must be exceptional
+# Moves good weps to beetle *must be exceptional, trashes all non exceptional
 
 ################## SETUP SECTION ####################################
 
@@ -17,7 +19,7 @@ useIDWands = True # true to use ID wands to ID magic items as
 # update with your beetles serial to move good weps to
 beetle = 0x00215F22
 
-#inspect an item in the bag of your beetle, copy root container serial here
+#inspect an item in the bag of your beetle, copy root container serial here. used to restock wood
 beetleContainer = 0x434C292B
 
 # turn to true if client has tool tips enabled, more reliable

@@ -1,7 +1,6 @@
-from System.Collections.Generic import List
-import sys
 # Dragon Armor Crafter by MatsaMilla
 # ToolTips must be enabled and must have a beetle
+# updated 5/27/22 - fixed tossing exceptional stuffs
 ####################################################
 
 scaleColor = 'blue' #pick color of scales, red, yellow, black, green, white, blue or blue2
@@ -14,6 +13,8 @@ beetle = 0x00215F22
 beetlePack = 0x434C292B # beetle container ID (inspect object in beetle pack for container ID
 
 #####################################################
+from System.Collections.Generic import List
+import sys
 
 noColor = 0x0000
 self_pack = Player.Backpack.Serial
@@ -141,7 +142,7 @@ def craftDragArmor(bag):
                 craftedArmor = Items.FindByID(i[1],-1,Player.Backpack.Serial)
                 if craftedArmor:
                     Items.WaitForProps(craftedArmor,500)
-                    if Items.GetPropValue(craftedArmor,'Exceptional'):
+                    if 'exceptional' in Items.GetPropStringByIndex(craftedArmor,0):
                         moveToBag(craftedArmor,bag)
                         break
                     else:

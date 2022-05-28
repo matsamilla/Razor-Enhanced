@@ -1,5 +1,5 @@
-from System.Collections.Generic import List
-# Wep crafter by MatsaMilla; Last edit: Matsamilla 4/6/22
+
+# Wep crafter by MatsaMilla; Last edit: Matsamilla 5/27/22 - fixed tossing exceptionals
 #
 # Only have 1 type of wood on you at a time, it adjusts wood type automagically
 #
@@ -51,7 +51,7 @@ slayerProps = ['Silver','Elemental Ban','Undead','Dragon Slaying',
 wepDmgMods = ['Vanquishing','Power', 'Force'] # 'Ruin','Might'
 
 ######################### Do not touch anything below here# #######################################
-
+from System.Collections.Generic import List
 #disregaurd list below
 wepDurabilityMods = ['Indestructable', 'Fortified', 'Massive', 'Substantial', 'Durable']
 wepAccuracyMods = ['Supremely Accurate','Exceedingly Accurate','Eminently Accurate', 'Surpassingly Accurate', 'Accurate']
@@ -439,7 +439,7 @@ def idItemToolTips(item):
             idItem(item)
         Items.WaitForProps(item, 2000)
         props = Items.GetPropStringList(item)
-        if 'Exceptional' in props:
+        if 'exceptional' in Items.GetPropStringByIndex(item,0):
             if any(elim in keepProps for elim in props):
             #if any(Journal.Search(keep) for keep in keepProps):
                 #** moves to beetle if has property in keepProps **

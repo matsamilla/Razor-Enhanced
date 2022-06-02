@@ -1,7 +1,7 @@
 # ButlerHelper by Spatchel & Matsamilla
 # use with ButlerProfiles.py for best results, update butlerID with butler serial below
 
-# Last updated 4/2/22
+# Last updated 6/2/22
 
 ###########################################################
 # Add your butlers serial below                           #
@@ -90,23 +90,39 @@ if Misc.CheckSharedValue('armor'):
     armorS = Misc.ReadSharedValue('armor')
     if cap:
         cap0 = armorS
+    elif Player.CheckLayer('Helm'):
+        cap0 = 0
     else:
         cap0 = 0
     gorget1 = armorS
     sleeves2 = armorS
     gloves3 = armorS
-    tunic4 = armorS
-    legs5 = armorS
+    if Player.CheckLayer("InnerTorso"):
+        tunic4 = 0
+    else:
+        tunic4 = armorS
+    if Player.CheckLayer("Pants"):
+        legs5 = 0
+    else:
+        legs5 = armorS
 else:
     if cap:
         cap0 = armor
+    elif Player.CheckLayer('Helm'):
+        cap0 = 0
     else:
         cap0 = 0
     gorget1 = armor
     sleeves2 = armor
     gloves3 = armor
-    tunic4 = armor
-    legs5 = armor
+    if Player.CheckLayer("InnerTorso"):
+        tunic4 = 0
+    else:
+        tunic4 = armorS
+    if Player.CheckLayer("Pants"):
+        legs5 = 0
+    else:
+        legs5 = armorS
     
 # Agility Pots Count    
 if Misc.CheckSharedValue('agil'):

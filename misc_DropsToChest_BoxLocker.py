@@ -1,4 +1,5 @@
-# Move big item to trap pouch & announce by MatsaMilla
+# Move big item to trap box & announce in party what drop is by MatsaMilla
+# if key is in box, key gets locked in box...
 # version 2.2 - fixed if you get drop after locked
 
 #standard imports
